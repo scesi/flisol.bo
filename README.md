@@ -20,3 +20,7 @@ To install **pnpm**, you can run:
 ```bash
 npm install -g pnpm
 ```
+
+## Design Used
+
+Link: [Figma Project](https://www.figma.com/design/vvjQtrClXMljjr36THLEgY/Landing-Flisol-2025?node-id=1-2&t=mUtAihlTy2HoFOS8-1)
