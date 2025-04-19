@@ -11,7 +11,12 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "astro": "^5.7.4"
+    "@astrojs/react": "^4.2.4",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "astro": "^5.7.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
