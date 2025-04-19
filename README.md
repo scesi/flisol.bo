@@ -2,6 +2,10 @@
 
 A community-driven project by and for the FLISoL Bolivia community. It starts small, but together we can make it grow. Everyone is welcome to contribute!
 
+## How to contribute
+
+Want to help? Read the [contribution guide](CONTRIBUTING.md) to learn how to join the project.
+
 ## Technologies Used
 
 This project uses the following technologies:
