@@ -24,7 +24,7 @@ When submitting a PR, please include the following information:
 ## Rules
 
 - Follow the [code style guide](https://github.com/airbnb/javascript.git).
-- Use Prettier for formatting and ESLint to maintain code quality.
+- Use **Prettier** for formatting and **ESLint** to maintain code quality.
 - Make sure all tests pass before submitting a PR (if necessary).
 - Use descriptive names for your branches and commits.
 
