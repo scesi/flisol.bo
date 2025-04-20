@@ -11,6 +11,7 @@ export const ArrowToggle = ({ orientation }: ArrowToggleProps) => {
 
   return (
     <div
+      role="button"
       className={`arrow ${orientation} ${pressed ? 'pressed' : ''}`}
       tabIndex={0}
       onMouseDown={() => setPressed(true)}
