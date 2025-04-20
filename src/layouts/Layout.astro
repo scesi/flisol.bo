@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/globals.css" />
     <meta name="generator" content={Astro.generator} />
     <title>Astro Basics</title>
   </head>
@@ -13,8 +14,17 @@
 </html>
 
 <style>
+  /* Register your custom font family and tell the browser where to find it. */
+  @font-face {
+    font-family: 'Luckiest_Guy';
+    src: url('/public/fonts/LuckiestGuy-Regular.ttf') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
   html,
   body {
+    font-family: 'Luckiest_Guy', sans-serif;
     margin: 0;
     width: 100%;
     height: 100%;
