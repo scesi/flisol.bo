@@ -1,12 +1,41 @@
-import eslintPluginAstro from 'eslint-plugin-astro'
-export default [
-  // add more generic rule sets here, such as:
-  // js.configs.recommended,
-  ...eslintPluginAstro.configs.recommended,
+// eslint.config.js
+import js from '@eslint/js'
+import * as tseslint from '@typescript-eslint/eslint-plugin'
+import parser from '@typescript-eslint/parser'
+import react from 'eslint-plugin-react'
+import reactHooks from 'eslint-plugin-react-hooks'
+import { defineConfig, globalIgnores } from 'eslint/config'
+
+export default defineConfig([
+  globalIgnores(['**/*.d.ts', '/.astro']),
+  js.configs.recommended,
   {
+    files: ['**/*.ts', '**/*.tsx'],
+    ignores: [
+      '**/*.d.ts',
+      '/.astro',
+      './.astro/',
+      'node_modules/',
+      'dist/',
+      'build/',
+      '.vercel/',
+      '.output/',
+      'public/',
+    ],
+    languageOptions: {
+      parser,
+      parserOptions: {
+        project: './tsconfig.json',
+      },
+    },
+    plugins: {
+      '@typescript-eslint': tseslint,
+      react,
+      'react-hooks': reactHooks,
+    },
     rules: {
-      // override/add rules settings here, such as:
-      // "astro/no-set-html-directive": "error"
+      // Puedes personalizar tus reglas aquí
+      'react/react-in-jsx-scope': 'off',
     },
   },
-]
+])
