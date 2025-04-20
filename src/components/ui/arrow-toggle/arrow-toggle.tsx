@@ -12,6 +12,7 @@ export const ArrowToggle = ({ orientation }: ArrowToggleProps) => {
   return (
     <div
       role="button"
+      aria-pressed={pressed}
       className={`arrow ${orientation} ${pressed ? 'pressed' : ''}`}
       tabIndex={0}
       onMouseDown={() => setPressed(true)}
