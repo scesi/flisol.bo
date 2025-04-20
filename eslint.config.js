@@ -34,7 +34,7 @@ export default defineConfig([
       'react-hooks': reactHooks,
     },
     rules: {
-      // Puedes personalizar tus reglas aquí
+      // You can customize your rules here
       'react/react-in-jsx-scope': 'off',
     },
   },
