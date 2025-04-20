@@ -16,7 +16,7 @@ export const ArrowToggle = ({ orientation }: ArrowToggleProps) => {
       onMouseDown={() => setPressed(true)}
       onMouseUp={() => setPressed(false)}
       onMouseLeave={() => setPressed(false)}
-      // Accesibility options to keyboard users
+      // Accessibility options to keyboard users
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           setPressed(true)
