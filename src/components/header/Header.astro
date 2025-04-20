@@ -1,0 +1,84 @@
+---
+import ArrowToggle from '../ui/arrow-toggle/arrow-toggle'
+
+const { year } = Astro.props
+---
+
+<header class="header">
+  <img class="flag" src="/src/assets/icons/flags/bo.svg" alt="Bolivian Flag" />
+  <div class="year-nav">
+    <ArrowToggle orientation="left" client:load />
+    <span class="year">
+      <h2 class="year_v1">{year}</h2>
+      <h2 class="year_v2">{year}</h2>
+    </span>
+    <ArrowToggle orientation="right" client:load />
+  </div>
+</header>
+
+<style>
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+  }
+
+  .year-nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .year {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    text-shadow:
+      -1px -1px 0 black,
+      1px -1px 0 black,
+      -1px 1px 0 black,
+      1px 1px 0 black;
+    padding: 1rem 1rem;
+  }
+
+  .year_v1 {
+    position: absolute;
+    color: var(--arrow-color);
+    bottom: 20px;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .year_v2 {
+    color: var(--arrow-color-bg);
+    left: 0;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .flag {
+    position: absolute;
+    left: 5%;
+    border-radius: 10px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .header {
+      justify-content: space-around
+    }
+
+    .year-nav {
+      gap: 0.2rem;
+    }
+
+    .year {
+      font-size: 1.5rem;
+    }
+
+    .flag {
+      position: relative;
+    }
+    
+  }
+</style>

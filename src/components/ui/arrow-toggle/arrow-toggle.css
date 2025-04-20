@@ -1,0 +1,29 @@
+.arrow {
+  width: 3rem;
+  height: 3rem;
+  background-image: url('/src/assets/icons/svg/arrow-icon/arrow-right.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: background-image 0.1s ease;
+  cursor: pointer;
+}
+
+.arrow.pressed {
+  background-image: url('/src/assets/icons/svg/arrow-icon/arrow-right-pressed.svg');
+}
+
+.arrow.left {
+  background-image: url('/src/assets/icons/svg/arrow-icon/arrow-left.svg');
+}
+
+.arrow.left.pressed {
+  background-image: url('/src/assets/icons/svg/arrow-icon/arrow-left-pressed.svg');
+}
+
+@media screen and (max-width: 768px) {
+  .arrow {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+}
