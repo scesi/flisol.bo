@@ -29,6 +29,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "prettier": "3.5.3",
     "prettier-plugin-astro": "0.14.1",
+    "sass-embedded": "^1.86.3",
     "typescript": "^5.8.3"
   }
 }
