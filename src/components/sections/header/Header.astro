@@ -1,5 +1,5 @@
 ---
-import ArrowToggle from '../ui/arrow-toggle/arrow-toggle'
+import ArrowToggle from '@/components/ui/arrow-toggle/arrow-toggle'
 
 const { year } = Astro.props
 ---
@@ -65,7 +65,7 @@ const { year } = Astro.props
 
   @media screen and (max-width: 768px) {
     .header {
-      justify-content: space-around
+      justify-content: space-around;
     }
 
     .year-nav {
@@ -79,6 +79,5 @@ const { year } = Astro.props
     .flag {
       position: relative;
     }
-    
   }
 </style>
