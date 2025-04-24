@@ -17,6 +17,7 @@ import LinkedinLogo from '@/assets/icons/svg/socials/linkedin-logo.svg'
           target="_blank"
           rel="noopener noreferrer"
           aria-label="SCESI's website"
+          class="scesi-logo-container"
         >
           <LogoScesi class="scesi-logo" aria-label="SCESI's Logo" role="img" />
         </a>
@@ -26,7 +27,7 @@ import LinkedinLogo from '@/assets/icons/svg/socials/linkedin-logo.svg'
               href="https://www.facebook.com/scesi"
               target="_blank"
               aria-label="facebook icon"
-              rel="noopener noreferrer"><FacebookLogo /></a
+              rel="noopener noreferrer"><FacebookLogo class="social-icon" /></a
             >
           </li>
           <li>
@@ -34,7 +35,7 @@ import LinkedinLogo from '@/assets/icons/svg/socials/linkedin-logo.svg'
               href="https://www.instagram.com/scesiumss/"
               target="_blank"
               aria-label="instagram icon"
-              rel="noopener noreferrer"><InstagramLogo /></a
+              rel="noopener noreferrer"><InstagramLogo class="social-icon" /></a
             >
           </li>
           <li>
@@ -42,7 +43,7 @@ import LinkedinLogo from '@/assets/icons/svg/socials/linkedin-logo.svg'
               href="https://www.linkedin.com/company/scesi"
               target="_blank"
               aria-label="linkedin icon"
-              rel="noopener noreferrer"><LinkedinLogo /></a
+              rel="noopener noreferrer"><LinkedinLogo class="social-icon" /></a
             >
           </li>
         </ul>
@@ -53,8 +54,9 @@ import LinkedinLogo from '@/assets/icons/svg/socials/linkedin-logo.svg'
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Hacklab's website"
+          class="hacklab-logo-container"
         >
-          <LogoHacklab class="hacklab-logo" />
+          <LogoHacklab class="hacklab-logo" aria-label="HACKLAB's Logo" role="img" />
         </a>
         <ul>
           <li>
@@ -62,7 +64,7 @@ import LinkedinLogo from '@/assets/icons/svg/socials/linkedin-logo.svg'
               href="https://www.facebook.com/HackLabBrickHeads"
               target="_blank"
               aria-label="facebook icon"
-              rel="noopener noreferrer"><FacebookLogo /></a
+              rel="noopener noreferrer"><FacebookLogo class="social-icon" /></a
             >
           </li>
           <li>
@@ -70,7 +72,7 @@ import LinkedinLogo from '@/assets/icons/svg/socials/linkedin-logo.svg'
               href="https://www.instagram.com/hacklabbrickheads/"
               target="_blank"
               aria-label="instagram icon"
-              rel="noopener noreferrer"><InstagramLogo /></a
+              rel="noopener noreferrer"><InstagramLogo class="social-icon" /></a
             >
           </li>
           <li>
@@ -78,7 +80,7 @@ import LinkedinLogo from '@/assets/icons/svg/socials/linkedin-logo.svg'
               href="https://www.linkedin.com/company/hacklab-brickheads-cochabamba"
               target="_blank"
               aria-label="linkedin icon"
-              rel="noopener noreferrer"><LinkedinLogo /></a
+              rel="noopener noreferrer"><LinkedinLogo class="social-icon" /></a
             >
           </li>
         </ul>
@@ -100,6 +102,7 @@ import LinkedinLogo from '@/assets/icons/svg/socials/linkedin-logo.svg'
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
+      height: max-content;
       gap: 23rem;
     }
 
@@ -117,6 +120,7 @@ import LinkedinLogo from '@/assets/icons/svg/socials/linkedin-logo.svg'
     .footer-title {
       align-self: center;
       letter-spacing: 2px;
+      text-align: center;
     }
 
     .footer-content ul {
@@ -141,17 +145,49 @@ import LinkedinLogo from '@/assets/icons/svg/socials/linkedin-logo.svg'
       height: 100px;
     }
 
+    .scesi-logo-container,
+    .hacklab-logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     @media screen and (max-width: 768px) {
+      footer {
+        font-size: smaller;
+      }
       .footer-links {
-        flex-direction: column;
         align-items: center;
-        gap: 2rem;
+        gap: 1rem;
       }
 
-      .scesi-logo,
+
+      .scesi-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
       .hacklab-logo {
-        width: 80%;
+        width: 100px;
         height: auto;
+      }
+
+      .scesi-logo {
+        width: 70px;
+        height: auto;
+      }
+
+      .scesi-logo-container,
+      .hacklab-logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: fit-content;
+      }
+
+      .social-icon {
+        width: 25px;
+        height: 25px;
       }
     }
   </style>
