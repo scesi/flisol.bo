@@ -1,0 +1,194 @@
+---
+import LogoScesi from '@/assets/icons/svg/logos/logo-scesi.svg'
+import LogoHacklab from '@/assets/icons/svg/logos/logo-hacklab.svg'
+
+import FacebookLogo from '@/assets/icons/svg/socials/facebook-logo.svg'
+import InstagramLogo from '@/assets/icons/svg/socials/instagram-logo.svg'
+import LinkedinLogo from '@/assets/icons/svg/socials/linkedin-logo.svg'
+---
+
+<footer>
+  <div class="footer-content">
+    <h3 class="footer-title">Organizan</h3>
+    <div class="footer-links">
+      <article class="scesi-links">
+        <a
+          href="https://www.scesi.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="SCESI's website"
+          class="scesi-logo-container"
+        >
+          <LogoScesi class="scesi-logo" aria-label="SCESI's Logo" role="img" />
+        </a>
+        <ul>
+          <li>
+            <a
+              href="https://www.facebook.com/scesi"
+              target="_blank"
+              aria-label="facebook icon"
+              rel="noopener noreferrer"><FacebookLogo class="social-icon" /></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.instagram.com/scesiumss/"
+              target="_blank"
+              aria-label="instagram icon"
+              rel="noopener noreferrer"><InstagramLogo class="social-icon" /></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/company/scesi"
+              target="_blank"
+              aria-label="linkedin icon"
+              rel="noopener noreferrer"><LinkedinLogo class="social-icon" /></a
+            >
+          </li>
+        </ul>
+      </article>
+      <article class="hacklab-links">
+        <a
+          href="https://brickheads.space/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Hacklab's website"
+          class="hacklab-logo-container"
+        >
+          <LogoHacklab class="hacklab-logo" aria-label="HACKLAB's Logo" role="img" />
+        </a>
+        <ul>
+          <li>
+            <a
+              href="https://www.facebook.com/HackLabBrickHeads"
+              target="_blank"
+              aria-label="facebook icon"
+              rel="noopener noreferrer"><FacebookLogo class="social-icon" /></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.instagram.com/hacklabbrickheads/"
+              target="_blank"
+              aria-label="instagram icon"
+              rel="noopener noreferrer"><InstagramLogo class="social-icon" /></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/company/hacklab-brickheads-cochabamba"
+              target="_blank"
+              aria-label="linkedin icon"
+              rel="noopener noreferrer"><LinkedinLogo class="social-icon" /></a
+            >
+          </li>
+        </ul>
+      </article>
+    </div>
+    <p>&copy; 2025 The Open Source Contributors. MIT Licensed.</p>
+  </div>
+
+  <style>
+    footer {
+      background-color: black;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      height: max-content;
+      gap: 23rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-content p,
+    .footer-title {
+      align-self: center;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+
+    .footer-content ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .scesi-links ul,
+    .hacklab-links ul {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scesi-logo {
+      width: 100px;
+      height: 100px;
+    }
+    .hacklab-logo {
+      width: 150px;
+      height: 100px;
+    }
+
+    .scesi-logo-container,
+    .hacklab-logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @media screen and (max-width: 768px) {
+      footer {
+        font-size: smaller;
+      }
+      .footer-links {
+        align-items: center;
+        gap: 1rem;
+      }
+
+
+      .scesi-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hacklab-logo {
+        width: 100px;
+        height: auto;
+      }
+
+      .scesi-logo {
+        width: 70px;
+        height: auto;
+      }
+
+      .scesi-logo-container,
+      .hacklab-logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: fit-content;
+      }
+
+      .social-icon {
+        width: 25px;
+        height: 25px;
+      }
+    }
+  </style>
+</footer>
