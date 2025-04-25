@@ -1,11 +1,12 @@
 ---
 import ArrowToggle from '@/components/ui/arrow-toggle/arrow-toggle'
+import BolivianFlag from '@/assets/icons/flags/bo.svg'
 
 const { year } = Astro.props
 ---
 
 <header class="header">
-  <img class="flag" src="/src/assets/icons/flags/bo.svg" alt="Bolivian Flag" />
+  <BolivianFlag class="flag" aria-label="Bolivian Flag" role="img" />
   <div class="year-nav">
     <ArrowToggle orientation="left" client:load />
     <span class="year">
