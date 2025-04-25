@@ -1,0 +1,273 @@
+---
+import TuxComic from '@/assets/icons/svg/tux-comic.svg'
+import FocusComic from '@/assets/icons/svg/focus-comic.svg'
+import FlisoLogo from '@/assets/icons/svg/logos/flisol-logo.svg'
+import PathsComic from '@/assets/icons/svg/paths-comic.svg'
+import DotsComic from '@/assets/icons/svg/dots-comic.svg'
+---
+
+<section class="hero">
+  <div class="comic-grid">
+    <div class="comic-row top">
+      <div class="comic-square orange">
+        <FlisoLogo class="flisol-logo" aria-label="Flisol Logo" role="img" />
+        <DotsComic class="dots-comic-orange" aria-label="Dots Comic" role="img" />
+      </div>
+      <div class="comic-square red">
+        <DotsComic class="dots-comic-red" aria-label="Dots Comic" role="img" />
+      </div>
+    </div>
+    <div class="comic-row bottom">
+      <div class="comic-square yellow">
+        <PathsComic class="paths-comic" aria-label="Paths Comic" role="img" />
+      </div>
+      <div class="comic-square blue">
+        <FocusComic class="focus-comic" aria-label="focus-comic-effect" role="img" />
+        <TuxComic class="tux-comic" aria-label="Tux Comic" role="img" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    z-index: 1;
+    border-bottom: 5px solid black;
+    overflow: hidden;
+  }
+
+  .comic-grid {
+    display: flex;
+    position: absolute;
+    margin-top: -300px;
+    flex-direction: column;
+    rotate: -12deg;
+    width: fit-content;
+    height: fit-content;
+    gap: 0.5rem;
+  }
+
+  .comic-square {
+    border: 3px solid black;
+    width: 200vw;
+    height: 90vh;
+    display: inline-flex;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .comic-row {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .comic-row.top {
+    position: relative;
+  }
+
+  .orange {
+    background-color: #fdba8a;
+  }
+  .red {
+    background-color: #ff6d6d;
+    width: 90%;
+  }
+  .yellow {
+    background-color: #edff86;
+    width: 50%;
+  }
+  .blue {
+    background-color: #0081dd;
+    display: flex;
+  }
+
+  .tux-comic {
+    position: absolute;
+    top: 5vw;
+    left: 30vw;
+    width: 25vw;
+    height: auto;
+    rotate: 12deg;
+  }
+
+  .focus-comic {
+    position: absolute;
+    top: -12vw;
+    width: 90vw;
+    height: auto;
+  }
+
+  .flisol-logo {
+    position: absolute;
+    bottom: 3vw;
+    right: 20vw;
+    width: 25vw;
+    height: auto;
+    rotate: 12deg;
+    z-index: 2;
+  }
+
+  .dots-comic-orange {
+    position: absolute;
+    bottom: -10vw;
+    right: 10vw;
+    width: 50vw;
+    height: auto;
+    rotate: 12deg;
+    opacity: 0.5;
+    z-index: 1;
+  }
+
+  .dots-comic-red {
+    position: absolute;
+    fill: #ff9393;
+    bottom: -10vw;
+    left: 15vw;
+    width: 35vw;
+    height: auto;
+    rotate: 12deg;
+    z-index: 1;
+  }
+
+  .paths-comic {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25vw;
+    height: auto;
+    rotate: 12deg;
+  }
+
+  @media (max-width: 1080px) {
+    .hero {
+      height: 100vh;
+      border-bottom-width: 3px;
+    }
+
+    .comic-grid {
+      margin-top: -200px;
+      rotate: -8deg;
+      gap: 0.4rem;
+    }
+
+    .comic-square {
+      height: 80vh;
+      width: 250vw;
+      border-width: 2px;
+    }
+
+    .red {
+      width: 80%;
+    }
+
+    .yellow {
+      width: 60%;
+    }
+
+    .tux-comic {
+      top: 8vw;
+      left: 20vw;
+      width: 35vw;
+      rotate: 8deg;
+    }
+
+    .focus-comic {
+      top: -10vw;
+      left: -10vw;
+      width: 100vw;
+    }
+
+    .flisol-logo {
+      bottom: 5vw;
+      right: 10vw;
+      width: 40vw;
+      rotate: 8deg;
+    }
+
+    .dots-comic-orange {
+      bottom: -15vw;
+      right: 5vw;
+      width: 60vw;
+      opacity: 0.4;
+    }
+
+    .dots-comic-red {
+      bottom: -15vw;
+      left: 10vw;
+      width: 40vw;
+    }
+
+    .paths-comic {
+      top: 5vw;
+      right: 5vw;
+      width: 30vw;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .tux-comic {
+      top: 15vw;
+      left: 15vw;
+      width: 50vw;
+    }
+
+    .focus-comic {
+      top: -10vw;
+      left: -15vw;
+      width: 120vw;
+      rotate: 90deg;
+    }
+
+    .flisol-logo {
+      bottom: 8vw;
+      right: 5vw;
+      width: 35vw;
+    }
+
+    .dots-comic-orange {
+      width: 70vw;
+    }
+
+    .dots-comic-red {
+      width: 50vw;
+    }
+
+    .paths-comic {
+      width: 35vw;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      height: 100vh;
+    }
+    .comic-square {
+      height: 100vh;
+    }
+
+    .tux-comic {
+      width: 60vw;
+      left: 5vw;
+    }
+
+    .focus-comic {
+      rotate: 90deg;
+      top: -0vw;
+      left: -60vw;
+      width: 200vw;
+    }
+
+    .flisol-logo {
+      width: 40vw;
+    }
+
+    .paths-comic {
+      width: 40vw;
+    }
+  }
+</style>
