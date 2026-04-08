@@ -1,0 +1,16 @@
+:root {
+  --arrow-color: rgba(244, 233, 87, 1);
+  --arrow-color-bg: rgba(71, 82, 174, 1);
+}
+
+body,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

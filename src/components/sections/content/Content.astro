@@ -1,0 +1,149 @@
+---
+---
+<div class="content-container">
+  <div class="title content-box">
+    <span>FLISOL 2025</span>
+  </div>
+
+  <div class="day-1 content-box">
+    <span class="day-label">
+      Día 1
+    </span>
+  </div>
+
+  <div class="day-2 content-box">
+    <span class="day-label">
+      Día 2
+    </span>
+  </div>
+
+  <div class="capture-the-flag content-box">
+    <div class="capture-the-flag__title">
+      CAPTURE THE FLAG
+    </div>
+    <div class="capture-the-flag__button">
+      REGISTRATE!
+    </div>
+  </div>
+
+  <div class="not-defined-one content-box">
+  </div>
+
+  <div class="tux-running content-box">
+  </div>
+
+  <div class="not-defined-two content-box">
+  </div>
+</div>
+
+<style lang="scss">
+.content-box {
+  border: 5px solid black;
+}
+
+
+.content-container {
+  margin: 2rem;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(auto, 1fr));
+  grid-template-rows: repeat(4, auto);
+  grid-column-gap: 0.5rem;
+  grid-row-gap: 0.5rem; 
+  
+  .title {
+    grid-column: 1 / 7;
+    grid-row: 1 / 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #DD4547;
+    padding: 2rem;
+
+    span {
+      color: #EFE524;
+      -webkit-text-stroke: 4px black;
+      font-size: 4.375rem;
+      text-shadow: 4px 4px black;
+      text-align: center;
+      margin-bottom: -1.25rem;
+    }
+  }
+
+
+  .day-label {
+    position: absolute;
+    bottom: 0.25rem;
+    font-size: 4.375rem;
+    right: 2rem;
+  }
+
+  .day-1 {
+    grid-column: 1 / 4;
+    grid-row: 2 / 3;
+    height: 423px;
+    position: relative;
+    
+  }
+
+  .day-2 {
+    grid-column: 4 / 7;
+    grid-row: 2 / 3;
+    height: 423px;
+    position: relative;
+  }
+
+  .capture-the-flag {
+    grid-column: 1 / 5;
+    grid-row: 3 / 4;
+    height: 423px;
+    background-color: #1E1E1E;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    &__button {
+      margin: 2rem;
+      padding: 0.5rem 2.5rem;
+      background-color: #6FE445;
+      border: 1px solid black;
+      box-shadow: 3px 3px white;
+    }
+    
+    &__title {
+      color: #EFE524;
+      -webkit-text-stroke: 2px black;
+      font-size: 4.375rem;
+      text-shadow: 4px 4px #DD4547;
+      text-align: center;
+      margin-bottom: -1.25rem;
+    }
+  }
+
+  .not-defined-one {
+    grid-column: 5 / 7;
+    grid-row: 3 / 4;
+    height: 423px;
+
+  }
+
+  .tux-running {
+    grid-area: 4 / 1 / 5 / 3;
+    height: 423px;
+  }
+
+  .not-defined-two {
+    grid-area: 4 / 3 / 5 / 7;
+    height: 423px;
+  }
+
+}
+
+@media only screen and (max-width: 800px) {
+  .content-container {
+    margin: 0.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+}
+</style>
