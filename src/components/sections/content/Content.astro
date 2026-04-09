@@ -1,10 +1,19 @@
 ---
+import Schedule from './components/schedule.astro'
+import { AgendaIsland } from './components/agenda-island/AgendaIsland.tsx'
+import data from '@/data/schedule.json'
+
 import RunTux from '@/assets/icons/svg/run-tux.svg'
 import BrokenPaper from '@/assets/icons/svg/broken-paper.svg'
 import TuxComic from '@/assets/icons/svg/tux-comic.svg'
 import FocusComic from '@/assets/icons/svg/focus-comic.svg'
 import GnuComic from '@/assets/icons/svg/gnu-comic.png'
 import Flag from '@/assets/icons/svg/flag-tux.png'
+
+// const diaViernes = data.eventos.find((e) => e.dia === 'Viernes')
+// const diaSabado = data.eventos.find((e) => e.dia === 'Sabado')
+
+// const roomsDia1 = [...new Set(diaViernes?.eventos.map((ev) => ev.laboratorio))]
 ---
 
 <div class="content-container">
@@ -36,35 +45,7 @@ import Flag from '@/assets/icons/svg/flag-tux.png'
     </div>
   </div>
 
-  <div class="day-1 content-box">
-    <TuxComic />
-    <h4>Dia 1 - UMSS MEMI</h4>
-  </div>
-
-  <div class="day-2 content-box">
-    <img src={GnuComic.src} alt="Logo de GNU en estilo cómic" class="gnu-logo" />
-    <div class="focus">
-      <FocusComic />
-    </div>
-    <h4>Dia 2 - UCB</h4>
-  </div>
-
-  <div class="rooms-wrapper">
-    <div class="room room-1 content-box">
-      <h4>Dia 1 - UMSS MEMI</h4>
-    </div>
-    <div class="room room-2 content-box">
-      <h4>Dia 1 - UMSS MEMI</h4>
-    </div>
-    <div class="room room-3 content-box">
-      <h4>Dia 1 - UMSS MEMI</h4>
-    </div>
-    <div class="room room-4 content-box">
-      <h4>Dia 1 - UMSS MEMI</h4>
-    </div>
-  </div>
-
-  <div class="schedule content-box"></div>
+  <AgendaIsland client:load agendaData={data} tuxIcon={TuxComic.src} gnuIcon={GnuComic.src} />
 
   <div class="capture-the-flag content-box">
     <div class="matrix-screen">
@@ -104,7 +85,6 @@ import Flag from '@/assets/icons/svg/flag-tux.png'
       <div class="column"></div>
       <div class="column"></div>
       <div class="column"></div>
-
       <div class="column"></div>
       <div class="column"></div>
       <div class="column"></div>
@@ -204,91 +184,7 @@ import Flag from '@/assets/icons/svg/flag-tux.png'
       height: 423px;
       position: relative;
     }
-
-    .rooms-wrapper {
-      grid-column: 1 / 7;
-      grid-row: 5 / 5;
-      height: 80px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-column-gap: 0.5rem;
-    }
-
-    .room {
-      background-color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      h4 {
-        color: #efe524;
-        font-size: 1.5rem;
-        font-weight: 400;
-        margin-block: 0.5rem;
-        text-shadow: 2px 2px #dd4547;
-      }
-    }
-
-    .day-1 {
-      grid-column: 1 / 4;
-      grid-row: 4 / 5;
-      height: 423px;
-      background-color: #0081dd;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 2;
-      position: relative;
-      overflow: hidden;
-
-      svg {
-        width: 180px;
-        height: auto;
-      }
-
-      h4 {
-        font-size: 3rem;
-        -webkit-text-stroke: 2px black;
-        color: #efe524;
-        margin-top: 1rem;
-      }
-    }
-
-    .day-2 {
-      grid-column: 4 / 7;
-      grid-row: 4 / 5;
-      height: 423px;
-      background-color: #dd4547;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 2;
-      position: relative;
-      overflow: hidden;
-
-      .gnu-logo {
-        width: 150px;
-        height: auto;
-      }
-
-      h4 {
-        font-size: 3rem;
-        -webkit-text-stroke: 2px black;
-        color: #efe524;
-        margin-top: 1rem;
-      }
-    }
-
-    .focus {
-      position: absolute;
-      top: 20%;
-      left: 20%;
-      transform: translate(-50%, -50%);
-      opacity: 0.2;
-    }
-
+  
     .subtitle {
       position: relative;
       grid-column: 1 / 7;
@@ -310,12 +206,6 @@ import Flag from '@/assets/icons/svg/flag-tux.png'
       -webkit-text-stroke: 2px #dd4547;
       font-size: 3rem;
       text-shadow: 4px 4px black;
-    }
-
-    .schedule {
-      grid-column: 1 / 7;
-      grid-row: 6 / 6;
-      height: 800px;
     }
 
     .capture-the-flag {
@@ -459,7 +349,6 @@ import Flag from '@/assets/icons/svg/flag-tux.png'
       align-items: center;
     }
   }
-
   @media only screen and (max-width: 800px) {
     .content-container {
       margin: 0.5rem;

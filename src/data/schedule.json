@@ -1,0 +1,216 @@
+{
+  "eventos": [
+    {
+      "dia": "Viernes",
+      "total_eventos": 20,
+      "eventos": [
+        {
+          "horario": "10:00 - 10:50",
+          "laboratorio": "Laboratorio 2",
+          "actividad": "De la idea al lanzamiento: desarrollo de videojuegos",
+          "speaker": "Marcos Saavedra Garcia"
+        },
+        {
+          "horario": "14:00 - 14:50",
+          "laboratorio": "Laboratorio 2",
+          "actividad": "SOLID en React Native: Mejora tu Código y tus Apps",
+          "speaker": "Abdiel J. Orellana Sarabia"
+        },
+        {
+          "horario": "15:00 - 15:45",
+          "laboratorio": "Laboratorio 2",
+          "actividad": "¿Cómo crecer en tu carrera tech?",
+          "speaker": "Sofia Toro"
+        },
+        {
+          "horario": "16:15 - 17:00",
+          "laboratorio": "Laboratorio 2",
+          "actividad": "Diseño UI avanzado con herramientas Open Source",
+          "speaker": "Carlos Collazos"
+        },
+        {
+          "horario": "10:00 - 10:50",
+          "laboratorio": "Laboratorio 4",
+          "actividad": "Materializa tus ideas con impresiones 3D",
+          "speaker": "Diana Vargas Orellana"
+        },
+        {
+          "horario": "11:00 - 11:45",
+          "laboratorio": "Laboratorio 4",
+          "actividad": "Optimización de imágenes en Docker",
+          "speaker": "Samuel Douglas Navia Peña"
+        },
+        {
+          "horario": "12:15 - 13:00",
+          "laboratorio": "Laboratorio 4",
+          "actividad": "Cambios culturares, aprendiendo del entorno",
+          "speaker": "Nishel Davila"
+        },
+        {
+          "horario": "14:05 - 14:50",
+          "laboratorio": "Laboratorio 4",
+          "actividad": "Computación Cuántica y Qjs",
+          "speaker": "Henrique Alvarez Corrales"
+        },
+        {
+          "horario": "15:00 - 15:45",
+          "laboratorio": "Laboratorio 4",
+          "actividad": "¿Porque es tan importante Deep Seek?",
+          "speaker": "Jesus Orlando Reyes Moron"
+        },
+        {
+          "horario": "16:15 - 17:00",
+          "laboratorio": "Laboratorio 4",
+          "actividad": "La verdad detrás del software que usas todos los días",
+          "speaker": "Javier Cabezas Nina"
+        },
+
+        {
+          "horario": "10:00 - 10:50",
+          "laboratorio": "Auditorio",
+          "actividad": "GitHub Actions en Acción",
+          "speaker": "Vladimir Abel Costas Jáuregui"
+        },
+        {
+          "horario": "11:00 - 11:45",
+          "laboratorio": "Auditorio",
+          "actividad": "Ruta Frontend 2025 + IA",
+          "speaker": "Ivan Rene Ccama Mamani"
+        },
+        {
+          "horario": "14:00 - 14:50",
+          "laboratorio": "Auditorio",
+          "actividad": "Una Integración de Aplicaciones Web y Modelos Multimodales",
+          "speaker": "Luis Aviles"
+        },
+        {
+          "horario": "15:00- 15:45",
+          "laboratorio": "Auditorio",
+          "actividad": "Iniciemos en el mundo de los Datos",
+          "speaker": "Jacqueline Susan Mejía"
+        },
+        {
+          "horario": "16:15 - 17:00",
+          "laboratorio": "Auditorio",
+          "actividad": "Cómo la Inteligencia de Amenazas Forjando el Futuro de la Ciberdefensa",
+          "speaker": "Fernando Guzmán Gonzales"
+        },
+
+        {
+          "horario": "10:00 - 10:50",
+          "laboratorio": "Sala 2",
+          "actividad": "Introducción a los LLMs Open Source",
+          "speaker": "Jairo Andree Maida Rojas"
+        },
+        {
+          "horario": "11:00 - 11:45",
+          "laboratorio": "Sala 2",
+          "actividad": "Explorando GitHub Copilot y sus alternativas",
+          "speaker": "Ivan Herlan Herbas Zubieta"
+        },
+        {
+          "horario": "14:00 - 14:50",
+          "laboratorio": "Sala 2",
+          "actividad": "Una Integración de Aplicaciones Web y Modelos Multimodales",
+          "speaker": "Luis Aviles"
+        },
+        {
+          "horario": "12:15- 13:00",
+          "laboratorio": "Sala 2",
+          "actividad": "Desarrollos sin sentido, Aplicaciones sin motivo, con Godot engine",
+          "speaker": "Kevin Aaron Herrera Claros"
+        },
+        {
+          "horario": "14:05 - 14:50",
+          "laboratorio": "Sala 2",
+          "actividad": "Como sigues vivo React Native?",
+          "speaker": "Irvin Cossio Chavalier"
+        },
+        {
+          "horario": "15:00 - 15:45",
+          "laboratorio": "Sala 2",
+          "actividad": "Tu pendrive tiene memoria... ¡y no olvida!",
+          "speaker": "Celso Jimenes Obando"
+        }
+      ]
+    },
+    {
+      "dia": "Sabado",
+      "total_eventos": 12,
+      "eventos": [
+        {
+          "horario": "9:05 - 9:50",
+          "laboratorio": "AULA A PB-2",
+          "actividad": "Mi camino hacia la Ciencia de Datos",
+          "speaker": "Ariel Mamani Nina"
+        },
+        {
+          "horario": "9:05 - 9:50",
+          "laboratorio": "AULA A PB-4",
+          "actividad": "Innovación Y Magia, Los sueños de un dev",
+          "speaker": "Danilo Ernesto Jiménez Guzmán"
+        },
+        {
+          "horario": "9:05 - 10:25",
+          "laboratorio": "AULA A PB-5",
+          "actividad": "¿Es posible vivir en Linux?",
+          "speaker": "Willy Samuel Paz Colque"
+        },
+        {
+          "horario": "9:05 - 10:25",
+          "laboratorio": "TECLAB",
+          "actividad": "Diseña Interfaces de Usuario con Penpot",
+          "speaker": "Melany Ventura"
+        },
+        {
+          "horario": "10:00 - 10:25",
+          "laboratorio": "AULA A PB-2",
+          "actividad": "Toolkit hacker con software libre: así trabaja un hacker profesional",
+          "speaker": "Drayko Escobar"
+        },
+        {
+          "horario": "10:00 - 10:25",
+          "laboratorio": "AULA A PB-4",
+          "actividad": "El rol de los datos abiertos en la Inteligencia Artificial",
+          "speaker": "Oscar Contreras Carrasco"
+        },
+        {
+          "horario": "10:45 - 12:00",
+          "laboratorio": "AULA A PB-5",
+          "actividad": "Django 101, tu primera web con python",
+          "speaker": "Paulo Tintaya"
+        },
+        {
+          "horario": "10:45 - 11:20",
+          "laboratorio": "TECLAB",
+          "actividad": "Low Code/ No Code con software libre",
+          "speaker": "María René Torrez"
+        },
+        {
+          "horario": "12:05 - 12:50",
+          "laboratorio": "AULA A PB-2",
+          "actividad": "React Compiler: Less memo, more speed",
+          "speaker": "Fernando Quinteros Gutierrez"
+        },
+        {
+          "horario": "12:05 - 12:50",
+          "laboratorio": "AULA A PB-4",
+          "actividad": "Phreaking - El arte de la intrusión en telecomunicaciones",
+          "speaker": "Gonzalo Nina Mamani"
+        },
+        {
+          "horario": "12:05 - 12:50",
+          "laboratorio": "AULA A PB-5",
+          "actividad": "Productividad supersonica con Quarkus",
+          "speaker": "Mirco Pilco Peralta"
+        },
+        {
+          "horario": "12:05 - 12:50",
+          "laboratorio": "TECLAB",
+          "actividad": "Desarrollando una pagina web rapida",
+          "speaker": "Javier Nina"
+        }
+      ]
+    }
+  ]
+}
