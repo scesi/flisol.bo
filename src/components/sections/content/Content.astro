@@ -1,149 +1,470 @@
 ---
+import RunTux from '@/assets/icons/svg/run-tux.svg'
+import BrokenPaper from '@/assets/icons/svg/broken-paper.svg'
+import TuxComic from '@/assets/icons/svg/tux-comic.svg'
+import FocusComic from '@/assets/icons/svg/focus-comic.svg'
+import GnuComic from '@/assets/icons/svg/gnu-comic.png'
+import Flag from '@/assets/icons/svg/flag-tux.png'
 ---
+
 <div class="content-container">
   <div class="title content-box">
     <span>FLISOL 2025</span>
   </div>
 
+  <div class="about-event content-box image-container">
+    <RunTux />
+  </div>
+
+  <div class="about-event-dark content-box dark-box">
+    <div>
+      <h3 class="dark-title">Sobre el evento</h3>
+      <p class="dark-description">
+        El FLISoL (Festival Latinoamericano de Instalación de Software Libre) es un evento anual que
+        busca difundir y <span class="highlighted">promover el Software Libre en Latinoamérica</span
+        >. Es el evento de difusión de Software Libre más grande en el mundo hispanohablante, con
+        una presencia simultánea en diversos países. Se realiza anualmente el cuarto sábado de
+        abril.
+      </p>
+    </div>
+  </div>
+
+  <div class="subtitle content-box">
+    <div>
+      <h4 class="subtitle-text">AGENDA</h4>
+      <BrokenPaper />
+    </div>
+  </div>
+
   <div class="day-1 content-box">
-    <span class="day-label">
-      Día 1
-    </span>
+    <TuxComic />
+    <h4>Dia 1 - UMSS MEMI</h4>
   </div>
 
   <div class="day-2 content-box">
-    <span class="day-label">
-      Día 2
-    </span>
+    <img src={GnuComic.src} alt="Logo de GNU en estilo cómic" class="gnu-logo" />
+    <div class="focus">
+      <FocusComic />
+    </div>
+    <h4>Dia 2 - UCB</h4>
   </div>
+
+  <div class="rooms-wrapper">
+    <div class="room room-1 content-box">
+      <h4>Dia 1 - UMSS MEMI</h4>
+    </div>
+    <div class="room room-2 content-box">
+      <h4>Dia 1 - UMSS MEMI</h4>
+    </div>
+    <div class="room room-3 content-box">
+      <h4>Dia 1 - UMSS MEMI</h4>
+    </div>
+    <div class="room room-4 content-box">
+      <h4>Dia 1 - UMSS MEMI</h4>
+    </div>
+  </div>
+
+  <div class="schedule content-box"></div>
 
   <div class="capture-the-flag content-box">
-    <div class="capture-the-flag__title">
-      CAPTURE THE FLAG
+    <div class="matrix-screen">
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
     </div>
-    <div class="capture-the-flag__button">
-      REGISTRATE!
+
+    <img src={Flag.src} alt="Logo de Tux estilo comic con una bandera" class="gnu-logo" />
+    <div class="capture-the-flag__content">
+      <p class="capture-the-flag__title">CAPTURE THE FLAG</p>
+      <p class="capture-the-flag__button">RESULTADOS!</p>
     </div>
   </div>
 
-  <div class="not-defined-one content-box">
-  </div>
+  <div class="not-defined-one content-box"></div>
 
-  <div class="tux-running content-box">
-  </div>
+  <div class="tux-running content-box"></div>
 
-  <div class="not-defined-two content-box">
-  </div>
+  <div class="not-defined-two content-box"></div>
 </div>
 
 <style lang="scss">
-.content-box {
-  border: 5px solid black;
-}
-
-
-.content-container {
-  margin: 2rem;
-  display: grid;
-  grid-template-columns: repeat(6, minmax(auto, 1fr));
-  grid-template-rows: repeat(4, auto);
-  grid-column-gap: 0.5rem;
-  grid-row-gap: 0.5rem; 
-  
-  .title {
-    grid-column: 1 / 7;
-    grid-row: 1 / 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #DD4547;
-    padding: 2rem;
-
-    span {
-      color: #EFE524;
-      -webkit-text-stroke: 4px black;
-      font-size: 4.375rem;
-      text-shadow: 4px 4px black;
-      text-align: center;
-      margin-bottom: -1.25rem;
-    }
+  .content-box {
+    border: 5px solid black;
   }
 
-
-  .day-label {
-    position: absolute;
-    bottom: 0.25rem;
-    font-size: 4.375rem;
-    right: 2rem;
-  }
-
-  .day-1 {
-    grid-column: 1 / 4;
-    grid-row: 2 / 3;
-    height: 423px;
-    position: relative;
-    
-  }
-
-  .day-2 {
-    grid-column: 4 / 7;
-    grid-row: 2 / 3;
-    height: 423px;
-    position: relative;
-  }
-
-  .capture-the-flag {
-    grid-column: 1 / 5;
-    grid-row: 3 / 4;
-    height: 423px;
-    background-color: #1E1E1E;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    &__button {
-      margin: 2rem;
-      padding: 0.5rem 2.5rem;
-      background-color: #6FE445;
-      border: 1px solid black;
-      box-shadow: 3px 3px white;
-    }
-    
-    &__title {
-      color: #EFE524;
-      -webkit-text-stroke: 2px black;
-      font-size: 4.375rem;
-      text-shadow: 4px 4px #DD4547;
-      text-align: center;
-      margin-bottom: -1.25rem;
-    }
-  }
-
-  .not-defined-one {
-    grid-column: 5 / 7;
-    grid-row: 3 / 4;
-    height: 423px;
-
-  }
-
-  .tux-running {
-    grid-area: 4 / 1 / 5 / 3;
-    height: 423px;
-  }
-
-  .not-defined-two {
-    grid-area: 4 / 3 / 5 / 7;
-    height: 423px;
-  }
-
-}
-
-@media only screen and (max-width: 800px) {
   .content-container {
-    margin: 0.5rem;
-    display: flex;
-    flex-direction: column;
+    margin: 2rem;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(auto, 1fr));
+    grid-template-rows: repeat(10, auto);
+    grid-column-gap: 0.5rem;
+    grid-row-gap: 0.5rem;
+
+    .title {
+      grid-column: 1 / 7;
+      grid-row: 1 / 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #dd4547;
+      padding: 2rem;
+
+      span {
+        color: #efe524;
+        -webkit-text-stroke: 4px black;
+        font-size: 4.375rem;
+        text-shadow: 4px 4px black;
+        text-align: center;
+        margin-bottom: -1.25rem;
+      }
+    }
+
+    .day-label {
+      position: absolute;
+      bottom: 0.25rem;
+      font-size: 4.375rem;
+      right: 2rem;
+    }
+
+    .dark-box {
+      background-color: #1e1e1e;
+      color: white;
+      padding: 2rem;
+    }
+
+    .dark-title {
+      color: #efe524;
+      font-size: 2rem;
+      font-weight: 300;
+      text-align: start;
+    }
+
+    .highlighted {
+      color: #efe524;
+      font-weight: bold;
+    }
+
+    .dark-description {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 100;
+      margin-top: 1rem;
+      font-size: 1.8rem;
+    }
+
+    .about-event {
+      grid-column: 1 / 3;
+      grid-row: 2 / 3;
+      height: 423px;
+      position: relative;
+    }
+
+    .about-event-dark {
+      grid-column: 3 / 7;
+      grid-row: 2 / 3;
+      height: 423px;
+      position: relative;
+    }
+
+    .rooms-wrapper {
+      grid-column: 1 / 7;
+      grid-row: 5 / 5;
+      height: 80px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-column-gap: 0.5rem;
+    }
+
+    .room {
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      h4 {
+        color: #efe524;
+        font-size: 1.5rem;
+        font-weight: 400;
+        margin-block: 0.5rem;
+        text-shadow: 2px 2px #dd4547;
+      }
+    }
+
+    .day-1 {
+      grid-column: 1 / 4;
+      grid-row: 4 / 5;
+      height: 423px;
+      background-color: #0081dd;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+      position: relative;
+      overflow: hidden;
+
+      svg {
+        width: 180px;
+        height: auto;
+      }
+
+      h4 {
+        font-size: 3rem;
+        -webkit-text-stroke: 2px black;
+        color: #efe524;
+        margin-top: 1rem;
+      }
+    }
+
+    .day-2 {
+      grid-column: 4 / 7;
+      grid-row: 4 / 5;
+      height: 423px;
+      background-color: #dd4547;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+      position: relative;
+      overflow: hidden;
+
+      .gnu-logo {
+        width: 150px;
+        height: auto;
+      }
+
+      h4 {
+        font-size: 3rem;
+        -webkit-text-stroke: 2px black;
+        color: #efe524;
+        margin-top: 1rem;
+      }
+    }
+
+    .focus {
+      position: absolute;
+      top: 20%;
+      left: 20%;
+      transform: translate(-50%, -50%);
+      opacity: 0.2;
+    }
+
+    .subtitle {
+      position: relative;
+      grid-column: 1 / 7;
+      grid-row: 3 / 4;
+      height: 200px;
+      background-color: #ff6d6d;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .subtitle-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #efe524;
+      -webkit-text-stroke: 2px #dd4547;
+      font-size: 3rem;
+      text-shadow: 4px 4px black;
+    }
+
+    .schedule {
+      grid-column: 1 / 7;
+      grid-row: 6 / 6;
+      height: 800px;
+    }
+
+    .capture-the-flag {
+      position: relative;
+      overflow: hidden;
+      grid-column: 1 / 7;
+      grid-row: 7 / 8;
+      height: 423px;
+      background-color: #1e1e1e;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 5rem;
+      img,
+      .capture-the-flag__content {
+        position: relative;
+        z-index: 1;
+      }
+
+      img {
+        width: 150px;
+        height: auto;
+        margin-bottom: 1rem;
+      }
+
+      .matrix-screen {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        justify-content: space-around;
+        opacity: 0.4;
+        pointer-events: none;
+      }
+
+      .column {
+        position: relative;
+        width: 20px;
+        height: 100%;
+        color: rgba(111, 228, 69, 0.15);
+        font-family: monospace;
+        font-size: 18px;
+        text-align: center;
+        word-break: break-all;
+        line-height: 0.9;
+
+        &::before {
+          content: '101011010101101100101011010101101100101011010101101100101011010101101100';
+        }
+
+        &::after {
+          content: '10101';
+          position: absolute;
+          top: -20%;
+          left: 0;
+          width: 100%;
+          color: #6fe445;
+          text-shadow:
+            0 0 10px #6fe445,
+            0 0 20px #6fe445;
+          animation: drop linear infinite;
+        }
+      }
+
+      @for $i from 1 through 100 {
+        .column:nth-child(#{$i}) {
+          &::after {
+            animation-duration: #{random(3) + 2}s;
+            animation-delay: #{random(5)}s;
+          }
+        }
+      }
+
+      img,
+      &__content {
+        position: relative;
+        z-index: 2;
+      }
+
+      @keyframes drop {
+        0% {
+          top: -20%;
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          top: 100%;
+          opacity: 0;
+        }
+      }
+
+      &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      &__button {
+        margin-top: 2rem;
+        padding: 0.5rem 2.5rem;
+        background-color: #6fe445;
+        border: 1px solid black;
+        box-shadow: 3px 3px white;
+      }
+
+      &__title {
+        color: #efe524;
+        -webkit-text-stroke: 2px black;
+        font-size: 3.375rem;
+        text-shadow: 4px 4px #dd4547;
+        text-align: center;
+        margin-bottom: -1.25rem;
+      }
+    }
+
+    .not-defined-one {
+      grid-column: 1 / 7;
+      grid-row: 8 / 8;
+      height: 423px;
+    }
+
+    .tux-running {
+      grid-area: 9 / 1 / 9 / 3;
+      height: 423px;
+    }
+
+    .not-defined-two {
+      grid-area: 9 / 3 / 9 / 7;
+      height: 423px;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
-}
+
+  @media only screen and (max-width: 800px) {
+    .content-container {
+      margin: 0.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+  }
 </style>
