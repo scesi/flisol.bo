@@ -1,0 +1,114 @@
+---
+import ArrowToggle from '@/components/ui/arrow-toggle/arrow-toggle.tsx'
+
+interface Props {
+  eventos: Array<{
+    horario: string
+    actividad: string
+    speaker: string
+  }>
+}
+
+const { eventos } = Astro.props
+---
+
+<section class="schedule-list">
+  {
+    eventos.length > 0 ? (
+      eventos.map((evento) => (
+        <article class="schedule__session">
+          <p class="schedule__session--time">{evento.horario}</p>
+          <ArrowToggle orientation="right" client:load />
+          <div class="schedule__session--info">
+            <img
+              src="/path-to-default-avatar.png"
+              alt={evento.speaker}
+              class="schedule__session--photo"
+            />
+            <div class="schedule__session--details">
+              <h4 class="schedule__session--title">{evento.actividad}</h4>
+              <p class="schedule__session--speaker">{evento.speaker}</p>
+            </div>
+          </div>
+        </article>
+      ))
+    ) : (
+      <p class="empty-msg">No hay eventos programados para este ambiente.</p>
+    )
+  }
+</section>
+
+<style lang="scss">
+  .schedule {
+    background-color: #0081dd;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__session {
+      display: flex;
+      align-items: center;
+      gap: 5rem;
+
+      &--time {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--main-text-color);
+        -webkit-text-stroke: 0.5px black;
+        letter-spacing: 2px;
+      }
+
+      &--title {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--main-text-color);
+        -webkit-text-stroke: 0.5px black;
+        letter-spacing: 2px;
+      }
+
+      &--speaker {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        font-size: 1.3rem;
+        color: var(--white-text-color);
+        -webkit-text-stroke: 0.5px black;
+      }
+
+      &--photo {
+        width: 80px;
+        height: 80px;
+        border-radius: 100%;
+        object-fit: cover;
+        background-color: black;
+      }
+
+      &--info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      //   &--details {
+      //     display: flex;
+      //     flex-direction: column;
+      //     align-items: center;
+      //     justify-content: center;
+      //   }
+    }
+  }
+
+  .schedule-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    overflow-y: auto;
+    height: 100%;
+  }
+  .empty-msg {
+    color: white;
+    text-align: center;
+    font-family: sans-serif;
+  }
+</style>

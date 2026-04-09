@@ -22,8 +22,7 @@
 
 @media screen and (max-width: 768px) {
   .arrow {
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
-  
 }

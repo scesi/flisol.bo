@@ -6,7 +6,6 @@ const { year } = Astro.props
 ---
 
 <header class="header">
-  <BolivianFlag class="flag" aria-label="Bolivian Flag" role="img" />
   <div class="year-nav">
     <ArrowToggle orientation="left" client:load />
     <span class="year">
@@ -15,20 +14,40 @@ const { year } = Astro.props
     </span>
     <ArrowToggle orientation="right" client:load />
   </div>
+  <div class="nav-flag-container">
+    <span class="nav-items-container">
+      <navbar class="navbar">
+        <ul class="nav-links">
+          <li class="nav-item"><a href="#about">Sobre FLISoL</a></li>
+          <li class="nav-item"><a href="#agenda">Agenda</a></li>
+          <li class="nav-item"><a href="#contact">Contacto</a></li>
+        </ul>
+      </navbar>
+      <p class="nav-item register-button"><a href="#register">Inscribete</a></p>
+    </span>
+    <BolivianFlag class="flag" aria-label="Bolivian Flag" role="img" />
+  </div>
 </header>
 
 <style>
+  :global(html) {
+    scroll-behavior: smooth;
+  }
+
   .header {
     display: flex;
-    justify-content: center;
+    position: relative;
+    justify-content: space-around;
     align-items: center;
     background-color: white;
+    z-index: 1000;
   }
 
   .year-nav {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
+    padding-top: 1rem;
   }
 
   .year {
@@ -36,7 +55,7 @@ const { year } = Astro.props
     position: relative;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-shadow:
       -1px -1px 0 black,
       1px -1px 0 black,
@@ -59,9 +78,61 @@ const { year } = Astro.props
   }
 
   .flag {
-    position: absolute;
     left: 5%;
     border-radius: 10px;
+  }
+
+  .navbar {
+    right: 5%;
+  }
+
+  .nav-flag-container {
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    padding-top: 0.5rem;
+  }
+
+  .nav-item {
+    list-style: none;
+  }
+
+  .nav-item a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+  }
+
+  .register-button a {
+    background-color: var(--main-text-color);
+    color: black;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: 3px solid black;
+    letter-spacing: 1px;
+    box-shadow: 4px 4px 0px black;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    transition: transform 0.1s;
+  }
+
+  .register-button a:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px black;
+  }
+
+  .nav-items-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
   }
 
   @media screen and (max-width: 768px) {
