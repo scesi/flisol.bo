@@ -10,10 +10,16 @@ import FocusComic from '@/assets/icons/svg/focus-comic.svg'
 import GnuComic from '@/assets/icons/svg/gnu-comic.png'
 import Flag from '@/assets/icons/svg/flag-tux.png'
 
-const imageFiles = import.meta.glob('/src/assets/images/2025/*/*.{JPG,jpg,png,jpeg,webp}', {
-  eager: true,
-})
-const images = Object.keys(imageFiles)
+import { Image } from 'astro:assets'
+
+const imageFiles = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/images/2025/*/*.{JPG,jpg,png,jpeg,webp}',
+  {
+    eager: true,
+  }
+)
+
+const images = Object.values(imageFiles).map((img) => img.default)
 ---
 
 <div class="content-container">
@@ -109,7 +115,7 @@ const images = Object.keys(imageFiles)
       {
         [...images, ...images].map((img) => (
           <div class="slide">
-            <img src={img} alt="Momento del FLISoL 2025" loading="lazy" />
+            <Image src={img} alt="Momento del FLISoL 2025" width={400} height={450} />
           </div>
         ))
       }
