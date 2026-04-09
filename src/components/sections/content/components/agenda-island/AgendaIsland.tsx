@@ -76,16 +76,12 @@ export const AgendaIsland = ({ agendaData, tuxIcon, gnuIcon }: AgendaIslandProps
       <div className={`schedule content-box ${isFading ? 'fade-exit' : 'fade-enter'}`}>
         <div className="schedule-content">
           {filteredEvents.map((ev, i) => (
-            <div
-              key={i}
-              className="event-item"
-              style={{ padding: '1rem', }}
-            >
+            <div key={i} className="event-item" style={{ padding: '1rem' }}>
               <div style={{ fontSize: '1.2rem' }}>
                 <strong>{ev.horario}</strong> <span className="arrow-schedule"></span>
                 <span className="talk">
                   <p>{ev.actividad}</p>
-                  <p className='speaker'>{ev.speaker}</p>
+                  <p className="speaker">{ev.speaker}</p>
                 </span>
               </div>
             </div>
