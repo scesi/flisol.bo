@@ -133,7 +133,7 @@
   align-items: center;
 }
 
-.arrow {
+.arrow-schedule {
   background-image: url('/src/assets/icons/svg/arrow-icon/arrow-right.svg');
   background-size: contain;
   background-repeat: no-repeat;

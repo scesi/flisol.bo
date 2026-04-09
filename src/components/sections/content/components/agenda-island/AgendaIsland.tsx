@@ -82,7 +82,7 @@ export const AgendaIsland = ({ agendaData, tuxIcon, gnuIcon }: AgendaIslandProps
               style={{ padding: '1rem', }}
             >
               <div style={{ fontSize: '1.2rem' }}>
-                <strong>{ev.horario}</strong> <span className="arrow"></span>
+                <strong>{ev.horario}</strong> <span className="arrow-schedule"></span>
                 <span className="talk">
                   <p>{ev.actividad}</p>
                   <p className='speaker'>{ev.speaker}</p>
