@@ -30,6 +30,10 @@ const { year } = Astro.props
 </header>
 
 <style>
+  :global(html) {
+    scroll-behavior: smooth;
+  }
+
   .header {
     display: flex;
     position: relative;
