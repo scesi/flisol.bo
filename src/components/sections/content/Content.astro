@@ -11,6 +11,7 @@ import GnuComic from '@/assets/icons/svg/gnu-comic.png'
 import Flag from '@/assets/icons/svg/flag-tux.png'
 
 import { Image } from 'astro:assets'
+import ContributorsList from './components/ContributorsList.astro'
 
 const imageFiles = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/images/2025/*/*.{JPG,jpg,png,jpeg,webp}',
@@ -125,6 +126,10 @@ const images = Object.values(imageFiles).map((img) => img.default)
       }
     </div>
   </div>
+  </div>
+
+  <!-- Sección de contributors estilo cómic -->
+  <ContributorsList />
 </div>
 
 <style lang="scss">

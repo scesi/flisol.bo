@@ -1,0 +1,40 @@
+---
+// ContributorsList.astro
+import contributors from '@/data/contributors.json'
+import ContributorCard from '@/components/ui/ContributorCard.astro'
+---
+
+<section class="contributors-section">
+  <h2 class="section-title">Contribuidores 2025</h2>
+  <div class="contributors-list">
+    {contributors.contributors.map((contributor) => <ContributorCard contributor={contributor} />)}
+  </div>
+</section>
+
+<style>
+  .contributors-section {
+    grid-column: 1 / 7;
+    grid-row: 9 / 10;
+    margin: 3rem 0;
+    padding: 2rem 0;
+    background: #f9f6f2;
+  }
+  .section-title {
+    font-family: 'Bangers', 'Comic Neue', cursive, sans-serif;
+    font-size: 2.2em;
+    color: var(--main-text-color);
+    -webkit-text-stroke: 0.3px black;
+    text-align: center;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+    text-shadow:
+      2px 2px 0 #dd4547,
+      4px 4px 0 #222;
+  }
+  .contributors-list {
+    display: flex;
+    /* flex-wrap: wrap; */
+    /* gap: 2.5rem 2rem; */
+    /* justify-content: center; */
+  }
+</style>
