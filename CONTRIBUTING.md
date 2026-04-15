@@ -38,7 +38,7 @@ This project is licensed under the [MIT License](https://opensource.org/license/
 
 ## Credits
 
-**Project Lead & Creator:** Diego Perez(diegodev-01)
+**Project Lead & Creator:** Diego Perez[diegodev-01](https://github.com/diegodev-01)
 
 This Contribution Guide was Inspired by the [Contribution Guide to Github](https://gist.github.com/hschmitt/4596316).
 
@@ -48,4 +48,11 @@ Special thanks to the open-source community for providing great resources and ex
 
 ### Active
 
-This project is maintained by **Diego Perez(diegodev-01)** If you have any questions about a proposal or want to collaborate more actively, you can contact me via Pull Request or write to me at: [diego@dieguito.dev](mailto:diego@dieguito.dev).
+This project is maintained by **Diego Perez([diegodev-01](https://github.com/diegodev-01))** If you have any questions about a proposal or want to collaborate more actively, you can contact me via Pull Request or write to me at: [diego@dieguito.dev](mailto:diego@dieguito.dev).
+
+## Contributors
+
+Agradecemos a las siguientes personas por sus valiosas contribuciones a este proyecto:
+
+- [Melany Ventura](https://github.com/dev-ventura) - ✨ (Contribucion en Diseño UI/UX Flisol2025 Cochabamba)
+- [Mauricio Conde](https://github.com/cr0wg4n) - ✨ (Contribucion Desarrollo Frontend Flisol2025 Cochabamba)
