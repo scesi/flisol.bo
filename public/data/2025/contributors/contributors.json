@@ -51,6 +51,17 @@
           "url": "https://www.linkedin.com/in/melany-ventura/"
         }
       ]
+    },
+    {
+      "name": "Mauricio Matias Conde",
+      "role": "Full Stack Developer",
+      "networks": [
+        {
+          "network_name": "GitHub",
+          "username": "cr0wg4n",
+          "url": "https://github.com/cr0wg4n"
+        }
+      ]
     }
   ]
 }
