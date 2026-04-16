@@ -1,7 +1,4 @@
 :root {
-  --arrow-color: rgba(244, 233, 87, 1);
-  --arrow-color-bg: rgba(71, 82, 174, 1);
-  --main-text-color: #efe524;
   --white-text-color: #fff;
 }
 
@@ -19,4 +16,12 @@ p {
 
 * {
   box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/public/fonts/Montserrat-Regular.ttf') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }

@@ -1,0 +1,53 @@
+---
+import { ClientRouter } from 'astro:transitions'
+
+import { YEAR_THEMES } from '@/data/years-config'
+
+const { year } = Astro.props
+const theme = YEAR_THEMES[year] || YEAR_THEMES['2025']
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Flisol.bo</title>
+    <ClientRouter />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global define:vars={{
+  arrowColor: theme.arrowColor,
+      arrowBg: theme.arrowBg,
+      fontFamily: theme.fontFamily,
+      fontSize: theme.fontSize
+}}>
+  :root {
+    --arrow-color: var(--arrowColor);
+    --arrow-color-bg: var(--arrowBg);
+    --main-text-color: var(--arrow-color);
+    --white-text-color: var(--whiteTextColor);
+  }
+
+  @font-face {
+    font-family: 'PressStart2P';
+    src: url('/public/fonts/PressStart2P-Regular.ttf') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  html,
+  body {
+    font-family: 'PressStart2P', sans-serif;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>
