@@ -3,7 +3,6 @@ import BolivianFlag from '@core/assets/icons/flags/bo.svg'
 import ArrowToggle from '@core/components/ui/arrow-toggle/arrow-toggle'
 import { YEAR_THEMES } from '@/data/years-config'
 
-
 const MIN_YEAR = 2025
 const LATEST_YEAR = 2026
 
@@ -16,16 +15,16 @@ const selectedYear = archiveMatch ? parseInt(archiveMatch[1], 10) : LATEST_YEAR
 const prevYear = selectedYear - 1
 const nextYear = selectedYear + 1
 
-const prevDisabled = prevYear < MIN_YEAR;
-const nextDisabled = nextYear > LATEST_YEAR;
+const prevDisabled = prevYear < MIN_YEAR
+const nextDisabled = nextYear > LATEST_YEAR
 
-const prevHref = prevDisabled ? '#' : (prevYear === LATEST_YEAR ? '/' : `/archive/${prevYear}`)
-const nextHref = nextDisabled ? '#' : (nextYear === LATEST_YEAR ? '/' : `/archive/${nextYear}`)
+const prevHref = prevDisabled ? '#' : prevYear === LATEST_YEAR ? '/' : `/archive/${prevYear}`
+const nextHref = nextDisabled ? '#' : nextYear === LATEST_YEAR ? '/' : `/archive/${nextYear}`
 
 const theme = YEAR_THEMES[selectedYear] || YEAR_THEMES['2025']
 ---
 
-<header class="header">
+<header class="header" transition:name="main-header">
   <div class="year-nav">
     <ArrowToggle
       orientation="left"
@@ -85,13 +84,18 @@ const theme = YEAR_THEMES[selectedYear] || YEAR_THEMES['2025']
     scroll-behavior: smooth;
   }
 
+  :global(::view-transition-group(main-header)) {
+    z-index: 1000;
+  }
+
   .header {
     display: flex;
-    position: relative;
     justify-content: space-around;
     align-items: center;
     background-color: white;
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     z-index: 1000;
   }

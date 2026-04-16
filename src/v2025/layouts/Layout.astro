@@ -1,4 +1,6 @@
 ---
+import Footer from '@/core/components/footer/Footer.astro'
+import Header from '@/core/components/header/Header.astro'
 import { ClientRouter } from 'astro:transitions'
 ---
 
@@ -13,9 +15,9 @@ import { ClientRouter } from 'astro:transitions'
     <ClientRouter />
   </head>
   <body>
-    <main transition:animate="fade">
-      <slot />
-    </main>
+    <Header />
+    <main transition:animate="fade"><slot /></main>
+    <Footer />
   </body>
 </html>
 

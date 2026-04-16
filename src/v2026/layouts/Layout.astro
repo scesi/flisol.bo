@@ -2,6 +2,8 @@
 import { ClientRouter } from 'astro:transitions'
 
 import { YEAR_THEMES } from '@/data/years-config.ts'
+import Header from '@/core/components/header/Header.astro'
+import Footer from '@/core/components/footer/Footer.astro'
 
 const { year } = Astro.props
 const theme = YEAR_THEMES[year] || YEAR_THEMES['2025']
@@ -18,9 +20,9 @@ const theme = YEAR_THEMES[year] || YEAR_THEMES['2025']
     <ClientRouter />
   </head>
   <body>
-    <main transition:animate="fade">
-      <slot />
-    </main>
+    <Header />
+    <main transition:animate="fade"><slot /></main>
+    <Footer />
   </body>
 </html>
 
