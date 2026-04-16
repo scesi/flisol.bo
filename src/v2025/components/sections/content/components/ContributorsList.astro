@@ -1,6 +1,5 @@
 ---
-// ContributorsList.astro
-import contributors from '@/data/contributors.json'
+import contributors from '@/v2025/data/contributors.json'
 import ContributorCard from '@/v2025/components/ui/ContributorCard.astro'
 ---
 
@@ -23,9 +22,8 @@ import ContributorCard from '@/v2025/components/ui/ContributorCard.astro'
     overflow: hidden;
   }
   .section-title {
-    font-family: 'Bangers', 'Comic Neue', cursive, sans-serif;
     font-size: clamp(2rem, 5vw, 3rem);
-    color: var(--main-text-color);
+    color: var(--arrow-color);
     -webkit-text-stroke: 0.3px black;
     text-align: center;
     margin-bottom: 2rem;

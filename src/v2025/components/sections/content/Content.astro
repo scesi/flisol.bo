@@ -1,7 +1,7 @@
 ---
 import Schedule from './components/schedule.astro'
 import { AgendaIsland } from './components/agenda-island/AgendaIsland.tsx'
-import data from '@/data/schedule.json'
+import data from '@/v2025/data/schedule.json'
 
 import RunTux from '@/v2025/assets/icons/svg/run-tux.svg'
 import BrokenPaper from '@/v2025/assets/icons/svg/broken-paper.svg'
@@ -14,7 +14,7 @@ import { Image } from 'astro:assets'
 import ContributorsList from './components/ContributorsList.astro'
 
 const imageFiles = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/images/2025/*/*.{JPG,jpg,png,jpeg,webp}',
+  '/src/v2025/assets/images/2025/*/*.{JPG,jpg,png,jpeg,webp}',
   {
     eager: true,
   }

@@ -1,5 +1,5 @@
 ---
-import ArrowToggle from '@/components/ui/arrow-toggle/arrow-toggle.tsx'
+import ArrowToggle from '@/core/components/ui/arrow-toggle/arrow-toggle'
 
 interface Props {
   eventos: Array<{
@@ -18,7 +18,7 @@ const { eventos } = Astro.props
       eventos.map((evento) => (
         <article class="schedule__session">
           <p class="schedule__session--time">{evento.horario}</p>
-          <ArrowToggle orientation="right" client:load />
+          <ArrowToggle orientation="right" href="#" label="Toggle details" client:load />
           <div class="schedule__session--info">
             <img
               src="/path-to-default-avatar.png"
@@ -88,13 +88,6 @@ const { eventos } = Astro.props
         align-items: center;
         gap: 1rem;
       }
-
-      //   &--details {
-      //     display: flex;
-      //     flex-direction: column;
-      //     align-items: center;
-      //     justify-content: center;
-      //   }
     }
   }
 

@@ -3,30 +3,22 @@ import BolivianFlag from '@core/assets/icons/flags/bo.svg'
 import ArrowToggle from '@core/components/ui/arrow-toggle/arrow-toggle'
 import { YEAR_THEMES } from '@/data/years-config'
 
-// 1. Definimos los años disponibles de FLISoL
+
 const MIN_YEAR = 2025
-// Viendo tu estructura de carpetas (v2026), asumo que será el 2026.
 const LATEST_YEAR = 2026
 
-// 2. Leemos la URL actual para saber en qué página estamos
 const pathname = Astro.url.pathname
 
-// 3. Buscamos si la URL contiene el patrón de archivo (ej. /archive/2025)
 const archiveMatch = pathname.match(/\/archive\/(\d{4})/)
 
-// 4. Si hay coincidencia, usamos el año de la URL. Si no, asumimos que estamos en el index (LATEST_YEAR)
 const selectedYear = archiveMatch ? parseInt(archiveMatch[1], 10) : LATEST_YEAR
 
 const prevYear = selectedYear - 1
 const nextYear = selectedYear + 1
 
-// Verificamos si los años existen para deshabilitar las flechas
 const prevDisabled = prevYear < MIN_YEAR;
 const nextDisabled = nextYear > LATEST_YEAR;
 
-// 5. Generamos las rutas correctamente.
-// Si el año a navegar es el más reciente, vamos a la raíz '/'.
-// Si es un año anterior, vamos a la ruta pública '/archive/[año]'
 const prevHref = prevDisabled ? '#' : (prevYear === LATEST_YEAR ? '/' : `/archive/${prevYear}`)
 const nextHref = nextDisabled ? '#' : (nextYear === LATEST_YEAR ? '/' : `/archive/${nextYear}`)
 
@@ -131,7 +123,6 @@ const theme = YEAR_THEMES[selectedYear] || YEAR_THEMES['2025']
       1px 1px 0 var(--arrowColorBg);
     padding: 1rem 1rem;
     padding-top: 1.5rem;
-    /* view-transition-name is set via transition:name directive on the element */
   }
 
   .year_v1 {

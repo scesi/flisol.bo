@@ -1,10 +1,7 @@
 ---
-// ContributorCard.astro
-// Card estilo cómic para mostrar un contributor
-import type { Contributor, Network } from '../../types/contributor'
+import type { Contributor, Network } from '@/types/contributor'
 const { contributor } = Astro.props
 
-// Avatar: si tiene GitHub, usa su avatar, si no, avatar genérico
 const github = contributor.networks.find((n: Network) => n.network_name === 'GitHub')
 const avatarUrl = github
   ? `https://github.com/${github.username}.png`
