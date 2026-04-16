@@ -45,11 +45,6 @@ export const ArrowLeftPressed = () => {
           fill="#15151B"
         />
       </g>
-      <defs>
-        <clipPath id="clip0_46_2192">
-          <rect width="62" height="49" fill="white" transform="translate(0 0.5)" />
-        </clipPath>
-      </defs>
     </svg>
   )
 }

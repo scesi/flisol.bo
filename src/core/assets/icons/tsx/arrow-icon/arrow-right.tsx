@@ -49,11 +49,7 @@ export const ArrowRight = () => {
           fill="#15151B"
         />
       </g>
-      <defs>
-        <clipPath id="a">
-          <path fill="#fff" d="M62 0H0v44h62z" />
-        </clipPath>
-      </defs>
+
     </svg>
   )
 }

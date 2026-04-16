@@ -6,7 +6,7 @@ import PathsComic from '@/v2025/assets/icons/svg/paths-comic.svg'
 import DotsComic from '@/v2025/assets/icons/svg/dots-comic.svg'
 ---
 
-<section class="hero">
+<section class="hero" transition:name="hero-section" transition:animate="fade">
   <div class="comic-grid">
     <div class="comic-row top">
       <div class="comic-square orange">
@@ -40,8 +40,6 @@ import DotsComic from '@/v2025/assets/icons/svg/dots-comic.svg'
     z-index: 1;
     border-bottom: 5px solid black;
     overflow: hidden;
-    transform: translateZ(0);
-    will-change: transform;
   }
 
   .comic-grid {

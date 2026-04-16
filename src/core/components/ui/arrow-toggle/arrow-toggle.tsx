@@ -1,4 +1,4 @@
-import { useState, type ComponentType } from 'react'
+import React, { type ComponentType } from 'react'
 import './arrow-toggle.css'
 
 import { ArrowLeft, ArrowLeftPressed, ArrowRight, ArrowRightPressed } from '@/core/assets/icons/tsx/arrow-icon'
@@ -8,44 +8,46 @@ type Orientation = 'left' | 'right'
 
 type ArrowToggleProps = {
   orientation: Orientation
+  href: string
+  label: string
+  disabled?: boolean
 }
 
 const ICON_MAP: Record<Orientation, { default: ComponentType; pressed: ComponentType }> = {
   left: { default: ArrowLeft, pressed: ArrowLeftPressed },
-
   right: { default: ArrowRight, pressed: ArrowRightPressed },
-
 }
 
-export const ArrowToggle = ({ orientation }: ArrowToggleProps) => {
-  const [pressed, setPressed] = useState(false)
-
+export const ArrowToggle = ({ orientation, href, label, disabled = false }: ArrowToggleProps) => {
   const icons = ICON_MAP[orientation]
-  const IconComponent = pressed ? icons.pressed : icons.default
+  const DefaultIcon = icons.default
+  const PressedIcon = icons.pressed
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (disabled) {
+      e.preventDefault()
+    }
+  }
 
   return (
-    <div
-      role="button"
-      aria-pressed={pressed}
-      className={`arrow`}
-      tabIndex={0}
-      onMouseDown={() => setPressed(true)}
-      onMouseUp={() => setPressed(false)}
-      onMouseLeave={() => setPressed(false)}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          setPressed(true)
-          e.preventDefault()
-        }
-      }}
-      onKeyUp={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          setPressed(false)
-        }
+    <a
+      href={disabled ? '#' : href}
+      aria-label={label}
+      className={`arrow ${disabled ? 'disabled' : ''}`}
+      onClick={handleClick}
+      title={disabled ? 'Coming soon' : label}
+      style={{
+        opacity: disabled ? 0.5 : 1,
+        cursor: disabled ? 'not-allowed' : 'pointer'
       }}
     >
-      <IconComponent />
-    </div>
+      <span className="icon-default">
+        <DefaultIcon />
+      </span>
+      <span className="icon-pressed">
+        <PressedIcon />
+      </span>
+    </a>
   )
 }
 

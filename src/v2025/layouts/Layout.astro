@@ -13,7 +13,9 @@ import { ClientRouter } from 'astro:transitions'
     <ClientRouter />
   </head>
   <body>
-    <slot />
+    <main transition:animate="fade">
+      <slot />
+    </main>
   </body>
 </html>
 
@@ -21,7 +23,7 @@ import { ClientRouter } from 'astro:transitions'
   /* Register your custom font family and tell the browser where to find it. */
   @font-face {
     font-family: 'Luckiest_Guy';
-    src: url('/public/fonts/LuckiestGuy-Regular.ttf') format('woff');
+    src: url('/fonts/LuckiestGuy-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;

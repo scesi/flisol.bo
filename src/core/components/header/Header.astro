@@ -3,7 +3,8 @@ import BolivianFlag from '@core/assets/icons/flags/bo.svg'
 import ArrowToggle from '@core/components/ui/arrow-toggle/arrow-toggle'
 import { YEAR_THEMES } from '@/data/years-config'
 
-// 1. Definimos cuál es el año "principal" que vive en la raíz (index.astro)
+// 1. Definimos los años disponibles de FLISoL
+const MIN_YEAR = 2025
 // Viendo tu estructura de carpetas (v2026), asumo que será el 2026.
 const LATEST_YEAR = 2026
 
@@ -19,27 +20,39 @@ const selectedYear = archiveMatch ? parseInt(archiveMatch[1], 10) : LATEST_YEAR
 const prevYear = selectedYear - 1
 const nextYear = selectedYear + 1
 
+// Verificamos si los años existen para deshabilitar las flechas
+const prevDisabled = prevYear < MIN_YEAR;
+const nextDisabled = nextYear > LATEST_YEAR;
+
 // 5. Generamos las rutas correctamente.
 // Si el año a navegar es el más reciente, vamos a la raíz '/'.
 // Si es un año anterior, vamos a la ruta pública '/archive/[año]'
-const prevHref = prevYear === LATEST_YEAR ? '/' : `/archive/${prevYear}`
-const nextHref = nextYear === LATEST_YEAR ? '/' : `/archive/${nextYear}`
+const prevHref = prevDisabled ? '#' : (prevYear === LATEST_YEAR ? '/' : `/archive/${prevYear}`)
+const nextHref = nextDisabled ? '#' : (nextYear === LATEST_YEAR ? '/' : `/archive/${nextYear}`)
 
 const theme = YEAR_THEMES[selectedYear] || YEAR_THEMES['2025']
 ---
 
 <header class="header">
   <div class="year-nav">
-    <a href={prevHref} aria-label={`Navigate to ${prevYear} archive`} class="nav-arrow left-arrow">
-      <ArrowToggle orientation="left" client:load />
-    </a>
+    <ArrowToggle
+      orientation="left"
+      href={prevHref}
+      label={`Navigate to ${prevYear} archive`}
+      disabled={prevDisabled}
+      client:load
+    />
     <span class="year" transition:name="year-text">
       <h2 class="year_v1">{selectedYear}</h2>
       <h2 class="year_v2">{selectedYear}</h2>
     </span>
-    <a href={nextHref} aria-label={`Navigate to ${nextYear} archive`} class="nav-arrow right-arrow">
-      <ArrowToggle orientation="right" client:load />
-    </a>
+    <ArrowToggle
+      orientation="right"
+      href={nextHref}
+      label={`Navigate to ${nextYear} archive`}
+      disabled={nextDisabled}
+      client:load
+    />
   </div>
 
   <div class="nav-flag-container">
@@ -118,7 +131,7 @@ const theme = YEAR_THEMES[selectedYear] || YEAR_THEMES['2025']
       1px 1px 0 var(--arrowColorBg);
     padding: 1rem 1rem;
     padding-top: 1.5rem;
-    view-transition-name: year-text;
+    /* view-transition-name is set via transition:name directive on the element */
   }
 
   .year_v1 {
