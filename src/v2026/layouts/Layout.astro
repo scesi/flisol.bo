@@ -18,16 +18,21 @@ const theme = YEAR_THEMES[year] || YEAR_THEMES['2025']
     <ClientRouter />
   </head>
   <body>
-    <slot />
+    <main transition:animate="fade">
+      <slot />
+    </main>
   </body>
 </html>
 
-<style is:global define:vars={{
-  arrowColor: theme.arrowColor,
-      arrowBg: theme.arrowBg,
-      fontFamily: theme.fontFamily,
-      fontSize: theme.fontSize
-}}>
+<style
+  is:global
+  define:vars={{
+    arrowColor: theme.arrowColor,
+    arrowBg: theme.arrowBg,
+    fontFamily: theme.fontFamily,
+    fontSize: theme.fontSize,
+  }}
+>
   :root {
     --arrow-color: var(--arrowColor);
     --arrow-color-bg: var(--arrowBg);

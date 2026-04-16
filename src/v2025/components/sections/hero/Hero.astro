@@ -35,10 +35,13 @@ import DotsComic from '@/v2025/assets/icons/svg/dots-comic.svg'
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 100vh;
+    padding-top: 5rem;
     z-index: 1;
     border-bottom: 5px solid black;
     overflow: hidden;
+    transform: translateZ(0);
+    will-change: transform;
   }
 
   .comic-grid {

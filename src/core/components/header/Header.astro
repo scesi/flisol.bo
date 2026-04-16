@@ -3,26 +3,39 @@ import BolivianFlag from '@core/assets/icons/flags/bo.svg'
 import ArrowToggle from '@core/components/ui/arrow-toggle/arrow-toggle'
 import { YEAR_THEMES } from '@/data/years-config'
 
-const { year } = Astro.props
-const currentYear = parseInt(year)
+// 1. Definimos cuál es el año "principal" que vive en la raíz (index.astro)
+// Viendo tu estructura de carpetas (v2026), asumo que será el 2026.
+const LATEST_YEAR = 2026
 
-const prevYear = currentYear - 1
-const nextYear = currentYear + 1
+// 2. Leemos la URL actual para saber en qué página estamos
+const pathname = Astro.url.pathname
 
-const prevHref = prevYear === 2026 ? '/' : `/archive/${prevYear}`
-const nextHref = nextYear === 2026 ? '/' : `/archive/${nextYear}`
+// 3. Buscamos si la URL contiene el patrón de archivo (ej. /archive/2025)
+const archiveMatch = pathname.match(/\/archive\/(\d{4})/)
 
-const theme = YEAR_THEMES[year] || YEAR_THEMES['2025']
+// 4. Si hay coincidencia, usamos el año de la URL. Si no, asumimos que estamos en el index (LATEST_YEAR)
+const selectedYear = archiveMatch ? parseInt(archiveMatch[1], 10) : LATEST_YEAR
+
+const prevYear = selectedYear - 1
+const nextYear = selectedYear + 1
+
+// 5. Generamos las rutas correctamente.
+// Si el año a navegar es el más reciente, vamos a la raíz '/'.
+// Si es un año anterior, vamos a la ruta pública '/archive/[año]'
+const prevHref = prevYear === LATEST_YEAR ? '/' : `/archive/${prevYear}`
+const nextHref = nextYear === LATEST_YEAR ? '/' : `/archive/${nextYear}`
+
+const theme = YEAR_THEMES[selectedYear] || YEAR_THEMES['2025']
 ---
 
-<header class="header" transition:persist>
+<header class="header">
   <div class="year-nav">
     <a href={prevHref} aria-label={`Navigate to ${prevYear} archive`} class="nav-arrow left-arrow">
       <ArrowToggle orientation="left" client:load />
     </a>
-    <span class="year" transition:name="year-display">
-      <h2 class="year_v1">{year}</h2>
-      <h2 class="year_v2">{year}</h2>
+    <span class="year" transition:name="year-text">
+      <h2 class="year_v1">{selectedYear}</h2>
+      <h2 class="year_v2">{selectedYear}</h2>
     </span>
     <a href={nextHref} aria-label={`Navigate to ${nextYear} archive`} class="nav-arrow right-arrow">
       <ArrowToggle orientation="right" client:load />
@@ -73,6 +86,8 @@ const theme = YEAR_THEMES[year] || YEAR_THEMES['2025']
     justify-content: space-around;
     align-items: center;
     background-color: white;
+    position: fixed;
+    width: 100%;
     z-index: 1000;
   }
 
@@ -102,10 +117,12 @@ const theme = YEAR_THEMES[year] || YEAR_THEMES['2025']
       -1px 1px 0 var(--arrowColorBg),
       1px 1px 0 var(--arrowColorBg);
     padding: 1rem 1rem;
+    padding-top: 1.5rem;
     view-transition-name: year-text;
   }
 
   .year_v1 {
+    font-family: var(--yearFont);
     position: absolute;
     color: var(--arrowColor);
     bottom: 20px;
@@ -114,6 +131,7 @@ const theme = YEAR_THEMES[year] || YEAR_THEMES['2025']
   }
 
   .year_v2 {
+    font-family: var(--yearFont);
     color: var(--arrowColorBg);
     left: 0;
     font-size: var(--titleFontSize);

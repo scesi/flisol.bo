@@ -11,7 +11,7 @@ export const YEAR_THEMES: Record<string, YearTheme> = {
     fontFamily: "'Luckiest_Guy', sans-serif",
     arrowColor: "#f4e957",
     arrowBg: "#4752ae",
-    titleFontSize: "1.5rem",
+    titleFontSize: "2rem",
     fontSize: "1.2rem",
   },
   "2026": {
