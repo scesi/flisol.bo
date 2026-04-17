@@ -1,0 +1,123 @@
+---
+import Image from 'astro/components/Image.astro'
+import Background1 from '@/v2026/assets/background-hero/background_cbba_city_pixel_1.png'
+import Background2 from '@/v2026/assets/background-hero/background_cbba_city_pixel_2.png'
+import Background3 from '@/v2026/assets/background-hero/background_cbba_city_pixel_3.png'
+import Background4 from '@/v2026/assets/background-hero/background_cbba_city_pixel_4.png'
+import Background5 from '@/v2026/assets/background-hero/background_cbba_city_pixel_5.png'
+---
+
+<section class="hero">
+  <svg style="display: none;"> </svg>
+  <div class="city">
+    <Image src={Background1} alt="Background Layer 1" class="layer layer-1" />
+    <Image src={Background2} alt="Background Layer 2" class="layer layer-2" />
+    <Image src={Background3} alt="Background Layer 3" class="layer layer-3" />
+    <Image src={Background4} alt="Background Layer 4" class="layer layer-4" />
+    <Image src={Background5} alt="Background Layer 5" class="layer layer-5" />
+  </div>
+  <div class="floor">
+    <div class="grid-container">
+      <div class="grid-lines"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    height: 100vh;
+    display: flex;
+  }
+
+  .city {
+    position: relative;
+    width: 100%;
+    height: 80%;
+    bottom: 0;
+    background: linear-gradient(to bottom, #210a50, #4296ca);
+  }
+
+  .floor {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20%;
+    background: #210a50;
+    overflow: hidden;
+    perspective: 400px;
+  }
+
+  .floor::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    pointer-events: none;
+    z-index: 10;
+    /* Un patrón de puntos de 2x2 píxeles */
+    background-image: radial-gradient(rgba(0, 0, 0, 0.4) 1px, transparent 0);
+    background-size: 3px 3px;
+  }
+
+  .grid-container {
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    transform: rotateX(45deg);
+    transform-origin: top;
+  }
+
+  .grid-lines {
+    width: 100%;
+    height: 1000%;
+    margin-top: -100px;
+    background-image:
+      linear-gradient(to right, rgba(66, 150, 202, 0.3) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(66, 150, 202, 0.3) 1px, transparent 1px);
+    background-size: 40px 40px;
+    filter: drop-shadow(0 0 2px rgb(107, 162, 196)) drop-shadow(0 0 5px rgba(196, 214, 224, 0.5));
+    animation: move-grid 2s linear infinite;
+  }
+
+  @keyframes move-grid {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(40px);
+    }
+  }
+
+  .layer {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 115%;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  .layer-1 {
+    z-index: 5;
+  }
+
+  .layer-2 {
+    z-index: 4;
+  }
+
+  .layer-3 {
+    z-index: 3;
+  }
+
+  .layer-4 {
+    z-index: 2;
+  }
+
+  .layer-5 {
+    z-index: 0;
+  }
+</style>
