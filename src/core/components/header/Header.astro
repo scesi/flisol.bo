@@ -2,6 +2,7 @@
 import BolivianFlag from '@core/assets/icons/flags/bo.svg'
 import ArrowToggle from '@core/components/ui/arrow-toggle/arrow-toggle'
 import { YEAR_THEMES } from '@/data/years-config'
+import { YEAR_DATA } from '@/data/years-data'
 
 const MIN_YEAR = 2025
 const LATEST_YEAR = 2026
@@ -22,6 +23,7 @@ const prevHref = prevDisabled ? '#' : prevYear === LATEST_YEAR ? '/' : `/archive
 const nextHref = nextDisabled ? '#' : nextYear === LATEST_YEAR ? '/' : `/archive/${nextYear}`
 
 const theme = YEAR_THEMES[selectedYear] || YEAR_THEMES['2025']
+const data = YEAR_DATA[selectedYear] || YEAR_DATA['2025']
 ---
 
 <header class="header" transition:name="main-header">
@@ -65,7 +67,7 @@ const theme = YEAR_THEMES[selectedYear] || YEAR_THEMES['2025']
         </ul>
       </nav>
       { LATEST_YEAR === selectedYear &&
-        <p class="nav-item register-button"><a href="#register">Inscribete</a></p>
+        <p class="nav-item register-button"><a  href={data.registerLink} target="_blank" rel="noopener noreferrer">Inscribete</a></p>
       }
     </div>
 
