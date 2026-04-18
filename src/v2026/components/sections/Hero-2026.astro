@@ -5,6 +5,9 @@ import Background2 from '@/v2026/assets/background-hero/background_cbba_city_pix
 import Background3 from '@/v2026/assets/background-hero/background_cbba_city_pixel_3.png'
 import Background4 from '@/v2026/assets/background-hero/background_cbba_city_pixel_4.png'
 import Background5 from '@/v2026/assets/background-hero/background_cbba_city_pixel_5.png'
+import FlisolLogo from '@/v2026/assets/flisol_logo_2026.png'
+import PixelGNU from '@/v2026/assets/pixel_gnu.png'
+import PixelTux from '@/v2026/assets/pixel_tux.png'
 ---
 
 <section class="hero">
@@ -14,6 +17,11 @@ import Background5 from '@/v2026/assets/background-hero/background_cbba_city_pix
     <Image src={Background3} alt="Background Layer 3" class="layer layer-3" />
     <Image src={Background4} alt="Background Layer 4" class="layer layer-4" />
     <Image src={Background5} alt="Background Layer 5" class="layer layer-5" />
+    <div class="logo">
+      <Image src={FlisolLogo} alt="Flisol Logo" class="logo-flisol" />
+      <Image src={PixelGNU} alt="Pixel GNU" class="pixel-gnu" />
+      <Image src={PixelTux} alt="Pixel Tux" class="pixel-tux" />
+    </div>
   </div>
   <div class="floor">
     <div class="grid-container">
@@ -47,6 +55,17 @@ import Background5 from '@/v2026/assets/background-hero/background_cbba_city_pix
     overflow: hidden;
     perspective: 400px;
     z-index: 20;
+  }
+
+  .logo {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
   }
 
   .floor::after {
@@ -101,33 +120,91 @@ import Background5 from '@/v2026/assets/background-hero/background_cbba_city_pix
     height: 100%;
     object-fit: cover;
     z-index: 1;
+    animation: bounce-in 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  @keyframes bounce-in {
+    0% {
+      transform: translateY(100%);
+    }
+    60% {
+      transform: translateY(0%);
+    }
+    80% {
+      transform: translateY(1%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .floor {
+    height: 21%;
   }
 
   .layer-1 {
     z-index: 5;
     filter: drop-shadow(0 0 5px black);
+    animation-delay: 0.1s;
+    filter: blur(1px);
   }
 
   .layer-2 {
     z-index: 4;
     filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.322));
+    animation-delay: 0.2s;
+    filter: blur(2px);
   }
 
   .layer-3 {
     z-index: 3;
     filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.212));
+    animation-delay: 0.3s;
+    filter: blur(4px);
+    opacity: 0.5;
   }
 
   .layer-4 {
     z-index: 2;
     margin-bottom: -50px;
+    animation-delay: 0.4s;
     filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+    filter: blur(1px);
   }
 
   .layer-5 {
     margin-bottom: -50px;
-
     z-index: 0;
+    animation-delay: 0.5s;
+    filter: blur(3px);
+  }
+
+  .logo-flisol {
+    z-index: 6;
+    width: 30%;
+    height: auto;
+  }
+
+  .pixel-gnu {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 7;
+    width: 15%;
+    height: auto;
+    transform: scaleX(-1);
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+  }
+
+  .pixel-tux {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 8;
+    width: 15%;
+    height: auto;
+    animation-delay: 0.8s;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
   }
 
   @media screen and (max-width: 768px) {
@@ -140,7 +217,7 @@ import Background5 from '@/v2026/assets/background-hero/background_cbba_city_pix
     }
 
     .floor {
-      height: 30%;
+      height: 25%;
     }
 
     .layer-4 {
@@ -148,6 +225,19 @@ import Background5 from '@/v2026/assets/background-hero/background_cbba_city_pix
       margin-bottom: -80px;
       z-index: 2;
       filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+    }
+
+    .logo-flisol {
+      margin-top: 10rem;
+      width: 70%;
+    }
+
+    .pixel-gnu {
+      width: 35%;
+    }
+
+    .pixel-tux {
+      width: 25%;
     }
   }
 </style>
