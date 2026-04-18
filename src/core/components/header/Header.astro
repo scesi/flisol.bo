@@ -64,7 +64,9 @@ const theme = YEAR_THEMES[selectedYear] || YEAR_THEMES['2025']
           <li class="nav-item"><a href="#contributors">Contributors</a></li>
         </ul>
       </nav>
-      <p class="nav-item register-button"><a href="#register">Inscribete</a></p>
+      { LATEST_YEAR === selectedYear &&
+        <p class="nav-item register-button"><a href="#register">Inscribete</a></p>
+      }
     </div>
 
     <BolivianFlag class="flag" aria-label="Bolivian Flag" role="img" />
