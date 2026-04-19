@@ -33,24 +33,24 @@ import PixelTux from '@/v2026/assets/pixel_tux.png'
 <style>
   .hero {
     margin-top: 4.5rem;
-    height: 100vh;
+    height: calc(100vh - 4.5rem);
     display: flex;
+    flex-direction: column;
   }
 
   .city {
     position: relative;
     width: 100%;
-    height: 72%;
-    bottom: 0;
+    flex: 1;
     background: linear-gradient(to bottom, #210a50, #4296ca);
-    border-bottom: 5px solid #4296ca;
+    overflow: hidden;
   }
 
   .floor {
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
-    height: 20%;
+    height: 21%;
     background: #210a50;
     overflow: hidden;
     perspective: 400px;
@@ -210,14 +210,15 @@ import PixelTux from '@/v2026/assets/pixel_tux.png'
   @media screen and (max-width: 768px) {
     .hero {
       margin-top: 3rem;
+      height: calc(100vh - 3rem);
     }
 
     .city {
-      height: 70%;
+      height: 77%;
     }
 
     .floor {
-      height: 25%;
+      height: 23%;
     }
 
     .layer-4 {

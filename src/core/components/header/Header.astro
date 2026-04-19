@@ -66,8 +66,14 @@ const data = YEAR_DATA[selectedYear] || YEAR_DATA['2025']
           <li class="nav-item"><a href="#contributors">Contributors</a></li>
         </ul>
       </nav>
-      { LATEST_YEAR === selectedYear &&
-        <p class="nav-item register-button"><a  href={data.registerLink} target="_blank" rel="noopener noreferrer">Inscribete</a></p>
+      {
+        LATEST_YEAR === selectedYear && (
+          <p class="nav-item register-button">
+            <a href={data.registerLink} target="_blank" rel="noopener noreferrer">
+              Inscribete
+            </a>
+          </p>
+        )
       }
     </div>
 
