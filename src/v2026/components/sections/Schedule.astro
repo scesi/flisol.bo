@@ -2,522 +2,553 @@
 import scheduleData from '@/v2026/data/schedule.json'
 import ScheduleCard from '@/v2026/components/sections/schedule/ScheduleCard.astro'
 import {
-	CATEGORY_LABELS,
-	enrichScheduleData,
-	groupEventsByDay,
-	isSimpleBlockEvent,
-	type EnrichedScheduleEvent,
-	type EventCategory,
+  CATEGORY_LABELS,
+  enrichScheduleData,
+  groupEventsByDay,
+  isSimpleBlockEvent,
+  type EnrichedScheduleEvent,
+  type EventCategory,
 } from '@/v2026/utils/schedule'
 
 const allEvents = enrichScheduleData(scheduleData)
 const groupedByDay = groupEventsByDay(allEvents)
 const dayEntries = Object.entries(groupedByDay).map(([dayLabel, events]) => {
-	const timeSet = new Set(events.map((event) => event.startTime))
-	const rooms = Array.from(new Set(events.filter(e => !e.spanAllRooms).map(e => e.laboratorio))).sort()
-	const minuteByTime = events.reduce<Record<string, number>>((acc, event) => {
-		if (acc[event.startTime] === undefined || event.startMinutes < acc[event.startTime]) {
-			acc[event.startTime] = event.startMinutes
-		}
-		return acc
-	}, {})
-	const times = Array.from(timeSet).sort((a, b) => (minuteByTime[a] ?? 0) - (minuteByTime[b] ?? 0))
-	const timeIndex = Object.fromEntries(times.map((time, index) => [time, index]))
+  const timeSet = new Set(events.map((event) => event.startTime))
+  const rooms = Array.from(
+    new Set(events.filter((e) => !e.spanAllRooms).map((e) => e.laboratorio))
+  ).sort()
+  const minuteByTime = events.reduce<Record<string, number>>((acc, event) => {
+    if (acc[event.startTime] === undefined || event.startMinutes < acc[event.startTime]) {
+      acc[event.startTime] = event.startMinutes
+    }
+    return acc
+  }, {})
+  const times = Array.from(timeSet).sort((a, b) => (minuteByTime[a] ?? 0) - (minuteByTime[b] ?? 0))
+  const timeIndex = Object.fromEntries(times.map((time, index) => [time, index]))
 
-	const matrix = events.reduce<Record<string, EnrichedScheduleEvent>>((acc, event) => {
-		acc[`${event.startTime}|${event.laboratorio}`] = event
-		return acc
-	}, {})
+  const matrix = events.reduce<Record<string, EnrichedScheduleEvent>>((acc, event) => {
+    acc[`${event.startTime}|${event.laboratorio}`] = event
+    return acc
+  }, {})
 
-	const hiddenCells = new Set<string>()
+  const hiddenCells = new Set<string>()
 
-	events.forEach((event) => {
-		if (event.spanAllRooms) return
-		const startIdx = timeIndex[event.startTime]
-		if (startIdx === undefined) return
-		const totalRows = Math.max(1, event.spanRows ?? 1)
-		for (let offset = 1; offset < totalRows; offset += 1) {
-			const rowToHide = startIdx + offset
-			if (rowToHide < times.length) {
-				hiddenCells.add(`${rowToHide}|${event.laboratorio}`)
-			}
-		}
-	})
+  events.forEach((event) => {
+    if (event.spanAllRooms) return
+    const startIdx = timeIndex[event.startTime]
+    if (startIdx === undefined) return
+    const totalRows = Math.max(1, event.spanRows ?? 1)
+    for (let offset = 1; offset < totalRows; offset += 1) {
+      const rowToHide = startIdx + offset
+      if (rowToHide < times.length) {
+        hiddenCells.add(`${rowToHide}|${event.laboratorio}`)
+      }
+    }
+  })
 
-	return {
-		dayLabel,
-		events,
-		rooms,
-		times,
-		matrix,
-		hiddenCells,
-	}
+  return {
+    dayLabel,
+    events,
+    rooms,
+    times,
+    matrix,
+    hiddenCells,
+  }
 })
 
 const categoryTone: Record<EventCategory, string> = {
-	frontend: 'tone-frontend',
-	backend: 'tone-backend',
-	mobile: 'tone-mobile',
-	ia: 'tone-ia',
-	datos: 'tone-datos',
-	seguridad: 'tone-seguridad',
-	infra: 'tone-infra',
-	gamedev: 'tone-gamedev',
-	ux: 'tone-ux',
-	comunidad: 'tone-comunidad',
-	general: 'tone-general',
+  frontend: 'tone-frontend',
+  backend: 'tone-backend',
+  mobile: 'tone-mobile',
+  ia: 'tone-ia',
+  datos: 'tone-datos',
+  seguridad: 'tone-seguridad',
+  infra: 'tone-infra',
+  gamedev: 'tone-gamedev',
+  ux: 'tone-ux',
+  comunidad: 'tone-comunidad',
+  general: 'tone-general',
 }
 
 const legendCategories = Object.keys(CATEGORY_LABELS) as EventCategory[]
 ---
 
 <section id="agenda" class="schedule-section">
-	<div class="schedule-shell">
-		<header class="schedule-header">
-			<p class="schedule-kicker">Agenda 2026</p>
-			<h2>Explora tu ruta FLISoL</h2>
-		
+  <div class="schedule-shell">
+    <header class="schedule-header">
+      <p class="schedule-kicker">Agenda 2026</p>
+      <h2>Explora tu ruta FLISoL</h2>
 
-			<div class="legend" aria-label="Categorias de actividades">
-				{
-					legendCategories.map((category) => (
-						<span class={`legend-chip ${categoryTone[category]}`}>
-							<span class="dot" aria-hidden="true"></span>
-							{CATEGORY_LABELS[category]}
-						</span>
-					))
-				}
-			</div>
-		</header>
+      <div class="legend" aria-label="Categorias de actividades">
+        {
+          legendCategories.map((category) => (
+            <span class={`legend-chip ${categoryTone[category]}`}>
+              <span class="dot" aria-hidden="true" />
+              {CATEGORY_LABELS[category]}
+            </span>
+          ))
+        }
+      </div>
+    </header>
 
-		<div class="day-tabs-wrapper">
-			{
-				dayEntries.map((entry, dayIndex) => (
-					<>
-						<input
-							class="tab-input"
-							type="radio"
-							name="schedule-day"
-							id={`day-${dayIndex}`}
-							checked={dayIndex === 0}
-						/>
-						<label class="day-tab" for={`day-${dayIndex}`}>
-							<span class="day-name">{entry.dayLabel}</span>
-							<span class="day-count">{entry.events.length} actividades</span>
-						</label>
-					</>
-				))
-			}
+    <div class="day-tabs-wrapper">
+      {
+        dayEntries.map((entry, dayIndex) => (
+          <>
+            <input
+              class="tab-input"
+              type="radio"
+              name="schedule-day"
+              id={`day-${dayIndex}`}
+              checked={dayIndex === 0}
+            />
+            <label class="day-tab" for={`day-${dayIndex}`}>
+              <span class="day-name">{entry.dayLabel}</span>
+              <span class="day-count">{entry.events.length} actividades</span>
+            </label>
+          </>
+        ))
+      }
 
-			<div class="day-panels">
-				{
-					dayEntries.map((entry, dayIndex) => (
-						<section class="day-panel" data-index={dayIndex} aria-label={`Agenda ${entry.dayLabel}`}>
-							<div class="mobile-stack">
-								{entry.events.map((event) => <ScheduleCard event={event} tone={categoryTone[event.category]} />)}
-							</div>
+      <div class="day-panels">
+        {
+          dayEntries.map((entry, dayIndex) => (
+            <section
+              class="day-panel"
+              data-index={dayIndex}
+              aria-label={`Agenda ${entry.dayLabel}`}
+            >
+              <div class="mobile-stack">
+                {entry.events.map((event) => (
+                  <ScheduleCard event={event} tone={categoryTone[event.category]} />
+                ))}
+              </div>
 
-							<div class="desktop-grid" aria-label={`Tabla de horarios ${entry.dayLabel}`}>
-								<table class="desktop-table">
-									<thead>
-										<tr>
-											<th class="head-cell hour">Hora</th>
-											{entry.rooms.map((room) => <th class="head-cell">{room}</th>)}
-										</tr>
-									</thead>
-									<tbody>
-										{entry.times.map((time, timeIdx) => {
-											const spanEvent = entry.events.find((event) => event.startTime === time && event.spanAllRooms)
+              <div class="desktop-grid" aria-label={`Tabla de horarios ${entry.dayLabel}`}>
+                <table class="desktop-table">
+                  <thead>
+                    <tr>
+                      <th class="head-cell hour">Hora</th>
+                      {entry.rooms.map((room) => (
+                        <th class="head-cell">{room}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {entry.times.map((time, timeIdx) => {
+                      const spanEvent = entry.events.find(
+                        (event) => event.startTime === time && event.spanAllRooms
+                      )
 
-											return (
-												<tr>
-													<td class="time-cell">
-														<span>{time}</span>
-													</td>
+                      return (
+                        <tr>
+                          <td class="time-cell">
+                            <span>{time}</span>
+                          </td>
 
-													{spanEvent ? (
-														<td class="event-cell shared-cell" colspan={entry.rooms.length}>
-															<div class:list={["shared-event-bar", isSimpleBlockEvent(spanEvent) && 'shared-event-bar-simple']}>
-																<span class="shared-title">{spanEvent.actividad}</span>
-																{!isSimpleBlockEvent(spanEvent) && <span class="shared-speaker">{spanEvent.speaker}</span>}
-															</div>
-														</td>
-													) : (
-														entry.rooms.map((room) => {
-															if (entry.hiddenCells.has(`${timeIdx}|${room}`)) {
-																return null
-															}
+                          {spanEvent ? (
+                            <td class="event-cell shared-cell" colspan={entry.rooms.length}>
+                              <div
+                                class:list={[
+                                  'shared-event-bar',
+                                  isSimpleBlockEvent(spanEvent) && 'shared-event-bar-simple',
+                                ]}
+                              >
+                                <span class="shared-title">{spanEvent.actividad}</span>
+                                {!isSimpleBlockEvent(spanEvent) && (
+                                  <span class="shared-speaker">{spanEvent.speaker}</span>
+                                )}
+                              </div>
+                            </td>
+                          ) : (
+                            entry.rooms.map((room) => {
+                              if (entry.hiddenCells.has(`${timeIdx}|${room}`)) {
+                                return null
+                              }
 
-															const event = entry.matrix[`${time}|${room}`]
+                              const event = entry.matrix[`${time}|${room}`]
 
-															if (!event) {
-																return (
-																	<td class="event-cell">
-																		<div class="empty-slot" aria-hidden="true"></div>
-																	</td>
-																)
-															}
+                              if (!event) {
+                                return (
+                                  <td class="event-cell">
+                                    <div class="empty-slot" aria-hidden="true" />
+                                  </td>
+                                )
+                              }
 
-															const rowSpan = Math.max(1, event.spanRows ?? 1)
-															const rowsRemaining = entry.times.length - timeIdx
-															const safeRowSpan = Math.min(rowSpan, rowsRemaining)
+                              const rowSpan = Math.max(1, event.spanRows ?? 1)
+                              const rowsRemaining = entry.times.length - timeIdx
+                              const safeRowSpan = Math.min(rowSpan, rowsRemaining)
 
-															return (
-																<td class="event-cell" rowspan={safeRowSpan}>
-																	<div class="event-fill-wrapper">
-																		<ScheduleCard event={event} tone={categoryTone[event.category]} compact />
-																	</div>
-																</td>
-															)
-														})
-													)}
-												</tr>
-											)
-										})}
-									</tbody>
-								</table>
-							</div>
-						</section>
-					))
-				}
-			</div>
-		</div>
-	</div>
+                              return (
+                                <td class="event-cell" rowspan={safeRowSpan}>
+                                  <div class="event-fill-wrapper">
+                                    <ScheduleCard
+                                      event={event}
+                                      tone={categoryTone[event.category]}
+                                      compact
+                                    />
+                                  </div>
+                                </td>
+                              )
+                            })
+                          )}
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </div>
 </section>
 <style>
-	.schedule-section {
-		position: relative;
-		margin-top: -1px;
-		padding: 5rem 0.55rem 6rem;
-		background:
-			linear-gradient(180deg, rgba(14, 8, 38, 0.95) 0%, rgba(22, 12, 58, 0.96) 55%, rgba(34, 14, 84, 0.98) 100%),
-			radial-gradient(circle at 20% 10%, rgba(66, 150, 202, 0.28), transparent 35%),
-			radial-gradient(circle at 80% 0%, rgba(233, 186, 45, 0.12), transparent 38%);
-		border-top: 4px solid #4296ca;
-	}
+  .schedule-section {
+    position: relative;
+    margin-top: -1px;
+    padding: 5rem 0.55rem 6rem;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(14, 8, 38, 0.95) 0%,
+        rgba(22, 12, 58, 0.96) 55%,
+        rgba(34, 14, 84, 0.98) 100%
+      ),
+      radial-gradient(circle at 20% 10%, rgba(66, 150, 202, 0.28), transparent 35%),
+      radial-gradient(circle at 80% 0%, rgba(233, 186, 45, 0.12), transparent 38%);
+    border-top: 4px solid #4296ca;
+  }
 
-	.schedule-shell {
-		width: min(1460px, calc(100vw - 1.1rem));
-		margin: 0 auto;
-	}
+  .schedule-shell {
+    width: min(1460px, calc(100vw - 1.1rem));
+    margin: 0 auto;
+  }
 
-	.schedule-header {
-		color: #f9f8ff;
-		margin-bottom: 1.4rem;
-	}
+  .schedule-header {
+    color: #f9f8ff;
+    margin-bottom: 1.4rem;
+  }
 
-	.schedule-kicker {
-		font-size: 0.72rem;
-		color: #e9ba2d;
-		margin-bottom: 0.8rem;
-		text-transform: uppercase;
-		letter-spacing: 1.5px;
-	}
+  .schedule-kicker {
+    font-size: 0.72rem;
+    color: #e9ba2d;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
 
-	.schedule-header h2 {
-		font-size: clamp(1.1rem, 2vw, 1.5rem);
-		color: #ffffff;
-		margin-bottom: 1rem;
-		line-height: 1.6;
-		text-shadow:
-			2px 0 #18083b,
-			-2px 0 #18083b,
-			0 2px #18083b,
-			0 -2px #18083b;
-	}
+  .schedule-header h2 {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: #ffffff;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    text-shadow:
+      2px 0 #18083b,
+      -2px 0 #18083b,
+      0 2px #18083b,
+      0 -2px #18083b;
+  }
 
-	.schedule-description {
-		max-width: 70ch;
-		font-family: 'Montserrat', sans-serif;
-		line-height: 1.45;
-		color: #e5defe;
-		margin-bottom: 1.2rem;
-	}
+  .schedule-description {
+    max-width: 70ch;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.45;
+    color: #e5defe;
+    margin-bottom: 1.2rem;
+  }
 
-	.legend {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.55rem;
-	}
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+  }
 
-	.legend-chip {
-		border: 2px solid #111;
-		background: #22155e;
-		color: #f6f4ff;
-		border-radius: 8px;
-		display: inline-flex;
-		align-items: center;
-		gap: 0.4rem;
-		padding: 0.35rem 0.52rem;
-		font-size: 0.58rem;
-		box-shadow: 2px 2px 0 #111;
-	}
+  .legend-chip {
+    border: 2px solid #111;
+    background: #22155e;
+    color: #f6f4ff;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.52rem;
+    font-size: 0.58rem;
+    box-shadow: 2px 2px 0 #111;
+  }
 
-	.dot {
-		width: 8px;
-		height: 8px;
-		border-radius: 2px;
-		background: currentColor;
-		box-shadow: 0 0 0 1px #000;
-	}
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: currentColor;
+    box-shadow: 0 0 0 1px #000;
+  }
 
-	.day-tabs-wrapper {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, max-content));
-		gap: 0.6rem;
-	}
+  .day-tabs-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, max-content));
+    gap: 0.6rem;
+  }
 
-	.tab-input {
-		position: absolute;
-		opacity: 0;
-		pointer-events: none;
-	}
+  .tab-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
 
-	.day-tab {
-		border: 3px solid #1a0c43;
-		background: #27156e;
-		color: #d6cbff;
-		border-radius: 10px 10px 0 0;
-		box-shadow: 3px 3px 0 #120630;
-		cursor: pointer;
-		min-width: 180px;
-		padding: 0.7rem 0.9rem;
-		display: inline-flex;
-		flex-direction: column;
-		gap: 0.3rem;
-		transition: transform 0.15s ease;
-	}
+  .day-tab {
+    border: 3px solid #1a0c43;
+    background: #27156e;
+    color: #d6cbff;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 3px 3px 0 #120630;
+    cursor: pointer;
+    min-width: 180px;
+    padding: 0.7rem 0.9rem;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    transition: transform 0.15s ease;
+  }
 
-	.tab-input:focus-visible + .day-tab {
-		outline: 2px solid #e9ba2d;
-		outline-offset: 2px;
-	}
+  .tab-input:focus-visible + .day-tab {
+    outline: 2px solid #e9ba2d;
+    outline-offset: 2px;
+  }
 
-	.day-name {
-		color: #fef9ff;
-		font-size: 0.7rem;
-	}
+  .day-name {
+    color: #fef9ff;
+    font-size: 0.7rem;
+  }
 
-	.day-count {
-		font-family: 'Montserrat', sans-serif;
-		font-size: 0.72rem;
-		color: #b7a8f8;
-	}
+  .day-count {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    color: #b7a8f8;
+  }
 
-	.day-panels {
-		grid-column: 1 / -1;
-		border: 4px solid #1a0c43;
-		background: rgba(15, 8, 40, 0.9);
-		box-shadow:
-			0 0 0 2px #4296ca,
-			8px 8px 0 rgba(10, 4, 27, 0.72);
-		border-radius: 0 12px 12px 12px;
-		min-height: 380px;
-	}
+  .day-panels {
+    grid-column: 1 / -1;
+    border: 4px solid #1a0c43;
+    background: rgba(15, 8, 40, 0.9);
+    box-shadow:
+      0 0 0 2px #4296ca,
+      8px 8px 0 rgba(10, 4, 27, 0.72);
+    border-radius: 0 12px 12px 12px;
+    min-height: 380px;
+  }
 
-	.day-panel {
-		display: none;
-		padding: 1rem;
-	}
+  .day-panel {
+    display: none;
+    padding: 1rem;
+  }
 
-	#day-0:checked ~ .day-tab[for='day-0'],
-	#day-1:checked ~ .day-tab[for='day-1'] {
-		transform: translateY(2px);
-		background: #1a0d4a;
-		color: #ffffff;
-		border-color: #4296ca;
-		box-shadow: 2px 2px 0 #120630;
-	}
+  #day-0:checked ~ .day-tab[for='day-0'],
+  #day-1:checked ~ .day-tab[for='day-1'] {
+    transform: translateY(2px);
+    background: #1a0d4a;
+    color: #ffffff;
+    border-color: #4296ca;
+    box-shadow: 2px 2px 0 #120630;
+  }
 
-	#day-0:checked ~ .day-panels .day-panel[data-index='0'],
-	#day-1:checked ~ .day-panels .day-panel[data-index='1'] {
-		display: block;
-	}
+  #day-0:checked ~ .day-panels .day-panel[data-index='0'],
+  #day-1:checked ~ .day-panels .day-panel[data-index='1'] {
+    display: block;
+  }
 
-	.mobile-stack {
-		display: grid;
-		gap: 0.75rem;
-	}
+  .mobile-stack {
+    display: grid;
+    gap: 0.75rem;
+  }
 
-	.desktop-grid {
-		display: none;
-	}
+  .desktop-grid {
+    display: none;
+  }
 
-	.desktop-table {
-		width: 100%;
-		table-layout: fixed;
-		border-collapse: collapse;
-	}
+  .desktop-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+  }
 
-	.head-cell,
-	.time-cell,
-	.event-cell {
-		border-right: 1px solid rgba(139, 126, 200, 0.4);
-		border-bottom: 1px solid rgba(139, 126, 200, 0.4);
-		vertical-align: top;
-	}
+  .head-cell,
+  .time-cell,
+  .event-cell {
+    border-right: 1px solid rgba(139, 126, 200, 0.4);
+    border-bottom: 1px solid rgba(139, 126, 200, 0.4);
+    vertical-align: top;
+  }
 
-	.head-cell {
-		position: sticky;
-		top: 0;
-		z-index: 3;
-		background: #170a43;
-		color: #ebddff;
-		padding: 0.6rem;
-		font-size: 0.56rem;
-		line-height: 1.5;
-		white-space: normal;
-		overflow-wrap: anywhere;
-	}
+  .head-cell {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    background: #170a43;
+    color: #ebddff;
+    padding: 0.6rem;
+    font-size: 0.56rem;
+    line-height: 1.5;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
 
-	.head-cell.hour {
-		color: #9be8ff;
-		width: 112px;
-	}
+  .head-cell.hour {
+    color: #9be8ff;
+    width: 112px;
+  }
 
-	.desktop-table th {
-		text-align: left;
-	}
+  .desktop-table th {
+    text-align: left;
+  }
 
-	.time-cell {
-		padding: 0.75rem 0.6rem;
-		color: #9be8ff;
-		font-size: 0.58rem;
-		background: #130733;
-	}
+  .time-cell {
+    padding: 0.75rem 0.6rem;
+    color: #9be8ff;
+    font-size: 0.58rem;
+    background: #130733;
+  }
 
-	.event-cell {
-		background: rgba(32, 15, 83, 0.65);
-		padding: 0;
-		height: 1px;
-	}
+  .event-cell {
+    background: rgba(32, 15, 83, 0.65);
+    padding: 0;
+    height: 1px;
+  }
 
-	.event-fill-wrapper {
-		height: 100%;
-		min-height: 100%;
-		padding: 0.45rem;
-		display: flex;
-	}
+  .event-fill-wrapper {
+    height: 100%;
+    min-height: 100%;
+    padding: 0.45rem;
+    display: flex;
+  }
 
-	.event-fill-wrapper :global(.schedule-card) {
-		flex: 1;
-		height: auto;
-		min-height: 100%;
-	}
+  .event-fill-wrapper :global(.schedule-card) {
+    flex: 1;
+    height: auto;
+    min-height: 100%;
+  }
 
-	.shared-cell {
-		background: rgba(19, 17, 29, 0.9);
-		padding: 0;
-	}
+  .shared-cell {
+    background: rgba(19, 17, 29, 0.9);
+    padding: 0;
+  }
 
-	.shared-event-bar {
-		min-height: 74px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 0.75rem;
-		padding: 0.55rem 0.9rem;
-		background: linear-gradient(180deg, rgba(66, 66, 66, 0.85) 0%, rgba(55, 55, 55, 0.92) 100%);
-		border-top: 1px solid rgba(255, 255, 255, 0.1);
-		border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-	}
+  .shared-event-bar {
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.55rem 0.9rem;
+    background: linear-gradient(180deg, rgba(66, 66, 66, 0.85) 0%, rgba(55, 55, 55, 0.92) 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  }
 
-	.shared-event-bar-simple {
-		background: linear-gradient(180deg, rgba(219, 214, 238, 0.98) 0%, rgba(199, 191, 226, 0.98) 100%);
-		border-top-color: rgba(0, 0, 0, 0.15);
-		border-bottom-color: rgba(0, 0, 0, 0.25);
-	}
+  .shared-event-bar-simple {
+    background: linear-gradient(
+      180deg,
+      rgba(219, 214, 238, 0.98) 0%,
+      rgba(199, 191, 226, 0.98) 100%
+    );
+    border-top-color: rgba(0, 0, 0, 0.15);
+    border-bottom-color: rgba(0, 0, 0, 0.25);
+  }
 
-	.shared-title {
-		font-size: 0.66rem;
-		color: #f2f2f2;
-	}
+  .shared-title {
+    font-size: 0.66rem;
+    color: #f2f2f2;
+  }
 
-	.shared-event-bar-simple .shared-title {
-		color: #140a33;
-	}
+  .shared-event-bar-simple .shared-title {
+    color: #140a33;
+  }
 
-	.shared-speaker {
-		font-family: 'Montserrat', sans-serif;
-		font-size: 0.86rem;
-		color: #d9d9d9;
-	}
+  .shared-speaker {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.86rem;
+    color: #d9d9d9;
+  }
 
-	.empty-slot {
-		min-height: 96px;
-	}
+  .empty-slot {
+    min-height: 96px;
+  }
 
-	.legend-chip.tone-frontend {
-		color: #4bd5ff;
-	}
+  .legend-chip.tone-frontend {
+    color: #4bd5ff;
+  }
 
-	.legend-chip.tone-backend {
-		color: #ff6b6b;
-	}
+  .legend-chip.tone-backend {
+    color: #ff6b6b;
+  }
 
-	.legend-chip.tone-mobile {
-		color: #a575ff;
-	}
+  .legend-chip.tone-mobile {
+    color: #a575ff;
+  }
 
-	.legend-chip.tone-ia {
-		color: #6ef3ab;
-	}
+  .legend-chip.tone-ia {
+    color: #6ef3ab;
+  }
 
-	.legend-chip.tone-datos {
-		color: #7bb8ff;
-	}
+  .legend-chip.tone-datos {
+    color: #7bb8ff;
+  }
 
-	.legend-chip.tone-seguridad {
-		color: #ff9850;
-	}
+  .legend-chip.tone-seguridad {
+    color: #ff9850;
+  }
 
-	.legend-chip.tone-infra {
-		color: #ecc15d;
-	}
+  .legend-chip.tone-infra {
+    color: #ecc15d;
+  }
 
-	.legend-chip.tone-gamedev {
-		color: #39ffb2;
-	}
+  .legend-chip.tone-gamedev {
+    color: #39ffb2;
+  }
 
-	.legend-chip.tone-ux {
-		color: #f47dff;
-	}
+  .legend-chip.tone-ux {
+    color: #f47dff;
+  }
 
-	.legend-chip.tone-comunidad {
-		color: #f8db7d;
-	}
+  .legend-chip.tone-comunidad {
+    color: #f8db7d;
+  }
 
-	.legend-chip.tone-general {
-		color: #bcb0e9;
-	}
+  .legend-chip.tone-general {
+    color: #bcb0e9;
+  }
 
-	@media (max-width: 900px) {
-		.schedule-section {
-			padding: 4.8rem 0.5rem 5.2rem;
-		}
+  @media (max-width: 900px) {
+    .schedule-section {
+      padding: 4.8rem 0.5rem 5.2rem;
+    }
 
-		.day-tabs-wrapper {
-			grid-template-columns: 1fr 1fr;
-		}
+    .day-tabs-wrapper {
+      grid-template-columns: 1fr 1fr;
+    }
 
-		.day-tab {
-			min-width: auto;
-		}
-	}
+    .day-tab {
+      min-width: auto;
+    }
+  }
 
-	@media (min-width: 1024px) {
-		.day-panel {
-			padding: 0;
-		}
+  @media (min-width: 1024px) {
+    .day-panel {
+      padding: 0;
+    }
 
-		.mobile-stack {
-			display: none;
-		}
+    .mobile-stack {
+      display: none;
+    }
 
-		.desktop-grid {
-			display: block;
-			border-radius: 0 0 10px 10px;
-			overflow: hidden;
-		}
-	}
+    .desktop-grid {
+      display: block;
+      border-radius: 0 0 10px 10px;
+      overflow: hidden;
+    }
+  }
 </style>

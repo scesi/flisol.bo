@@ -59,16 +59,58 @@ export const CATEGORY_LABELS: Record<EventCategory, string> = {
 }
 
 const CATEGORY_KEYWORDS: Record<EventCategory, string[]> = {
-  seguridad: ['hacker', 'phreaking', 'amenazas', 'ciber', 'seguridad', 'attacks', 'ataque', 'ataques', 'vulnerabilidad'],
-  ia: ['ia', 'ai', 'llm', 'llms', 'copilot', 'inteligencia artificial', 'machine learning', 'deep seek', 'modelo', 'modelos', 'neural network', 'neural networks', 'pinn'],
+  seguridad: [
+    'hacker',
+    'phreaking',
+    'amenazas',
+    'ciber',
+    'seguridad',
+    'attacks',
+    'ataque',
+    'ataques',
+    'vulnerabilidad',
+  ],
+  ia: [
+    'ia',
+    'ai',
+    'llm',
+    'llms',
+    'copilot',
+    'inteligencia artificial',
+    'machine learning',
+    'deep seek',
+    'modelo',
+    'modelos',
+    'neural network',
+    'neural networks',
+    'pinn',
+  ],
   datos: ['datos', 'data', 'data science', 'ciencia de datos', 'analytics', 'cuantica'],
   gamedev: ['godot', 'videojuegos', 'juegos', 'engine', 'gamedev'],
   mobile: ['android', 'ios', 'flutter', 'kotlin', 'mobile'],
   backend: ['backend', 'java', 'spring boot', 'nodejs', 'node', 'api', 'python'],
   frontend: ['frontend', 'react', 'web', 'ui', 'javascript', 'css', 'html', 'blogs'],
-  infra: ['docker', 'quarkus', 'linux', 'devops', 'github actions', 'arquitectura', 'despliegue', 'cloud', 'aws'],
+  infra: [
+    'docker',
+    'quarkus',
+    'linux',
+    'devops',
+    'github actions',
+    'arquitectura',
+    'despliegue',
+    'cloud',
+    'aws',
+  ],
   ux: ['ux', 'diseno', 'interfaz', 'penpot', 'diseño'],
-  comunidad: ['carrera', 'software libre', 'comunidad', 'open source', 'gratis', 'startup', 'costos'],
+  comunidad: [
+    'carrera',
+    'software libre',
+    'comunidad',
+    'open source',
+    'gratis',
+    'startup',
+    'costos',
+  ],
   general: [],
 }
 
@@ -104,7 +146,10 @@ const slugify = (value: string): string => {
 }
 
 export const inferCategory = (activity: string): EventCategory => {
-  const text = activity.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  const text = activity
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
 
   const match = (Object.keys(CATEGORY_KEYWORDS) as EventCategory[]).find((category) => {
     if (category === 'general') return false
@@ -140,7 +185,9 @@ export const enrichScheduleData = (scheduleData: RawScheduleData): EnrichedSched
   })
 }
 
-export const groupEventsByDay = (events: EnrichedScheduleEvent[]): Record<string, EnrichedScheduleEvent[]> => {
+export const groupEventsByDay = (
+  events: EnrichedScheduleEvent[]
+): Record<string, EnrichedScheduleEvent[]> => {
   return events.reduce<Record<string, EnrichedScheduleEvent[]>>((acc, event) => {
     const key = event.dayLabel
     if (!acc[key]) {

@@ -49,7 +49,6 @@ export const ArrowRight = () => {
           fill="#15151B"
         />
       </g>
-
     </svg>
   )
 }
