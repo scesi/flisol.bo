@@ -59,7 +59,7 @@ const CATEGORY_KEYWORDS: Record<EventCategory, string[]> = {
   seguridad: ['hacker', 'phreaking', 'amenazas', 'ciber', 'seguridad'],
   infra: ['docker', 'quarkus', 'linux', 'devops', 'github actions'],
   ux: ['ux', 'diseno', 'interfaz', 'penpot'],
-  comunidad: ['carrera', 'software libre', 'comunidad', 'open source'],
+  comunidad: ['carrera', 'software libre', 'comunidad', 'open source', 'gratis'],
   general: [],
 }
 
@@ -99,7 +99,10 @@ export const inferCategory = (activity: string): EventCategory => {
 
   const match = (Object.keys(CATEGORY_KEYWORDS) as EventCategory[]).find((category) => {
     if (category === 'general') return false
-    return CATEGORY_KEYWORDS[category].some((word) => text.includes(word))
+    return CATEGORY_KEYWORDS[category].some((word) => {
+      const regex = new RegExp(`\\b${word}\\b`, 'i')
+      return regex.test(text)
+    })
   })
 
   return match || 'general'

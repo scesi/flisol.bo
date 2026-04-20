@@ -77,22 +77,7 @@
           "actividad": "Patrocinadores",
           "speaker": "",
           "confirmado": true,
-          "esBloque": true
-        },
-        {
-          "horario": "13:55 - 14:00",
-          "laboratorio": "Laboratorio 1",
-          "actividad": "Patrocinadores",
-          "speaker": "",
-          "confirmado": true,
-          "esBloque": true
-        },
-        {
-          "horario": "13:55 - 14:00",
-          "laboratorio": "Laboratorio 2",
-          "actividad": "Patrocinadores",
-          "speaker": "",
-          "confirmado": true,
+          "spanAllRooms": true,
           "esBloque": true
         },
         {
