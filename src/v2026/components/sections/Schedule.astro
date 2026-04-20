@@ -12,11 +12,9 @@ import {
 
 const allEvents = enrichScheduleData(scheduleData)
 const groupedByDay = groupEventsByDay(allEvents)
-const FIXED_ROOMS = ['Auditorio', 'Laboratorio 1', 'Laboratorio 2']
-
 const dayEntries = Object.entries(groupedByDay).map(([dayLabel, events]) => {
 	const timeSet = new Set(events.map((event) => event.startTime))
-	const rooms = FIXED_ROOMS
+	const rooms = Array.from(new Set(events.filter(e => !e.spanAllRooms).map(e => e.laboratorio))).sort()
 	const minuteByTime = events.reduce<Record<string, number>>((acc, event) => {
 		if (acc[event.startTime] === undefined || event.startMinutes < acc[event.startTime]) {
 			acc[event.startTime] = event.startMinutes
@@ -58,10 +56,13 @@ const dayEntries = Object.entries(groupedByDay).map(([dayLabel, events]) => {
 
 const categoryTone: Record<EventCategory, string> = {
 	frontend: 'tone-frontend',
+	backend: 'tone-backend',
+	mobile: 'tone-mobile',
 	ia: 'tone-ia',
 	datos: 'tone-datos',
 	seguridad: 'tone-seguridad',
 	infra: 'tone-infra',
+	gamedev: 'tone-gamedev',
 	ux: 'tone-ux',
 	comunidad: 'tone-comunidad',
 	general: 'tone-general',
@@ -164,8 +165,8 @@ const legendCategories = Object.keys(CATEGORY_LABELS) as EventCategory[]
 															const safeRowSpan = Math.min(rowSpan, rowsRemaining)
 
 															return (
-																<td class:list={["event-cell", safeRowSpan > 1 && 'event-cell-vertical-span']} rowspan={safeRowSpan}>
-																	<div class:list={[safeRowSpan > 1 && 'event-fill-wrapper']}>
+																<td class="event-cell" rowspan={safeRowSpan}>
+																	<div class="event-fill-wrapper">
 																		<ScheduleCard event={event} tone={categoryTone[event.category]} compact />
 																	</div>
 																</td>
@@ -389,10 +390,6 @@ const legendCategories = Object.keys(CATEGORY_LABELS) as EventCategory[]
 
 	.event-cell {
 		background: rgba(32, 15, 83, 0.65);
-		padding: 0.45rem;
-	}
-
-	.event-cell-vertical-span {
 		padding: 0;
 		height: 1px;
 	}
@@ -456,6 +453,14 @@ const legendCategories = Object.keys(CATEGORY_LABELS) as EventCategory[]
 		color: #4bd5ff;
 	}
 
+	.legend-chip.tone-backend {
+		color: #ff6b6b;
+	}
+
+	.legend-chip.tone-mobile {
+		color: #a575ff;
+	}
+
 	.legend-chip.tone-ia {
 		color: #6ef3ab;
 	}
@@ -470,6 +475,10 @@ const legendCategories = Object.keys(CATEGORY_LABELS) as EventCategory[]
 
 	.legend-chip.tone-infra {
 		color: #ecc15d;
+	}
+
+	.legend-chip.tone-gamedev {
+		color: #39ffb2;
 	}
 
 	.legend-chip.tone-ux {

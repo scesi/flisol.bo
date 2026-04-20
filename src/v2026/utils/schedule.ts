@@ -23,10 +23,13 @@ export type RawScheduleData = {
 
 export type EventCategory =
   | 'frontend'
+  | 'backend'
+  | 'mobile'
   | 'ia'
   | 'datos'
   | 'seguridad'
   | 'infra'
+  | 'gamedev'
   | 'ux'
   | 'comunidad'
   | 'general'
@@ -43,23 +46,29 @@ export type EnrichedScheduleEvent = RawScheduleEvent & {
 
 export const CATEGORY_LABELS: Record<EventCategory, string> = {
   frontend: 'Frontend',
+  backend: 'Backend',
+  mobile: 'Mobile',
   ia: 'IA',
   datos: 'Datos',
   seguridad: 'Seguridad',
   infra: 'Infra',
+  gamedev: 'GameDev',
   ux: 'UX',
   comunidad: 'Comunidad',
   general: 'General',
 }
 
 const CATEGORY_KEYWORDS: Record<EventCategory, string[]> = {
-  frontend: ['frontend', 'react', 'web', 'ui', 'javascript', 'css'],
-  ia: ['ia', 'llm', 'copilot', 'inteligencia artificial', 'deep seek', 'modelo', 'neural network', 'neural networks', 'pinn'],
-  datos: ['datos', 'data', 'ciencia de datos', 'analytics', 'cuantica'],
-  seguridad: ['hacker', 'phreaking', 'amenazas', 'ciber', 'seguridad'],
-  infra: ['docker', 'quarkus', 'linux', 'devops', 'github actions'],
-  ux: ['ux', 'diseno', 'interfaz', 'penpot'],
-  comunidad: ['carrera', 'software libre', 'comunidad', 'open source', 'gratis'],
+  seguridad: ['hacker', 'phreaking', 'amenazas', 'ciber', 'seguridad', 'attacks', 'ataque', 'ataques', 'vulnerabilidad'],
+  ia: ['ia', 'ai', 'llm', 'llms', 'copilot', 'inteligencia artificial', 'machine learning', 'deep seek', 'modelo', 'modelos', 'neural network', 'neural networks', 'pinn'],
+  datos: ['datos', 'data', 'data science', 'ciencia de datos', 'analytics', 'cuantica'],
+  gamedev: ['godot', 'videojuegos', 'juegos', 'engine', 'gamedev'],
+  mobile: ['android', 'ios', 'flutter', 'kotlin', 'mobile'],
+  backend: ['backend', 'java', 'spring boot', 'nodejs', 'node', 'api', 'python'],
+  frontend: ['frontend', 'react', 'web', 'ui', 'javascript', 'css', 'html', 'blogs'],
+  infra: ['docker', 'quarkus', 'linux', 'devops', 'github actions', 'arquitectura', 'despliegue', 'cloud', 'aws'],
+  ux: ['ux', 'diseno', 'interfaz', 'penpot', 'diseño'],
+  comunidad: ['carrera', 'software libre', 'comunidad', 'open source', 'gratis', 'startup', 'costos'],
   general: [],
 }
 
