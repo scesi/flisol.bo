@@ -142,7 +142,7 @@ const legendCategories = Object.keys(CATEGORY_LABELS) as EventCategory[]
 	.schedule-section {
 		position: relative;
 		margin-top: -1px;
-		padding: 5rem 1rem 6rem;
+		padding: 5rem 0.55rem 6rem;
 		background:
 			linear-gradient(180deg, rgba(14, 8, 38, 0.95) 0%, rgba(22, 12, 58, 0.96) 55%, rgba(34, 14, 84, 0.98) 100%),
 			radial-gradient(circle at 20% 10%, rgba(66, 150, 202, 0.28), transparent 35%),
@@ -151,7 +151,7 @@ const legendCategories = Object.keys(CATEGORY_LABELS) as EventCategory[]
 	}
 
 	.schedule-shell {
-		width: min(1200px, 100%);
+		width: min(1460px, calc(100vw - 1.1rem));
 		margin: 0 auto;
 	}
 
@@ -314,6 +314,8 @@ const legendCategories = Object.keys(CATEGORY_LABELS) as EventCategory[]
 		padding: 0.6rem;
 		font-size: 0.56rem;
 		line-height: 1.5;
+		white-space: normal;
+		overflow-wrap: anywhere;
 	}
 
 	.head-cell.hour {
@@ -376,7 +378,7 @@ const legendCategories = Object.keys(CATEGORY_LABELS) as EventCategory[]
 
 	@media (max-width: 900px) {
 		.schedule-section {
-			padding: 4.8rem 0.8rem 5.2rem;
+			padding: 4.8rem 0.5rem 5.2rem;
 		}
 
 		.day-tabs-wrapper {
@@ -399,8 +401,6 @@ const legendCategories = Object.keys(CATEGORY_LABELS) as EventCategory[]
 
 		.desktop-grid {
 			display: block;
-			max-height: 70vh;
-			overflow: auto;
 			border-radius: 0 0 10px 10px;
 		}
 

@@ -3,6 +3,7 @@ export type RawScheduleEvent = {
   laboratorio: string
   actividad: string
   speaker: string
+  descripcion?: string
 }
 
 export type RawScheduleDay = {
@@ -12,6 +13,8 @@ export type RawScheduleDay = {
 }
 
 export type RawScheduleData = {
+  locationDay1?: string
+  locationDay2?: string
   eventos: RawScheduleDay[]
 }
 
@@ -34,11 +37,18 @@ export type EnrichedScheduleEvent = RawScheduleEvent & {
   startMinutes: number
   endMinutes: number
   category: EventCategory
+  description: string
+  calendarLocation: string
 }
 
 export const DAY_DATE_MAP: Record<string, string> = {
   viernes: '2026-04-24',
   sabado: '2026-04-25',
+}
+
+const DAY_LOCATION_KEYS: Record<string, 'locationDay1' | 'locationDay2'> = {
+  viernes: 'locationDay1',
+  sabado: 'locationDay2',
 }
 
 export const CATEGORY_LABELS: Record<EventCategory, string> = {
@@ -109,11 +119,18 @@ export const enrichScheduleData = (scheduleData: RawScheduleData): EnrichedSched
   return scheduleData.eventos.flatMap((day) => {
     const normalizedDay = normalizeDay(day.dia)
     const dateISO = DAY_DATE_MAP[normalizedDay] || '2026-04-24'
+    const locationKey = DAY_LOCATION_KEYS[normalizedDay]
+    const dayLocation = (locationKey && scheduleData[locationKey]) || scheduleData.locationDay1 || 'Cochabamba, Bolivia'
 
     return day.eventos
       .map((event) => {
         const [startTime, endTime] = safeSplitTime(event.horario)
         const idSource = `${day.dia}-${event.horario}-${event.laboratorio}-${event.actividad}`
+        const baseDescription = event.descripcion?.trim()
+        const description =
+          baseDescription && baseDescription.length > 0
+            ? baseDescription
+            : `Sesion: ${event.actividad}. Ponente: ${event.speaker}. Sala: ${event.laboratorio}. Sede: ${dayLocation}.`
 
         return {
           ...event,
@@ -125,6 +142,8 @@ export const enrichScheduleData = (scheduleData: RawScheduleData): EnrichedSched
           startMinutes: toMinutes(startTime),
           endMinutes: toMinutes(endTime),
           category: inferCategory(event.actividad),
+          description,
+          calendarLocation: dayLocation,
         }
       })
       .sort((a, b) => a.startMinutes - b.startMinutes)
@@ -156,8 +175,8 @@ export const toGoogleCalendarUrl = (event: EnrichedScheduleEvent): string => {
     action: 'TEMPLATE',
     text: event.actividad,
     dates: `${startStamp}/${endStamp}`,
-    location: event.laboratorio,
-    details: `Speaker: ${event.speaker}`,
+    location: event.calendarLocation,
+    details: event.description,
   })
 
   return `https://calendar.google.com/calendar/render?${params.toString()}`

@@ -26,15 +26,25 @@ const category = event.category as EventCategory
 
   <h3 class="card-title">{event.actividad}</h3>
   <p class="card-speaker">{event.speaker}</p>
+  <p class="card-description">{event.description}</p>
 
   <div class="card-bottom">
     <span class="room-pill">{event.laboratorio}</span>
 
-    <details class="calendar-menu">
-      <summary class="calendar-trigger">Add to Calendar</summary>
-      <div class="calendar-actions">
-        <a href={googleUrl} target="_blank" rel="noopener noreferrer">Google Calendar</a>
-        <a href={icsUrl}>Descargar ICS</a>
+    <details class="event-details">
+      <summary class="detail-trigger">Ver detalle</summary>
+      <div class="detail-content">
+        <p class="detail-description">{event.description}</p>
+        <ul class="detail-list">
+          <li><strong>Hora:</strong> {event.startTime} - {event.endTime}</li>
+          <li><strong>Ponente:</strong> {event.speaker}</li>
+          <li><strong>Sala:</strong> {event.laboratorio}</li>
+          <li><strong>Ubicacion:</strong> {event.calendarLocation}</li>
+        </ul>
+        <div class="calendar-actions">
+          <a href={googleUrl} target="_blank" rel="noopener noreferrer">Google Calendar</a>
+          <a href={icsUrl}>Descargar ICS</a>
+        </div>
       </div>
     </details>
   </div>
@@ -115,71 +125,121 @@ const category = event.category as EventCategory
     font-family: 'Montserrat', sans-serif;
     font-size: 0.85rem;
     color: #d6cdfd;
+    margin-bottom: 0.4rem;
+  }
+
+  .card-description {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    line-height: 1.3;
+    color: #d9d2ff;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     margin-bottom: 0.7rem;
+  }
+
+  .card-bottom {
+    flex-wrap: wrap;
+    align-items: flex-start;
   }
 
   .room-pill {
     color: #d6cdfd;
-    max-width: 55%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    max-width: 100%;
+    overflow: visible;
+    text-overflow: initial;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    align-self: flex-start;
   }
 
-  .calendar-menu {
-    position: relative;
+  .event-details {
+    width: 100%;
+    margin-top: 0.45rem;
+    border: 2px solid #000;
+    border-radius: 8px;
+    background: rgba(20, 10, 58, 0.8);
   }
 
-  .calendar-trigger {
+  .detail-trigger {
     list-style: none;
     cursor: pointer;
-    border: 2px solid #000;
-    border-radius: 6px;
+    width: fit-content;
+    margin: 0.4rem;
+    border: 1px solid #000;
+    border-radius: 5px;
     background: #e9ba2d;
     color: #000;
     font-size: 0.58rem;
-    padding: 0.28rem 0.45rem;
+    padding: 0.2rem 0.42rem;
     box-shadow: 2px 2px 0 #000;
   }
 
-  .calendar-trigger::-webkit-details-marker {
+  .detail-trigger::-webkit-details-marker {
     display: none;
   }
 
-  .calendar-menu[open] .calendar-trigger {
+  .event-details[open] .detail-trigger {
     transform: translate(1px, 1px);
     box-shadow: 1px 1px 0 #000;
   }
 
+  .detail-content {
+    padding: 0 0.55rem 0.55rem;
+  }
+
+  .detail-description {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    line-height: 1.35;
+    color: #f0ebff;
+    margin-bottom: 0.45rem;
+  }
+
+  .detail-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.2rem;
+    font-family: 'Montserrat', sans-serif;
+    color: #d6cdfd;
+    font-size: 0.75rem;
+    line-height: 1.35;
+  }
+
+  .detail-list strong {
+    color: #f3d772;
+    font-weight: 600;
+  }
+
   .calendar-actions {
-    position: absolute;
-    right: 0;
-    top: calc(100% + 0.35rem);
-    width: 210px;
-    border: 2px solid #000;
-    border-radius: 8px;
-    overflow: hidden;
-    background: #ffffff;
-    box-shadow: 4px 4px 0 #000;
-    z-index: 5;
+    margin-top: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.4rem;
   }
 
   .calendar-actions a {
-    display: block;
+    display: inline-flex;
+    justify-content: center;
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
+    font-weight: 700;
     text-decoration: none;
-    color: #201057;
-    padding: 0.5rem 0.65rem;
-    border-bottom: 1px solid #d8d1fa;
-  }
-
-  .calendar-actions a:last-child {
-    border-bottom: none;
+    color: #000;
+    padding: 0.35rem 0.4rem;
+    border: 2px solid #000;
+    border-radius: 6px;
+    background: #e9ba2d;
+    box-shadow: 2px 2px 0 #000;
+    text-align: center;
   }
 
   .calendar-actions a:hover {
-    background: #f2ecff;
+    filter: brightness(1.05);
   }
 
   .compact-card {
@@ -193,6 +253,14 @@ const category = event.category as EventCategory
 
   .compact-card .card-speaker {
     font-size: 0.75rem;
+  }
+
+  .compact-card .card-description {
+    font-size: 0.72rem;
+  }
+
+  .compact-card .calendar-actions {
+    grid-template-columns: 1fr;
   }
 
   .tone-frontend {
