@@ -4,6 +4,9 @@ export type RawScheduleEvent = {
   actividad: string
   speaker: string
   confirmado: boolean
+  spanAllRooms?: boolean
+  spanRows?: number
+  esBloque?: boolean
 }
 
 export type RawScheduleDay = {
@@ -51,7 +54,7 @@ export const CATEGORY_LABELS: Record<EventCategory, string> = {
 
 const CATEGORY_KEYWORDS: Record<EventCategory, string[]> = {
   frontend: ['frontend', 'react', 'web', 'ui', 'javascript', 'css'],
-  ia: ['ia', 'llm', 'copilot', 'inteligencia artificial', 'deep seek', 'modelo'],
+  ia: ['ia', 'llm', 'copilot', 'inteligencia artificial', 'deep seek', 'modelo', 'neural network', 'neural networks', 'pinn'],
   datos: ['datos', 'data', 'ciencia de datos', 'analytics', 'cuantica'],
   seguridad: ['hacker', 'phreaking', 'amenazas', 'ciber', 'seguridad'],
   infra: ['docker', 'quarkus', 'linux', 'devops', 'github actions'],
@@ -105,7 +108,7 @@ export const inferCategory = (activity: string): EventCategory => {
 export const enrichScheduleData = (scheduleData: RawScheduleData): EnrichedScheduleEvent[] => {
   return scheduleData.eventos.flatMap((day) => {
     return day.eventos
-      .filter((event) => !event.confirmado)
+      .filter((event) => event.confirmado)
       .map((event) => {
         const [startTime, endTime] = safeSplitTime(event.horario)
         const idSource = `${day.dia}-${event.horario}-${event.laboratorio}-${event.actividad}`
@@ -134,4 +137,17 @@ export const groupEventsByDay = (events: EnrichedScheduleEvent[]): Record<string
     acc[key].push(event)
     return acc
   }, {})
+}
+
+export const isSimpleBlockEvent = (event: RawScheduleEvent): boolean => {
+  if (event.esBloque || event.spanAllRooms) {
+    return true
+  }
+
+  const text = event.actividad
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+
+  return /(break|almuerzo|registro|acreditacion|inauguracion|receso|coffee)/.test(text)
 }
