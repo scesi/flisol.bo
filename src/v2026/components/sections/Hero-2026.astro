@@ -8,6 +8,14 @@ import Background5 from '@/v2026/assets/background-hero/background_cbba_city_pix
 import FlisolLogo from '@/v2026/assets/flisol_logo_2026.png'
 import PixelGNU from '@/v2026/assets/pixel_gnu.png'
 import PixelTux from '@/v2026/assets/pixel_tux.png'
+
+const fechaEvento = new Date('2026-04-24T00:00:00')
+const ahora = new Date()
+const diferencia = fechaEvento.getTime() - ahora.getTime()
+
+// Cálculo de días restantes
+const diasRestantes = Math.max(0, Math.floor(diferencia / (1000 * 60 * 60 * 24)))
+const eventoIniciado = diasRestantes === 0
 ---
 
 <section class="hero">
@@ -19,6 +27,11 @@ import PixelTux from '@/v2026/assets/pixel_tux.png'
     <Image src={Background5} alt="Background Layer 5" class="layer layer-5" />
     <div class="logo">
       <Image src={FlisolLogo} alt="Flisol Logo" class="logo-flisol" />
+      <div class="info-container">
+        <div class="event-date">24 y 25 de Abril, 2026</div>
+        <h3>Faltan</h3>
+        <div id="countdown" class="timer">--:--:--:--</div>
+      </div>
       <Image src={PixelGNU} alt="Pixel GNU" class="pixel-gnu" />
       <Image src={PixelTux} alt="Pixel Tux" class="pixel-tux" />
     </div>
@@ -207,6 +220,32 @@ import PixelTux from '@/v2026/assets/pixel_tux.png'
     filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
   }
 
+  .info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    margin-top: 20px;
+    text-shadow: 0 0 10px rgba(66, 150, 202, 0.8);
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .event-date {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .timer {
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: rgba(33, 10, 80, 0.6);
+    padding: 10px 20px;
+    border: 2px solid #4296ca;
+    border-radius: 5px;
+  }
+
   @media screen and (max-width: 768px) {
     .hero {
       margin-top: 3rem;
@@ -229,16 +268,45 @@ import PixelTux from '@/v2026/assets/pixel_tux.png'
     }
 
     .logo-flisol {
-      margin-top: 10rem;
+      margin-top: 6rem;
       width: 70%;
     }
 
     .pixel-gnu {
-      width: 35%;
+      width: 30%;
     }
 
     .pixel-tux {
       width: 25%;
     }
+
+    .event-date {
+      font-size: 1rem;
+    }
+
+    .timer {
+      font-size: 1rem;
+    }
   }
 </style>
+<script>
+  const targetDate = new Date('2026-04-24T00:00:00').getTime()
+
+  function updateCountdown() {
+    const now = new Date().getTime()
+    const distance = targetDate - now
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24))
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000)
+
+    const timerElement = document.getElementById('countdown')
+    if (timerElement) {
+      timerElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`
+    }
+  }
+
+  setInterval(updateCountdown, 1000)
+  updateCountdown()
+</script>
