@@ -1,0 +1,229 @@
+---
+import {
+  CATEGORY_LABELS,
+  toGoogleCalendarUrl,
+  type EnrichedScheduleEvent,
+  type EventCategory,
+} from '@/v2026/utils/schedule'
+
+interface Props {
+  event: EnrichedScheduleEvent
+  tone: string
+  compact?: boolean
+}
+
+const { event, tone, compact = false } = Astro.props as Props
+const googleUrl = toGoogleCalendarUrl(event)
+const icsUrl = `/api/calendar/${event.id}.ics`
+const category = event.category as EventCategory
+---
+
+<article class:list={[`schedule-card ${tone}`, compact && 'compact-card']}>
+  <div class="card-top">
+    <span class="time-pill">{event.startTime} - {event.endTime}</span>
+    <span class="category-pill">{CATEGORY_LABELS[category]}</span>
+  </div>
+
+  <h3 class="card-title">{event.actividad}</h3>
+  <p class="card-speaker">{event.speaker}</p>
+
+  <div class="card-bottom">
+    <span class="room-pill">{event.laboratorio}</span>
+
+    <details class="calendar-menu">
+      <summary class="calendar-trigger">Add to Calendar</summary>
+      <div class="calendar-actions">
+        <a href={googleUrl} target="_blank" rel="noopener noreferrer">Google Calendar</a>
+        <a href={icsUrl}>Descargar ICS</a>
+      </div>
+    </details>
+  </div>
+</article>
+
+<style>
+  .schedule-card {
+    border: 3px solid #0f052f;
+    background: linear-gradient(180deg, #27156b 0%, #1a0d45 100%);
+    color: #f8f6ff;
+    border-radius: 10px;
+    padding: 0.8rem;
+    box-shadow: 3px 3px 0 #0f052f;
+    transition:
+      transform 0.12s ease,
+      box-shadow 0.12s ease,
+      border-color 0.12s ease;
+  }
+
+  .schedule-card:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0 #0f052f;
+  }
+
+  .schedule-card:active {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 #0f052f;
+  }
+
+  .schedule-card:focus-within {
+    border-color: #e9ba2d;
+    box-shadow:
+      0 0 0 2px rgba(233, 186, 45, 0.4),
+      3px 3px 0 #0f052f;
+  }
+
+  .card-top,
+  .card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .card-top {
+    margin-bottom: 0.5rem;
+  }
+
+  .time-pill,
+  .category-pill,
+  .room-pill {
+    border: 2px solid #000;
+    border-radius: 6px;
+    padding: 0.2rem 0.4rem;
+    font-size: 0.52rem;
+    line-height: 1.4;
+    display: inline-flex;
+    align-items: center;
+    background: #130733;
+  }
+
+  .time-pill {
+    color: #9be8ff;
+  }
+
+  .category-pill {
+    color: #fdf4c9;
+  }
+
+  .card-title {
+    font-size: 0.72rem;
+    line-height: 1.6;
+    color: #ffffff;
+    margin-bottom: 0.45rem;
+  }
+
+  .card-speaker {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    color: #d6cdfd;
+    margin-bottom: 0.7rem;
+  }
+
+  .room-pill {
+    color: #d6cdfd;
+    max-width: 55%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .calendar-menu {
+    position: relative;
+  }
+
+  .calendar-trigger {
+    list-style: none;
+    cursor: pointer;
+    border: 2px solid #000;
+    border-radius: 6px;
+    background: #e9ba2d;
+    color: #000;
+    font-size: 0.58rem;
+    padding: 0.28rem 0.45rem;
+    box-shadow: 2px 2px 0 #000;
+  }
+
+  .calendar-trigger::-webkit-details-marker {
+    display: none;
+  }
+
+  .calendar-menu[open] .calendar-trigger {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 #000;
+  }
+
+  .calendar-actions {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.35rem);
+    width: 210px;
+    border: 2px solid #000;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 4px 4px 0 #000;
+    z-index: 5;
+  }
+
+  .calendar-actions a {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: #201057;
+    padding: 0.5rem 0.65rem;
+    border-bottom: 1px solid #d8d1fa;
+  }
+
+  .calendar-actions a:last-child {
+    border-bottom: none;
+  }
+
+  .calendar-actions a:hover {
+    background: #f2ecff;
+  }
+
+  .compact-card {
+    height: 100%;
+  }
+
+  .compact-card .card-title {
+    font-size: 0.62rem;
+    line-height: 1.5;
+  }
+
+  .compact-card .card-speaker {
+    font-size: 0.75rem;
+  }
+
+  .tone-frontend {
+    border-color: #4bd5ff;
+  }
+
+  .tone-ia {
+    border-color: #6ef3ab;
+  }
+
+  .tone-datos {
+    border-color: #7bb8ff;
+  }
+
+  .tone-seguridad {
+    border-color: #ff9850;
+  }
+
+  .tone-infra {
+    border-color: #ecc15d;
+  }
+
+  .tone-ux {
+    border-color: #f47dff;
+  }
+
+  .tone-comunidad {
+    border-color: #f8db7d;
+  }
+
+  .tone-general {
+    border-color: #bcb0e9;
+  }
+</style>
