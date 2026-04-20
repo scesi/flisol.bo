@@ -7,7 +7,7 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['**/*.d.ts', '/.astro']),
+  globalIgnores(['**/*.d.ts', '.astro/', 'dist/', 'node_modules/', 'build/', '.vercel/', '.output/', 'public/']),
   js.configs.recommended,
   {
     files: ['**/*.ts', '**/*.tsx'],
