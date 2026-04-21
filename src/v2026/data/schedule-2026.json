@@ -1,0 +1,279 @@
+{
+  "locationDay1": "UMSS MEMI, Cochabamba, Bolivia",
+  "locationDay2": "UCB Campus Tupuraya, Cochabamba, Bolivia",
+  "eventos": [
+    {
+      "dia": "Viernes",
+      "total_eventos": 17,
+      "eventos": [
+        {
+          "horario": "8:30 - 9:30",
+          "laboratorio": "Auditorio",
+          "actividad": "Registro y acreditacion",
+          "speaker": "Organizacion FLISoL",
+          "confirmado": true,
+          "spanAllRooms": true,
+          "esBloque": true
+        },
+        {
+          "horario": "9:45 - 10:30",
+          "laboratorio": "Auditorio",
+          "actividad": "Presentaciones",
+          "speaker": "Organizacion FLISoL",
+          "confirmado": true,
+          "spanAllRooms": true,
+          "esBloque": true
+        },
+        {
+          "horario": "10:30 - 11:10",
+          "laboratorio": "Auditorio",
+          "actividad": "Physics Informed Neural Networks",
+          "speaker": "Alfredo Soliz Gamboa",
+          "confirmado": true
+        },
+        {
+          "horario": "10:30 - 12:30",
+          "laboratorio": "Laboratorio 1",
+          "actividad": "[Nombre] - Taller: [Taller practico]",
+          "speaker": "",
+          "confirmado": false,
+          "spanRows": 3
+        },
+        {
+          "horario": "10:30 - 12:30",
+          "laboratorio": "Laboratorio 2",
+          "actividad": "Install Fest Continuo",
+          "speaker": "",
+          "confirmado": true,
+          "spanRows": 3,
+          "esBloque": true
+        },
+        {
+          "horario": "11:15 - 11:55",
+          "laboratorio": "Auditorio",
+          "actividad": "Por que pagamos si es gratis?",
+          "speaker": "Diego Fernando Perez Luna",
+          "confirmado": true
+        },
+        {
+          "horario": "12:00 - 12:30",
+          "laboratorio": "Auditorio",
+          "actividad": "Modelos de lenguaje en Linux",
+          "speaker": "Willy Samuel Paz Colque",
+          "confirmado": true
+        },
+        {
+          "horario": "12:30 - 13:55",
+          "laboratorio": "Auditorio",
+          "actividad": "Almuerzo + Networking",
+          "speaker": "",
+          "confirmado": true,
+          "spanAllRooms": true,
+          "esBloque": true
+        },
+        {
+          "horario": "13:55 - 14:00",
+          "laboratorio": "Auditorio",
+          "actividad": "Patrocinadores",
+          "speaker": "",
+          "confirmado": true,
+          "spanAllRooms": true,
+          "esBloque": true
+        },
+        {
+          "horario": "14:00 - 14:40",
+          "laboratorio": "Auditorio",
+          "actividad": "Despliegue profesional de aplicaciones Java con Spring Boot y Docker",
+          "speaker": "Jhoseph Caceres Aramayo",
+          "confirmado": true
+        },
+        {
+          "horario": "14:00 - 15:25",
+          "laboratorio": "Laboratorio 1",
+          "actividad": "[Nombre] - Taller: [Taller avanzado]",
+          "speaker": "",
+          "confirmado": false,
+          "spanRows": 2
+        },
+        {
+          "horario": "14:00 - 16:10",
+          "laboratorio": "Laboratorio 2",
+          "actividad": "Install Fest Continuo",
+          "speaker": "",
+          "confirmado": true,
+          "spanRows": 3,
+          "esBloque": true
+        },
+        {
+          "horario": "14:45 - 15:25",
+          "laboratorio": "Auditorio",
+          "actividad": "Antropologia del software libre",
+          "speaker": "Jesus Orlando Reyes Moron",
+          "confirmado": true
+        },
+        {
+          "horario": "15:30 - 16:10",
+          "laboratorio": "Auditorio",
+          "actividad": "De Cochabamba al mundo: transporte publico y datos abiertos",
+          "speaker": "Luz Silvina Choque Jacinto",
+          "confirmado": true
+        },
+        {
+          "horario": "16:10 - 16:20",
+          "laboratorio": "Auditorio",
+          "actividad": "Cierre",
+          "speaker": "Organizacion FLISoL",
+          "confirmado": true,
+          "spanAllRooms": true,
+          "esBloque": true
+        }
+      ]
+    },
+    {
+      "dia": "Sábado",
+      "total_eventos": 19,
+      "eventos": [
+        {
+          "horario": "8:30 - 9:30",
+          "laboratorio": "Auditorio",
+          "actividad": "Registro y acreditación",
+          "speaker": "Organización FLISoL",
+          "confirmado": true,
+          "spanAllRooms": true,
+          "esBloque": true
+        },
+        {
+          "horario": "10:00 - 10:05",
+          "laboratorio": "Auditorio",
+          "actividad": "Patrocinadores",
+          "speaker": "",
+          "confirmado": true,
+          "spanAllRooms": true,
+          "esBloque": true
+        },
+        {
+          "horario": "10:05 - 13:50",
+          "laboratorio": "Laboratorio 2",
+          "actividad": "Install Fest continuo",
+          "speaker": "",
+          "confirmado": true,
+          "spanRows": 9,
+          "esBloque": true
+        },
+        {
+          "horario": "10:05 - 10:25",
+          "laboratorio": "Auditorio",
+          "actividad": "Los sitios web y los blogs no están muertos",
+          "speaker": "Carla Doria Medina Rojas",
+          "confirmado": true
+        },
+        {
+          "horario": "10:30 - 10:50",
+          "laboratorio": "Auditorio",
+          "actividad": "Cómo construir tu Startup con Arquitectura Open Source y reducir costos",
+          "speaker": "Pedro Anze",
+          "confirmado": true
+        },
+        {
+          "horario": "10:30 - 12:10",
+          "laboratorio": "Laboratorio 4",
+          "actividad": "Taller: Evoluciona a AI Software Engineer",
+          "speaker": "Pablo Jesús Pardo Alcocer",
+          "confirmado": true,
+          "spanRows": 4
+        },
+        {
+          "horario": "10:55 - 11:15",
+          "laboratorio": "Auditorio",
+          "actividad": "Backend en Linux: donde todo encaja",
+          "speaker": "Candy Camila Ordoñez Pinto",
+          "confirmado": true
+        },
+        {
+          "horario": "11:20 - 11:40",
+          "laboratorio": "Auditorio",
+          "actividad": "La Web ya no es plana",
+          "speaker": "Nahuel Torrez Guzmán",
+          "confirmado": true
+        },
+        {
+          "horario": "11:50 - 12:10",
+          "laboratorio": "Auditorio",
+          "actividad": "La evolución de Godot Engine",
+          "speaker": "Marcos Saavedra García",
+          "confirmado": true
+        },
+        {
+          "horario": "12:15 - 12:35",
+          "laboratorio": "Auditorio",
+          "actividad": "Supply Chain Attacks en NodeJS",
+          "speaker": "Abdiel J. Orellana Sarabia",
+          "confirmado": true
+        },
+        {
+          "horario": "12:40 - 13:00",
+          "laboratorio": "Auditorio",
+          "actividad": "Problemas reales en Data Science y las herramientas Open Source",
+          "speaker": "Evelyn Cusi López",
+          "confirmado": true
+        },
+        {
+          "horario": "13:05 - 13:25",
+          "laboratorio": "Auditorio",
+          "actividad": "De Developer a liderar un equipo de Data Science y Machine Learning",
+          "speaker": "Ariel Mamani Nina",
+          "confirmado": true
+        },
+        {
+          "horario": "13:30 - 13:50",
+          "laboratorio": "Auditorio",
+          "actividad": "Testing automatizado en Android",
+          "speaker": "Saúl Córdova Villarroel",
+          "confirmado": true
+        },
+        {
+          "horario": "13:50 - 14:50",
+          "laboratorio": "Auditorio",
+          "actividad": "Almuerzo + Networking",
+          "speaker": "",
+          "confirmado": true,
+          "spanAllRooms": true,
+          "esBloque": true
+        },
+        {
+          "horario": "14:50 - 14:55",
+          "laboratorio": "Auditorio",
+          "actividad": "Patrocinadores",
+          "speaker": "",
+          "confirmado": true,
+          "spanAllRooms": true,
+          "esBloque": true
+        },
+        {
+          "horario": "15:00 - 16:00",
+          "laboratorio": "Auditorio",
+          "actividad": "Panel de preguntas",
+          "speaker": "",
+          "confirmado": true
+        },
+        {
+          "horario": "15:00 - 16:00",
+          "laboratorio": "Laboratorio 2",
+          "actividad": "Install Fest continuo",
+          "speaker": "",
+          "confirmado": true,
+          "esBloque": true
+        },
+        {
+          "horario": "16:00 - 16:10",
+          "laboratorio": "Auditorio",
+          "actividad": "Cierre",
+          "speaker": "Organización FLISoL",
+          "confirmado": true,
+          "spanAllRooms": true,
+          "esBloque": true
+        }
+      ]
+    }
+  ]
+}

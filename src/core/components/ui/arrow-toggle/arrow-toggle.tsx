@@ -1,8 +1,12 @@
 import React, { type ComponentType } from 'react'
 import './arrow-toggle.css'
 
-import { ArrowLeft, ArrowLeftPressed, ArrowRight, ArrowRightPressed } from '@/core/assets/icons/tsx/arrow-icon'
-
+import {
+  ArrowLeft,
+  ArrowLeftPressed,
+  ArrowRight,
+  ArrowRightPressed,
+} from '@/core/assets/icons/tsx/arrow-icon'
 
 type Orientation = 'left' | 'right'
 
@@ -38,7 +42,7 @@ export const ArrowToggle = ({ orientation, href, label, disabled = false }: Arro
       title={disabled ? 'Coming soon' : label}
       style={{
         opacity: disabled ? 0.5 : 1,
-        cursor: disabled ? 'not-allowed' : 'pointer'
+        cursor: disabled ? 'not-allowed' : 'pointer',
       }}
     >
       <span className="icon-default">

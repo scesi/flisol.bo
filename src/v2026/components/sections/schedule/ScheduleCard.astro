@@ -1,0 +1,219 @@
+---
+import {
+  CATEGORY_LABELS,
+  isSimpleBlockEvent,
+  type EnrichedScheduleEvent,
+  type EventCategory,
+} from '@/v2026/utils/schedule'
+
+interface Props {
+  event: EnrichedScheduleEvent
+  tone: string
+  compact?: boolean
+}
+
+const { event, tone, compact = false } = Astro.props as Props
+const category = event.category as EventCategory
+const isSimpleBlock = isSimpleBlockEvent(event)
+---
+
+<article
+  class:list={[
+    `schedule-card ${tone}`,
+    compact && 'compact-card',
+    isSimpleBlock && 'simple-block-card',
+  ]}
+>
+  <div class="card-top">
+    <span class="time-pill">{event.startTime} - {event.endTime}</span>
+    {!isSimpleBlock && <span class="category-pill">{CATEGORY_LABELS[category]}</span>}
+  </div>
+
+  <h3 class="card-title">{event.actividad}</h3>
+  {!isSimpleBlock && <p class="card-speaker">{event.speaker}</p>}
+
+  {
+    !isSimpleBlock && (
+      <div class="card-bottom">
+        <span class="room-pill">{event.laboratorio}</span>
+      </div>
+    )
+  }
+</article>
+
+<style>
+  .schedule-card {
+    --tone-border: rgba(181, 170, 236, 0.65);
+    border: 2px solid var(--tone-border);
+    background: linear-gradient(180deg, rgba(38, 24, 92, 0.98) 0%, rgba(30, 18, 74, 0.98) 100%);
+    color: #f8f6ff;
+    border-radius: 8px;
+    padding: 0.75rem;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    transition:
+      border-color 0.12s ease,
+      background-color 0.12s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .schedule-card:hover {
+    border-color: var(--tone-border);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+      0 0 0 2px rgba(255, 255, 255, 0.08);
+  }
+
+  .schedule-card:active {
+    border-color: var(--tone-border);
+  }
+
+  .schedule-card:focus-within {
+    border-color: #e9ba2d;
+    box-shadow: 0 0 0 2px rgba(233, 186, 45, 0.45);
+  }
+
+  .card-top,
+  .card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .card-top {
+    margin-bottom: 0.5rem;
+  }
+
+  .time-pill,
+  .category-pill,
+  .room-pill {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+    padding: 0.15rem 0.35rem;
+    font-size: 0.5rem;
+    line-height: 1.4;
+    display: inline-flex;
+    align-items: center;
+    background: #12092e;
+  }
+
+  .time-pill {
+    color: #9be8ff;
+  }
+
+  .category-pill {
+    color: var(--tone-border);
+  }
+
+  .card-title {
+    font-size: 0.68rem;
+    line-height: 1.45;
+    color: #ffffff;
+    margin-bottom: 0.45rem;
+  }
+
+  .card-speaker {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    color: #c7bcf4;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-bottom {
+    flex-wrap: nowrap;
+    align-items: flex-start;
+  }
+
+  .room-pill {
+    color: #d6cdfd;
+    max-width: 100%;
+    overflow: visible;
+    text-overflow: initial;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    align-self: flex-start;
+  }
+
+  .compact-card {
+    height: 100%;
+  }
+
+  .compact-card .card-title {
+    font-size: 0.63rem;
+    line-height: 1.42;
+  }
+
+  .compact-card .card-speaker {
+    font-size: 0.74rem;
+  }
+
+  .simple-block-card {
+    background: linear-gradient(
+      180deg,
+      rgba(219, 214, 238, 0.98) 0%,
+      rgba(199, 191, 226, 0.98) 100%
+    );
+    --tone-border: rgba(18, 9, 46, 0.65);
+    border-color: var(--tone-border);
+    color: #13092e;
+  }
+
+  .simple-block-card .time-pill {
+    background: #1a0d45;
+    color: #c7efff;
+    border-color: #06021a;
+  }
+
+  .simple-block-card .card-title {
+    color: #140a33;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+    width: 100%;
+  }
+
+  .tone-frontend {
+    --tone-border: #4bd5ff;
+  }
+
+  .tone-backend {
+    --tone-border: #ff6b6b;
+  }
+
+  .tone-mobile {
+    --tone-border: #a575ff;
+  }
+
+  .tone-ia {
+    --tone-border: #6ef3ab;
+  }
+
+  .tone-datos {
+    --tone-border: #7bb8ff;
+  }
+
+  .tone-seguridad {
+    --tone-border: #ff9850;
+  }
+
+  .tone-infra {
+    --tone-border: #ecc15d;
+  }
+
+  .tone-gamedev {
+    --tone-border: #39ffb2;
+  }
+
+  .tone-ux {
+    --tone-border: #f47dff;
+  }
+
+  .tone-comunidad {
+    --tone-border: #f8db7d;
+  }
+
+  .tone-general {
+    --tone-border: #bcb0e9;
+  }
+</style>
