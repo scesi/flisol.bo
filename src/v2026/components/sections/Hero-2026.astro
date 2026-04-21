@@ -258,7 +258,34 @@ const eventoIniciado = diasRestantes === 0
   }
 
   .hero-register-button {
-    display: none;
+    display: inline-block;
+    margin-top: 15px;
+    background-color: #e9ba2d;
+    color: black;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: 3px solid black;
+    letter-spacing: 1px;
+    box-shadow: 4px 4px 0px black;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'PressStart2P', sans-serif;
+    font-size: 0.9rem;
+    text-shadow: none;
+    z-index: 20;
+    transition: transform 0.1s;
+  }
+
+  .hero-register-button:hover {
+    background-color: #6d28d9;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 0px black;
+  }
+
+  .hero-register-button:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px black;
   }
 
   @media screen and (max-width: 768px) {
@@ -304,27 +331,7 @@ const eventoIniciado = diasRestantes === 0
     }
 
     .hero-register-button {
-      display: inline-block;
-      margin-top: 15px;
-      background-color: #e9ba2d;
-      color: black;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      border: 3px solid black;
-      letter-spacing: 1px;
-      box-shadow: 4px 4px 0px black;
-      text-decoration: none;
-      font-weight: bold;
-      font-family: 'PressStart2P', sans-serif;
       font-size: 0.75rem;
-      text-shadow: none;
-      z-index: 20;
-      transition: transform 0.1s;
-    }
-
-    .hero-register-button:active {
-      transform: translate(2px, 2px);
-      box-shadow: 2px 2px 0px black;
     }
   }
 </style>
