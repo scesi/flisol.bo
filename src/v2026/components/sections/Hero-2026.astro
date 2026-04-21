@@ -8,6 +8,9 @@ import Background5 from '@/v2026/assets/background-hero/background_cbba_city_pix
 import FlisolLogo from '@/v2026/assets/flisol_logo_2026.png'
 import PixelGNU from '@/v2026/assets/pixel_gnu.png'
 import PixelTux from '@/v2026/assets/pixel_tux.png'
+import { YEAR_DATA } from '@/data/years-data'
+
+const data = YEAR_DATA['2026']
 
 const fechaEvento = new Date('2026-04-24T00:00:00')
 const ahora = new Date()
@@ -31,6 +34,14 @@ const eventoIniciado = diasRestantes === 0
         <div class="event-date">24 y 25 de Abril, 2026</div>
         <h3>Faltan</h3>
         <div id="countdown" class="timer">--:--:--:--</div>
+        <a
+          href={data.registerLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hero-register-button"
+        >
+          Inscribete
+        </a>
       </div>
       <Image src={PixelGNU} alt="Pixel GNU" class="pixel-gnu" />
       <Image src={PixelTux} alt="Pixel Tux" class="pixel-tux" />
@@ -246,6 +257,10 @@ const eventoIniciado = diasRestantes === 0
     border-radius: 5px;
   }
 
+  .hero-register-button {
+    display: none;
+  }
+
   @media screen and (max-width: 768px) {
     .hero {
       margin-top: 3rem;
@@ -286,6 +301,30 @@ const eventoIniciado = diasRestantes === 0
 
     .timer {
       font-size: 1rem;
+    }
+
+    .hero-register-button {
+      display: inline-block;
+      margin-top: 15px;
+      background-color: #e9ba2d;
+      color: black;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      border: 3px solid black;
+      letter-spacing: 1px;
+      box-shadow: 4px 4px 0px black;
+      text-decoration: none;
+      font-weight: bold;
+      font-family: 'PressStart2P', sans-serif;
+      font-size: 0.75rem;
+      text-shadow: none;
+      z-index: 20;
+      transition: transform 0.1s;
+    }
+
+    .hero-register-button:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px black;
     }
   }
 </style>
