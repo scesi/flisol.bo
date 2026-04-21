@@ -189,6 +189,42 @@ const data = YEAR_DATA[selectedYear] || YEAR_DATA['2025']
     transition: color 0.3s ease;
   }
 
+  .nav-item a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: var(--arrowColor);
+    transition: width 0.3s ease;
+  }
+
+  .nav-item a:hover::after {
+    width: 100%;
+  }
+
+  .nav-item a:hover {
+    color: var(--arrowColor);
+  }
+
+  .register-button a {
+    background-color: var(--arrowColor);
+    color: black;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: 3px solid black;
+    box-shadow: 4px 4px 0px black;
+    transition: all 0.2s ease;
+  }
+
+  .register-button a:hover {
+    background-color: #6d28d9;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 0px black;
+  }
+  
   .register-button a {
     background-color: var(--arrowColor);
     color: black;
