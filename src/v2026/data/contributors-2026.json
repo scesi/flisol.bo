@@ -51,6 +51,27 @@
           "url": "https://www.linkedin.com/in/melany-ventura/"
         }
       ]
+    },
+    {
+      "name": "Sidney Sahonero",
+      "role": "Full Stack Developer",
+      "networks": [
+        {
+          "network_name": "GitHub",
+          "username": "SidnyTech",
+          "url": "https://github.com/SidnyTech"
+        },
+        {
+          "network_name": "LinkedIn",
+          "username": "sidney-sahonero",
+          "url": "https://www.linkedin.com/in/sidney-sahonero/"
+        },
+        {
+          "network_name": "Instagram",
+          "username": "sidney.sg_",
+          "url": "https://www.instagram.com/sidney.sg_/"
+        }
+      ]
     }
   ]
 }
