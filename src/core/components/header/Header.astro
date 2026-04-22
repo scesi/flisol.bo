@@ -67,15 +67,6 @@ const data = YEAR_DATA[selectedYear] || YEAR_DATA['2025']
           <li class="nav-item"><a href="#contributors">Contributors</a></li>
         </ul>
       </nav>
-      {
-        LATEST_YEAR === selectedYear && (
-          <p class="nav-item register-button">
-            <a href={data.registerLink} target="_blank" rel="noopener noreferrer">
-              Inscribete
-            </a>
-          </p>
-        )
-      }
     </div>
 
     <BolivianFlag class="flag" aria-label="Bolivian Flag" role="img" />
@@ -209,41 +200,6 @@ const data = YEAR_DATA[selectedYear] || YEAR_DATA['2025']
     color: var(--arrowColor);
   }
 
-  .register-button a {
-    background-color: var(--arrowColor);
-    color: black;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    border: 3px solid black;
-    box-shadow: 4px 4px 0px black;
-    transition: all 0.2s ease;
-  }
-
-  .register-button a:hover {
-    background-color: #6d28d9;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 6px 6px 0px black;
-  }
-  
-  .register-button a {
-    background-color: var(--arrowColor);
-    color: black;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    border: 3px solid black;
-    letter-spacing: 1px;
-    box-shadow: 4px 4px 0px black;
-    text-decoration: none;
-    font-weight: bold;
-    display: inline-block;
-    transition: transform 0.1s;
-  }
-
-  .register-button a:active {
-    transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0px black;
-  }
 
   .nav-items-container {
     display: flex;

@@ -4,11 +4,11 @@
   "eventos": [
     {
       "dia": "Viernes",
-      "total_eventos": 17,
+      "total_eventos": 23,
       "eventos": [
         {
           "horario": "8:30 - 9:30",
-          "laboratorio": "Auditorio",
+          "laboratorio": "Sala 3",
           "actividad": "Registro y acreditacion",
           "speaker": "Organizacion FLISoL",
           "confirmado": true,
@@ -17,7 +17,7 @@
         },
         {
           "horario": "9:45 - 10:30",
-          "laboratorio": "Auditorio",
+          "laboratorio": "Sala 3",
           "actividad": "Presentaciones",
           "speaker": "Organizacion FLISoL",
           "confirmado": true,
@@ -26,22 +26,21 @@
         },
         {
           "horario": "10:30 - 11:10",
-          "laboratorio": "Auditorio",
-          "actividad": "Physics Informed Neural Networks",
+          "laboratorio": "Sala 3",
+          "actividad": "Charla: Physics Informed Neural Networks",
           "speaker": "Alfredo Soliz Gamboa",
           "confirmado": true
         },
         {
-          "horario": "10:30 - 12:30",
-          "laboratorio": "Laboratorio 1",
-          "actividad": "[Nombre] - Taller: [Taller practico]",
-          "speaker": "",
-          "confirmado": false,
-          "spanRows": 3
+          "horario": "10:30 - 11:10",
+          "laboratorio": "Sala 2",
+          "actividad": "Charla: Sistemas de recomendacion con modelos en local",
+          "speaker": "Victor Hugo Huanca",
+          "confirmado": true
         },
         {
           "horario": "10:30 - 12:30",
-          "laboratorio": "Laboratorio 2",
+          "laboratorio": "Laboratorio 4",
           "actividad": "Install Fest Continuo",
           "speaker": "",
           "confirmado": true,
@@ -49,22 +48,45 @@
           "esBloque": true
         },
         {
+          "horario": "10:30 - 12:30",
+          "laboratorio": "Pasillo",
+          "actividad": "Feria de comunidades",
+          "speaker": "",
+          "confirmado": true,
+          "spanRows": 3,
+          "esBloque": true
+        },
+        {
           "horario": "11:15 - 11:55",
-          "laboratorio": "Auditorio",
-          "actividad": "Por que pagamos si es gratis?",
+          "laboratorio": "Sala 3",
+          "actividad": "Charla: Por que pagamos si es gratis?",
           "speaker": "Diego Fernando Perez Luna",
           "confirmado": true
         },
         {
+          "horario": "11:15 - 11:55",
+          "laboratorio": "Sala 2",
+          "actividad": "Charla: Introduccion a automatizacion de flujos de trabajo",
+          "speaker": "Franco Prieto Ayala",
+          "confirmado": true
+        },
+        {
           "horario": "12:00 - 12:30",
-          "laboratorio": "Auditorio",
-          "actividad": "Modelos de lenguaje en Linux",
+          "laboratorio": "Sala 3",
+          "actividad": "Charla: Modelos de lenguaje en Linux",
           "speaker": "Willy Samuel Paz Colque",
           "confirmado": true
         },
         {
+          "horario": "12:00 - 12:30",
+          "laboratorio": "Sala 2",
+          "actividad": "Charla: Conociendo las bases de TypeScript",
+          "speaker": "Winsor Omar Orellana Vasquez",
+          "confirmado": true
+        },
+        {
           "horario": "12:30 - 13:55",
-          "laboratorio": "Auditorio",
+          "laboratorio": "Sala 3",
           "actividad": "Almuerzo + Networking",
           "speaker": "",
           "confirmado": true,
@@ -73,31 +95,51 @@
         },
         {
           "horario": "13:55 - 14:00",
-          "laboratorio": "Auditorio",
+          "laboratorio": "Sala 3",
           "actividad": "Patrocinadores",
           "speaker": "",
+          "confirmado": true
+        },
+        {
+          "horario": "13:55 - 14:00",
+          "laboratorio": "Sala 2",
+          "actividad": "Patrocinadores",
+          "speaker": "",
+          "confirmado": true
+        },
+        {
+          "horario": "13:55 - 14:00",
+          "laboratorio": "Laboratorio 4",
+          "actividad": "Patrocinadores",
+          "speaker": "",
+          "confirmado": true
+        },
+        {
+          "horario": "13:55 - 16:10",
+          "laboratorio": "Pasillo",
+          "actividad": "Feria de comunidades",
+          "speaker": "",
           "confirmado": true,
-          "spanAllRooms": true,
+          "spanRows": 4,
           "esBloque": true
         },
         {
           "horario": "14:00 - 14:40",
-          "laboratorio": "Auditorio",
-          "actividad": "Despliegue profesional de aplicaciones Java con Spring Boot y Docker",
+          "laboratorio": "Sala 3",
+          "actividad": "Charla: Despliegue profesional de aplicaciones Java con Spring Boot y Docker",
           "speaker": "Jhoseph Caceres Aramayo",
           "confirmado": true
         },
         {
-          "horario": "14:00 - 15:25",
-          "laboratorio": "Laboratorio 1",
-          "actividad": "[Nombre] - Taller: [Taller avanzado]",
-          "speaker": "",
-          "confirmado": false,
-          "spanRows": 2
+          "horario": "14:00 - 14:40",
+          "laboratorio": "Sala 2",
+          "actividad": "Charla: Mi homelab desde cero",
+          "speaker": "Ricardo Ramirez",
+          "confirmado": true
         },
         {
           "horario": "14:00 - 16:10",
-          "laboratorio": "Laboratorio 2",
+          "laboratorio": "Laboratorio 4",
           "actividad": "Install Fest Continuo",
           "speaker": "",
           "confirmado": true,
@@ -106,21 +148,35 @@
         },
         {
           "horario": "14:45 - 15:25",
-          "laboratorio": "Auditorio",
-          "actividad": "Antropologia del software libre",
+          "laboratorio": "Sala 3",
+          "actividad": "Charla: Antropologia del software libre",
           "speaker": "Jesus Orlando Reyes Moron",
           "confirmado": true
         },
         {
+          "horario": "14:45 - 15:25",
+          "laboratorio": "Sala 2",
+          "actividad": "Charla: Sin nombre",
+          "speaker": "Etherium",
+          "confirmado": true
+        },
+        {
           "horario": "15:30 - 16:10",
-          "laboratorio": "Auditorio",
-          "actividad": "De Cochabamba al mundo: transporte publico y datos abiertos",
+          "laboratorio": "Sala 3",
+          "actividad": "Charla: De Cochabamba al mundo: transporte publico y datos abiertos",
           "speaker": "Luz Silvina Choque Jacinto",
           "confirmado": true
         },
         {
+          "horario": "15:30 - 16:10",
+          "laboratorio": "Sala 2",
+          "actividad": "Charla: Como construir una comunidad tech desde cero",
+          "speaker": "Jacqueline Susan Mejia",
+          "confirmado": true
+        },
+        {
           "horario": "16:10 - 16:20",
-          "laboratorio": "Auditorio",
+          "laboratorio": "Sala 3",
           "actividad": "Cierre",
           "speaker": "Organizacion FLISoL",
           "confirmado": true,
@@ -130,21 +186,21 @@
       ]
     },
     {
-      "dia": "Sábado",
-      "total_eventos": 19,
+      "dia": "Sabado",
+      "total_eventos": 20,
       "eventos": [
         {
           "horario": "8:30 - 9:30",
-          "laboratorio": "Auditorio",
-          "actividad": "Registro y acreditación",
-          "speaker": "Organización FLISoL",
+          "laboratorio": "Sala primer piso",
+          "actividad": "Registro y acreditacion",
+          "speaker": "Organizacion FLISoL",
           "confirmado": true,
           "spanAllRooms": true,
           "esBloque": true
         },
         {
           "horario": "10:00 - 10:05",
-          "laboratorio": "Auditorio",
+          "laboratorio": "Sala primer piso",
           "actividad": "Patrocinadores",
           "speaker": "",
           "confirmado": true,
@@ -152,123 +208,136 @@
           "esBloque": true
         },
         {
-          "horario": "10:05 - 13:50",
-          "laboratorio": "Laboratorio 2",
-          "actividad": "Install Fest continuo",
+          "horario": "10:05 - 13:25",
+          "laboratorio": "Sala primer piso",
+          "actividad": "Install Fest Continuo",
           "speaker": "",
           "confirmado": true,
-          "spanRows": 9,
+          "spanRows": 8,
           "esBloque": true
         },
         {
           "horario": "10:05 - 10:25",
-          "laboratorio": "Auditorio",
-          "actividad": "Los sitios web y los blogs no están muertos",
+          "laboratorio": "Laboratorio 2",
+          "actividad": "Charla: Los sitios web y los blogs no estan muertos",
           "speaker": "Carla Doria Medina Rojas",
           "confirmado": true
         },
         {
+          "horario": "10:05 - 12:15",
+          "laboratorio": "Laboratorio 4",
+          "actividad": "Taller: Evoluciona a AI Software Engineer",
+          "speaker": "Pablo Jesus Pardo Alcocer",
+          "confirmado": true,
+          "spanRows": 6
+        },
+        {
+          "horario": "10:05 - 13:25",
+          "laboratorio": "Pasillo",
+          "actividad": "Feria de comunidades",
+          "speaker": "",
+          "confirmado": true,
+          "spanRows": 8,
+          "esBloque": true
+        },
+        {
           "horario": "10:30 - 10:50",
-          "laboratorio": "Auditorio",
-          "actividad": "Cómo construir tu Startup con Arquitectura Open Source y reducir costos",
+          "laboratorio": "Laboratorio 2",
+          "actividad": "Charla: Como construir tu Startup con Arquitectura Open Source y reducir costos",
           "speaker": "Pedro Anze",
           "confirmado": true
         },
         {
-          "horario": "10:30 - 12:10",
-          "laboratorio": "Laboratorio 4",
-          "actividad": "Taller: Evoluciona a AI Software Engineer",
-          "speaker": "Pablo Jesús Pardo Alcocer",
-          "confirmado": true,
-          "spanRows": 4
-        },
-        {
           "horario": "10:55 - 11:15",
-          "laboratorio": "Auditorio",
-          "actividad": "Backend en Linux: donde todo encaja",
-          "speaker": "Candy Camila Ordoñez Pinto",
+          "laboratorio": "Laboratorio 2",
+          "actividad": "Charla: Backend en Linux: donde todo encaja",
+          "speaker": "Candy Camila Ordonez Pinto",
           "confirmado": true
         },
         {
           "horario": "11:20 - 11:40",
-          "laboratorio": "Auditorio",
-          "actividad": "La Web ya no es plana",
-          "speaker": "Nahuel Torrez Guzmán",
+          "laboratorio": "Laboratorio 2",
+          "actividad": "Charla: La Web ya no es plana",
+          "speaker": "Nahuel Torrez Guzman",
+          "confirmado": true
+        },
+        {
+          "horario": "11:20 - 11:40",
+          "laboratorio": "Laboratorio 4",
+          "actividad": "Charla: El Manual del Pentester: Metodologia paso a paso con Software Libre",
+          "speaker": "Yanina Paola Quispe Orellana",
           "confirmado": true
         },
         {
           "horario": "11:50 - 12:10",
-          "laboratorio": "Auditorio",
-          "actividad": "La evolución de Godot Engine",
-          "speaker": "Marcos Saavedra García",
+          "laboratorio": "Laboratorio 2",
+          "actividad": "Charla: La evolucion de Godot Engine",
+          "speaker": "Marcos Saavedra Garcia",
+          "confirmado": true
+        },
+        {
+          "horario": "11:50 - 12:10",
+          "laboratorio": "Laboratorio 4",
+          "actividad": "Charla: Ecosistema de diseno libre: herramientas profesionales para el ingeniero creativo",
+          "speaker": "Alejandro Oquendo",
           "confirmado": true
         },
         {
           "horario": "12:15 - 12:35",
-          "laboratorio": "Auditorio",
-          "actividad": "Supply Chain Attacks en NodeJS",
+          "laboratorio": "Laboratorio 2",
+          "actividad": "Charla: Supply Chain Attacks en NodeJS",
           "speaker": "Abdiel J. Orellana Sarabia",
           "confirmado": true
         },
         {
+          "horario": "12:15 - 12:35",
+          "laboratorio": "Laboratorio 4",
+          "actividad": "Charla: Sin nombre",
+          "speaker": "Gonzalo",
+          "confirmado": true
+        },
+        {
           "horario": "12:40 - 13:00",
-          "laboratorio": "Auditorio",
-          "actividad": "Problemas reales en Data Science y las herramientas Open Source",
-          "speaker": "Evelyn Cusi López",
+          "laboratorio": "Laboratorio 2",
+          "actividad": "Charla: Problemas reales en Data Science y las herramientas open source",
+          "speaker": "Evelyn Cusi Lopez",
+          "confirmado": true
+        },
+        {
+          "horario": "12:40 - 13:00",
+          "laboratorio": "Laboratorio 4",
+          "actividad": "Charla: Testing automatizado en Android",
+          "speaker": "Saul Cordova Villarroel",
           "confirmado": true
         },
         {
           "horario": "13:05 - 13:25",
-          "laboratorio": "Auditorio",
-          "actividad": "De Developer a liderar un equipo de Data Science y Machine Learning",
+          "laboratorio": "Laboratorio 2",
+          "actividad": "Charla: De Developer a liderar un equipo de Data Science y Machine Learning",
           "speaker": "Ariel Mamani Nina",
           "confirmado": true
         },
         {
-          "horario": "13:30 - 13:50",
-          "laboratorio": "Auditorio",
-          "actividad": "Testing automatizado en Android",
-          "speaker": "Saúl Córdova Villarroel",
-          "confirmado": true
-        },
-        {
-          "horario": "13:50 - 14:50",
-          "laboratorio": "Auditorio",
-          "actividad": "Almuerzo + Networking",
-          "speaker": "",
-          "confirmado": true,
-          "spanAllRooms": true,
-          "esBloque": true
-        },
-        {
-          "horario": "14:50 - 14:55",
-          "laboratorio": "Auditorio",
-          "actividad": "Patrocinadores",
-          "speaker": "",
-          "confirmado": true,
-          "spanAllRooms": true,
-          "esBloque": true
-        },
-        {
-          "horario": "15:00 - 16:00",
-          "laboratorio": "Auditorio",
+          "horario": "13:05 - 13:25",
+          "laboratorio": "Laboratorio 4",
           "actividad": "Panel de preguntas",
           "speaker": "",
           "confirmado": true
         },
         {
-          "horario": "15:00 - 16:00",
-          "laboratorio": "Laboratorio 2",
-          "actividad": "Install Fest continuo",
+          "horario": "13:25 - 13:30",
+          "laboratorio": "",
+          "actividad": "Patrocinadores",
           "speaker": "",
           "confirmado": true,
+          "spanAllRooms": true,
           "esBloque": true
         },
         {
-          "horario": "16:00 - 16:10",
-          "laboratorio": "Auditorio",
+          "horario": "13:30 - 13:40",
+          "laboratorio": "Sala primer piso",
           "actividad": "Cierre",
-          "speaker": "Organización FLISoL",
+          "speaker": "Organizacion FLISoL",
           "confirmado": true,
           "spanAllRooms": true,
           "esBloque": true

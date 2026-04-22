@@ -53,6 +53,27 @@
       ]
     },
     {
+      "name": "Steven Joel Ramos Salazar",
+      "role": " ",
+      "networks": [
+        {
+          "network_name": "Github",
+          "username": "Stevenjoelrs",
+          "url": "https://github.com/Stevenjoelrs"
+        },
+        {
+          "network_name": "LinkedIn",
+          "username": "stevenjoelrs",
+          "url": "https://www.linkedin.com/in/stevenjoelrs/"
+        },
+        {
+          "network_name": "Instagram",
+          "username": "stevenjoelrs",
+          "url": "https://www.instagram.com/stevenjoelrs/"
+        }
+      ]
+    },
+    {
       "name": "Sidney Sahonero",
       "role": "Full Stack Developer",
       "networks": [
