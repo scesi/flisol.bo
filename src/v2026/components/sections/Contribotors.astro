@@ -1,0 +1,138 @@
+---
+import contributorsData from '@/v2026/data/contributors-2026.json'
+import ContributorsCard from '@/v2026/components/sections/contributors/ContributorsCard.astro'
+
+type Network = {
+  network_name: string
+  username: string
+  url: string
+}
+
+type Contributor = {
+  name: string
+  role: string
+  networks: Network[]
+}
+
+const contributors = (contributorsData.contributors ?? []) as Contributor[]
+
+const avatarModules = (
+  import.meta as ImportMeta & {
+    glob: (
+      pattern: string,
+      options?: { eager?: boolean; import?: string }
+    ) => Record<string, string>
+  }
+).glob('../../assets/contributors/*.webp', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>
+
+const avatarByName: Record<string, string> = Object.fromEntries(
+  Object.entries(avatarModules).map(([filePath, assetUrl]) => {
+    const fileName = filePath.split('/').pop() ?? ''
+    const baseName = fileName.replace(/\.webp$/i, '').replace(/[-_](icon|avatar)$/i, '')
+    return [baseName.toLowerCase(), assetUrl]
+  })
+)
+
+const normalizeKey = (value: string): string =>
+  value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim()
+
+const getAvatar = (name: string): string | null => {
+  const normalized = normalizeKey(name)
+  const firstName = normalized.split(' ')[0] ?? ''
+
+  return avatarByName[normalized] ?? avatarByName[firstName] ?? null
+}
+---
+
+<section id="contributors" class="contributors-section">
+  <div class="contributors-shell">
+    <header class="contributors-header">
+      <p class="contributors-kicker">Contributors</p>
+      <h2>Equipo 2026</h2>
+      <p class="contributors-description">
+        Personas que construyen esta edicion de FLISoL con codigo, diseno y comunidad.
+      </p>
+    </header>
+
+    <div class="contributors-grid">
+      {
+        contributors.map((contributor) => (
+          <ContributorsCard contributor={contributor} avatar={getAvatar(contributor.name)} />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .contributors-shell {
+    width: min(1460px, calc(100vw - 1.6rem));
+    margin: 0 auto;
+  }
+
+  .contributors-header {
+    color: #f9f8ff;
+    margin-bottom: 1.5rem;
+  }
+
+  .contributors-kicker {
+    font-size: 0.72rem;
+    color: #e9ba2d;
+    margin-bottom: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+  }
+
+  .contributors-header h2 {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: #fff;
+    margin-bottom: 0.8rem;
+    line-height: 1.55;
+    text-shadow:
+      2px 0 #18083b,
+      -2px 0 #18083b,
+      0 2px #18083b,
+      0 -2px #18083b;
+  }
+
+  .contributors-description {
+    max-width: 68ch;
+    color: #d9cff8;
+    line-height: 1.65;
+    font-size: 0.7rem;
+    margin: 0;
+  }
+
+  .contributors-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .contributors-grid > :global(*) {
+    flex: 0 0 220px;
+    max-width: 250px;
+  }
+
+  @media (max-width: 900px) {
+    .contributors-section {
+      padding: 4rem 0.7rem 4.8rem;
+    }
+
+    .contributors-grid {
+      gap: 1rem;
+    }
+
+    .contributors-grid > :global(*) {
+      flex: 0 0 170px;
+    }
+  }
+</style>

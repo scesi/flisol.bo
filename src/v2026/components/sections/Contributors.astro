@@ -1,0 +1,122 @@
+---
+import contributorsData from '@/v2026/data/contributors-2026.json'
+import melanyAvatar from '@/v2026/assets/contributors/melani-icon.webp'
+import sidneyAvatar from '@/v2026/assets/contributors/sidney-icon.webp'
+import ContributorsCard from '@/v2026/components/sections/contributors/ContributorsCard.astro'
+
+type Network = {
+  network_name: string
+  username: string
+  url: string
+}
+
+type Contributor = {
+  name: string
+  role: string
+  networks: Network[]
+}
+
+const contributors = (contributorsData.contributors ?? []) as Contributor[]
+
+const avatarByName: Record<string, string> = {
+  'melany ventura': melanyAvatar.src,
+  'sidney sahonero': sidneyAvatar.src,
+}
+
+const normalizeKey = (value: string): string =>
+  value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim()
+
+const getAvatar = (name: string): string | null => avatarByName[normalizeKey(name)] ?? null
+---
+
+<section id="contributors" class="contributors-section">
+  <div class="contributors-shell">
+    <header class="contributors-header">
+      <p class="contributors-kicker">Contributors</p>
+      <h2>Equipo 2026</h2>
+      <p class="contributors-description">
+        Personas que construyen esta edicion de FLISoL con codigo, diseno y comunidad.
+      </p>
+    </header>
+
+    <div class="contributors-grid">
+      {
+        contributors.map((contributor) => (
+          <ContributorsCard contributor={contributor} avatar={getAvatar(contributor.name)} />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .contributors-section {
+    position: relative;
+    margin-top: -1px;
+    padding: 4.8rem 0.8rem 5.4rem;
+    background:
+      linear-gradient(180deg, rgba(19, 8, 49, 0.95) 0%, rgba(16, 9, 43, 0.98) 100%),
+      radial-gradient(circle at 10% 20%, rgba(66, 150, 202, 0.22), transparent 34%),
+      radial-gradient(circle at 85% 5%, rgba(233, 186, 45, 0.13), transparent 30%);
+    border-top: 4px solid #4296ca;
+  }
+
+  .contributors-shell {
+    width: min(1460px, calc(100vw - 1.6rem));
+    margin: 0 auto;
+  }
+
+  .contributors-header {
+    color: #f9f8ff;
+    margin-bottom: 1.5rem;
+  }
+
+  .contributors-kicker {
+    font-size: 0.72rem;
+    color: #e9ba2d;
+    margin-bottom: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+  }
+
+  .contributors-header h2 {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: #fff;
+    margin-bottom: 0.8rem;
+    line-height: 1.55;
+    text-shadow:
+      2px 0 #18083b,
+      -2px 0 #18083b,
+      0 2px #18083b,
+      0 -2px #18083b;
+  }
+
+  .contributors-description {
+    max-width: 68ch;
+    color: #d9cff8;
+    line-height: 1.65;
+    font-size: 0.7rem;
+    margin: 0;
+  }
+
+  .contributors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  @media (max-width: 900px) {
+    .contributors-section {
+      padding: 4rem 0.7rem 4.8rem;
+    }
+
+    .contributors-grid {
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 0.8rem;
+    }
+  }
+</style>
