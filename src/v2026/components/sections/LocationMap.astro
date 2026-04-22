@@ -1,0 +1,163 @@
+---
+interface Props {
+  lat?: number;
+  lng?: number;
+  placeName?: string;
+}
+
+const { 
+  lat = -17.3932967, 
+  lng = -66.1469490, 
+  placeName = "Centro MEMI" 
+} = Astro.props;
+---
+
+<section id="eventLocation" class="map-section">
+  <div class="map-shell">
+    <header class="map-header">
+      <p class="map-kicker">Ubicación del evento</p>
+      <h3>Centro MEMI, Facultad de Ciencias y Tecnología de la Universidad Mayor de San Simón:</h3>
+    </header>
+
+    <div class="map-frame">
+      <div 
+        id="map" 
+        role="region" 
+        aria-label={`Mapa de ubicación en ${placeName}`}
+      ></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import L from 'leaflet';
+  import 'leaflet/dist/leaflet.css';
+  let mapInstance = null;
+
+  function initMap() {
+    const mapContainer = document.getElementById('map');
+    if (!mapContainer || mapInstance || mapContainer._leaflet_id) return;
+
+    const lat = -17.3932967;
+    const lng = -66.1469490;
+
+    mapInstance = L.map('map', {
+      scrollWheelZoom: false,
+    }).setView([lat, lng], 16);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap'
+    }).addTo(mapInstance);
+
+    const defaultIcon = L.icon({
+      iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41]
+    });
+
+    L.marker([lat, lng], { icon: defaultIcon })
+      .addTo(mapInstance)
+      .bindPopup(`<b style="color: #1a0c43;">Centro MEMI</b><br>FLISoL 2026.`)
+      .openPopup();
+  }
+
+  function setupObserver() {
+    const target = document.getElementById('map');
+    if (!target) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          initMap();
+          observer.disconnect();
+        }
+      });
+    }, { rootMargin: '100px' });
+
+    observer.observe(target);
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    mapInstance = null; 
+    setupObserver();
+  });
+</script>
+
+<style lang="scss">
+  .map-section {
+    position: relative;
+    padding: 5rem 0.55rem 6rem;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(14, 8, 38, 0.95) 0%,
+        rgba(22, 12, 58, 0.96) 55%,
+        rgba(34, 14, 84, 0.98) 100%
+      ),
+      radial-gradient(circle at 80% 10%, rgba(66, 150, 202, 0.2), transparent 35%);
+    border-top: 4px solid #4296ca;
+  }
+
+  .map-shell {
+    width: min(1460px, calc(100vw - 1.1rem));
+    margin: 0 auto;
+  }
+
+  .map-header {
+    color: #f9f8ff;
+    margin-bottom: 2.5rem;
+    text-align: left;
+  }
+
+  .map-kicker {
+    font-size: 0.72rem;
+    color: #e9ba2d;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  .map-header h3 {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: #ffffff;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    text-shadow: 2px 2px #18083b;
+  }
+
+  .map-description {
+    max-width: 60ch;
+    font-family: 'Montserrat', sans-serif;
+    color: #e5defe;
+    font-size: 0.9rem;
+  }
+
+  .map-frame {
+    border: 4px solid #1a0c43;
+    background: rgba(15, 8, 40, 0.9);
+    box-shadow:
+      0 0 0 2px #4296ca,
+      8px 8px 0 rgba(10, 4, 27, 0.72);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  #map {
+    height: 500px;
+    width: 100%;
+    z-index: 1;
+    filter: grayscale(0.2) contrast(1.1);
+  }
+
+  @media (max-width: 768px) {
+    #map {
+      height: 350px;
+    }
+    
+    .map-header {
+      text-align: center;
+    }
+  }
+</style>
