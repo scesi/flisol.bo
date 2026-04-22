@@ -32,21 +32,22 @@ const {
 <script>
   import L from 'leaflet';
   import 'leaflet/dist/leaflet.css';
+  let mapInstance = null;
 
   function initMap() {
     const mapContainer = document.getElementById('map');
-    if (!mapContainer) return;
+    if (!mapContainer || mapInstance || mapContainer._leaflet_id) return;
 
     const lat = -17.3932967;
     const lng = -66.1469490;
 
-    const map = L.map('map', {
+    mapInstance = L.map('map', {
       scrollWheelZoom: false,
     }).setView([lat, lng], 16);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap'
-    }).addTo(map);
+    }).addTo(mapInstance);
 
     const defaultIcon = L.icon({
       iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
@@ -56,22 +57,31 @@ const {
     });
 
     L.marker([lat, lng], { icon: defaultIcon })
-      .addTo(map)
+      .addTo(mapInstance)
       .bindPopup(`<b style="color: #1a0c43;">Centro MEMI</b><br>FLISoL 2026.`)
       .openPopup();
   }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        initMap();
-        observer.disconnect();
-      }
-    });
-  }, { rootMargin: '100px' });
+  function setupObserver() {
+    const target = document.getElementById('map');
+    if (!target) return;
 
-  const target = document.getElementById('map');
-  if (target) observer.observe(target);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          initMap();
+          observer.disconnect();
+        }
+      });
+    }, { rootMargin: '100px' });
+
+    observer.observe(target);
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    mapInstance = null; 
+    setupObserver();
+  });
 </script>
 
 <style lang="scss">
