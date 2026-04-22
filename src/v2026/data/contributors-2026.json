@@ -1,0 +1,56 @@
+{
+  "contributors": [
+    {
+      "name": "Diego Perez",
+      "role": "Full Stack Developer",
+      "networks": [
+        {
+          "network_name": "GitHub",
+          "username": "diegodev-01",
+          "url": "https://github.com/diegodev-01"
+        },
+        {
+          "network_name": "LinkedIn",
+          "username": "diego-perez-luna",
+          "url": "https://www.linkedin.com/in/diego-perez-luna"
+        },
+        {
+          "network_name": "Instagram",
+          "username": "diego_perez_l",
+          "url": "https://www.instagram.com/diego_perez_l/"
+        }
+      ]
+    },
+    {
+      "name": "Melany Ventura",
+      "role": "UI/UX Designer",
+      "networks": [
+        {
+          "network_name": "Behance",
+          "username": "dev-ventura",
+          "url": "https://www.behance.net/dev-ventura"
+        },
+        {
+          "network_name": "Dribbble",
+          "username": "dev-ventura",
+          "url": "https://dribbble.com/dev-ventura"
+        },
+        {
+          "network_name": "TikTok",
+          "username": "dev.ventura",
+          "url": "https://www.tiktok.com/@dev.ventura"
+        },
+        {
+          "network_name": "YouTube",
+          "username": "dev.ventura",
+          "url": "https://www.youtube.com/@dev.ventura"
+        },
+        {
+          "network_name": "LinkedIn",
+          "username": "melany-ventura",
+          "url": "https://www.linkedin.com/in/melany-ventura/"
+        }
+      ]
+    }
+  ]
+}
