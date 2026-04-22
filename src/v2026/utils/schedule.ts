@@ -24,13 +24,9 @@ export type RawScheduleData = {
 export type EventCategory =
   | 'frontend'
   | 'backend'
-  | 'mobile'
-  | 'ia'
-  | 'datos'
-  | 'seguridad'
+  | 'datosia'
   | 'infra'
-  | 'gamedev'
-  | 'ux'
+  | 'seguridad'
   | 'comunidad'
   | 'general'
 
@@ -47,13 +43,9 @@ export type EnrichedScheduleEvent = RawScheduleEvent & {
 export const CATEGORY_LABELS: Record<EventCategory, string> = {
   frontend: 'Frontend',
   backend: 'Backend',
-  mobile: 'Mobile',
-  ia: 'IA',
-  datos: 'Datos',
-  seguridad: 'Seguridad',
+  datosia: 'Datos e IA',
   infra: 'Infra',
-  gamedev: 'GameDev',
-  ux: 'UX',
+  seguridad: 'Seguridad',
   comunidad: 'Comunidad',
   general: 'General',
 }
@@ -61,55 +53,60 @@ export const CATEGORY_LABELS: Record<EventCategory, string> = {
 const CATEGORY_KEYWORDS: Record<EventCategory, string[]> = {
   seguridad: [
     'hacker',
-    'phreaking',
-    'amenazas',
-    'ciber',
     'seguridad',
+    'supply chain',
+    'pentester',
+    'pentest',
     'attacks',
     'ataque',
     'ataques',
     'vulnerabilidad',
   ],
-  ia: [
+  datosia: [
     'ia',
     'ai',
     'llm',
     'llms',
-    'copilot',
     'inteligencia artificial',
     'machine learning',
-    'deep seek',
     'modelo',
     'modelos',
     'neural network',
     'neural networks',
     'pinn',
+    'datos',
+    'data',
+    'data science',
+    'ciencia de datos',
+    'analytics',
   ],
-  datos: ['datos', 'data', 'data science', 'ciencia de datos', 'analytics', 'cuantica'],
-  gamedev: ['godot', 'videojuegos', 'juegos', 'engine', 'gamedev'],
-  mobile: ['android', 'ios', 'flutter', 'kotlin', 'mobile'],
-  backend: ['backend', 'java', 'spring boot', 'nodejs', 'node', 'api', 'python'],
-  frontend: ['frontend', 'react', 'web', 'ui', 'javascript', 'css', 'html', 'blogs'],
   infra: [
-    'docker',
-    'quarkus',
     'linux',
-    'devops',
-    'github actions',
+    'docker',
     'arquitectura',
     'despliegue',
+    'homelab',
+    'devops',
     'cloud',
     'aws',
   ],
-  ux: ['ux', 'diseno', 'interfaz', 'penpot', 'diseño'],
+  backend: ['backend', 'java', 'spring boot', 'nodejs', 'node', 'api', 'python'],
+  frontend: ['frontend', 'web', 'blogs', 'javascript', 'typescript', 'css', 'html', 'android'],
   comunidad: [
-    'carrera',
-    'software libre',
     'comunidad',
+    'software libre',
     'open source',
-    'gratis',
+    'diseno libre',
+    'diseño libre',
+    'networking',
+    'patrocinadores',
+    'patrocinador',
+    'feria',
+    'panel de preguntas',
+    'panel',
+    'install fest',
+    'installfest',
     'startup',
-    'costos',
   ],
   general: [],
 }

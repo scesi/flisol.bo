@@ -12,11 +12,34 @@ import {
 
 const allEvents = enrichScheduleData(scheduleData)
 const groupedByDay = groupEventsByDay(allEvents)
+
+const ROOM_ORDER_BY_DAY: Record<string, string[]> = {
+  viernes: ['Sala 3', 'Sala 2', 'Laboratorio 3', 'Laboratorio 4', 'Pasillo'],
+  sabado: ['Sala primer piso', 'Laboratorio 2', 'Laboratorio 4', 'Pasillo'],
+}
+
+const normalizeDayLabel = (dayLabel: string): string => {
+  return dayLabel
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+}
+
 const dayEntries = Object.entries(groupedByDay).map(([dayLabel, events]) => {
   const timeSet = new Set(events.map((event) => event.startTime))
-  const rooms = Array.from(
+  const unorderedRooms = Array.from(
     new Set(events.filter((e) => !e.spanAllRooms).map((e) => e.laboratorio))
-  ).sort()
+  )
+  const roomOrder = ROOM_ORDER_BY_DAY[normalizeDayLabel(dayLabel)] ?? []
+  const rooms = unorderedRooms.sort((a, b) => {
+    const indexA = roomOrder.indexOf(a)
+    const indexB = roomOrder.indexOf(b)
+
+    if (indexA === -1 && indexB === -1) return a.localeCompare(b)
+    if (indexA === -1) return 1
+    if (indexB === -1) return -1
+    return indexA - indexB
+  })
   const minuteByTime = events.reduce<Record<string, number>>((acc, event) => {
     if (acc[event.startTime] === undefined || event.startMinutes < acc[event.startTime]) {
       acc[event.startTime] = event.startMinutes
@@ -59,13 +82,9 @@ const dayEntries = Object.entries(groupedByDay).map(([dayLabel, events]) => {
 const categoryTone: Record<EventCategory, string> = {
   frontend: 'tone-frontend',
   backend: 'tone-backend',
-  mobile: 'tone-mobile',
-  ia: 'tone-ia',
-  datos: 'tone-datos',
-  seguridad: 'tone-seguridad',
+  datosia: 'tone-datosia',
   infra: 'tone-infra',
-  gamedev: 'tone-gamedev',
-  ux: 'tone-ux',
+  seguridad: 'tone-seguridad',
   comunidad: 'tone-comunidad',
   general: 'tone-general',
 }
@@ -268,9 +287,10 @@ const legendCategories = Object.keys(CATEGORY_LABELS) as EventCategory[]
   }
 
   .legend-chip {
-    border: 2px solid #111;
-    background: #22155e;
-    color: #f6f4ff;
+    --tone-border: #bcb0e9;
+    border: 2px solid var(--tone-border);
+    background: #12092e;
+    color: var(--tone-border);
     border-radius: 8px;
     display: inline-flex;
     align-items: center;
@@ -284,7 +304,7 @@ const legendCategories = Object.keys(CATEGORY_LABELS) as EventCategory[]
     width: 8px;
     height: 8px;
     border-radius: 2px;
-    background: currentColor;
+    background: var(--tone-border);
     box-shadow: 0 0 0 1px #000;
   }
 
@@ -479,47 +499,31 @@ const legendCategories = Object.keys(CATEGORY_LABELS) as EventCategory[]
   }
 
   .legend-chip.tone-frontend {
-    color: #4bd5ff;
+    --tone-border: #4bd5ff;
   }
 
   .legend-chip.tone-backend {
-    color: #ff6b6b;
+    --tone-border: #ff6b6b;
   }
 
-  .legend-chip.tone-mobile {
-    color: #a575ff;
-  }
-
-  .legend-chip.tone-ia {
-    color: #6ef3ab;
-  }
-
-  .legend-chip.tone-datos {
-    color: #7bb8ff;
+  .legend-chip.tone-datosia {
+    --tone-border: #6ef3ab;
   }
 
   .legend-chip.tone-seguridad {
-    color: #ff9850;
+    --tone-border: #ff9850;
   }
 
   .legend-chip.tone-infra {
-    color: #ecc15d;
-  }
-
-  .legend-chip.tone-gamedev {
-    color: #39ffb2;
-  }
-
-  .legend-chip.tone-ux {
-    color: #f47dff;
+    --tone-border: #ecc15d;
   }
 
   .legend-chip.tone-comunidad {
-    color: #f8db7d;
+    --tone-border: #f8db7d;
   }
 
   .legend-chip.tone-general {
-    color: #bcb0e9;
+    --tone-border: #bcb0e9;
   }
 
   @media (max-width: 900px) {
