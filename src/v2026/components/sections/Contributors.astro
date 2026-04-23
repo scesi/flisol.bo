@@ -103,7 +103,6 @@ const getAvatar = (name: string): string | null => {
 
 <style>
   .contributors-section {
-    margin-top: -1px;
     padding: 4.8rem 0.8rem 5.4rem;
     background:
       linear-gradient(180deg, rgba(19, 8, 49, 0.95) 0%, rgba(16, 9, 43, 0.98) 100%),
@@ -151,19 +150,22 @@ const getAvatar = (name: string): string | null => {
   }
 
   .contributors-grid {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     grid-template-columns: repeat(5, minmax(185px, 230px));
     justify-content: center;
-    column-gap: 2rem;
-    row-gap: 2rem;
+    column-gap: 1.5rem;
+    row-gap: 1.5rem;
     margin-bottom: 1.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
   @media (max-width: 1220px) {
     .contributors-grid {
       grid-template-columns: repeat(5, minmax(165px, 205px));
       column-gap: 0.9rem;
-      row-gap: 1.55rem;
+      row-gap: 1.5rem;
     }
   }
 
@@ -218,15 +220,15 @@ const getAvatar = (name: string): string | null => {
   }
 
   .legend-gold {
-    color: #f4ce57;
+    color: #ffe438;
   }
 
   .legend-silver {
-    color: #a9b7d3;
+    color: #dbe0eb;
   }
 
   .legend-bronze {
-    color: #c18a60;
+    color: #bd6e31;
   }
 
   @media (max-width: 900px) {

@@ -135,9 +135,10 @@ const getInitials = (name: string): string => {
     --level-color-soft: color-mix(in srgb, var(--level-color) 55%, #2e1d6c 45%);
     position: relative;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     gap: 0.45rem;
-    width: min(100%, 260px);
+    width: min(100%, 230px);
     margin: 0 auto;
     padding: 0.75rem;
     border: 3px solid var(--level-color);
@@ -197,6 +198,8 @@ const getInitials = (name: string): string => {
     overflow: hidden;
     border-radius: 12px;
     aspect-ratio: 4 / 5;
+    justify-content: center;
+    display: flex;
   }
 
   .avatar,
@@ -206,8 +209,8 @@ const getInitials = (name: string): string => {
   }
 
   .avatar {
-    width: 100%;
-    height: 100%;
+    width: 95%;
+    height: 95%;
     object-fit: cover;
     object-position: center;
     display: block;
@@ -236,7 +239,7 @@ const getInitials = (name: string): string => {
   .contributor-name {
     margin: 0;
     color: #ffffff;
-    font-size: 0.62rem;
+    font-size: 0.72rem;
     line-height: 1.35;
     text-align: center;
     text-shadow:
@@ -306,8 +309,8 @@ const getInitials = (name: string): string => {
   }
 
   .network-icon svg {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     display: block;
   }
 
@@ -357,15 +360,15 @@ const getInitials = (name: string): string => {
     .card-info {
       min-width: 0;
       flex: 1;
-      gap: 0.80rem;
+      gap: 0.8rem;
       align-items: flex-center;
       margin: auto;
       margin-left: 8px;
-
     }
 
     .contributor-name {
       text-align: left;
+      font-size: 0.72rem;
     }
 
     .network-icon,
