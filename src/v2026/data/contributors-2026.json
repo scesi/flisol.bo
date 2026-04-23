@@ -93,6 +93,27 @@
           "url": "https://www.instagram.com/sidney.sg_/"
         }
       ]
+    },
+    {
+      "name": "Anahi Sanabria",
+      "role": "Fullstack",
+      "networks": [
+        {
+          "network_name": "GitHub",
+          "username": "anahiSU",
+          "url": "https://github.com/AnahiSU"
+        },
+        {
+          "network_name": "LinkedIn",
+          "username": "anahiSU",
+          "url": "https://www.linkedin.com/in/anahisu/"
+        },
+        {
+          "network_name": "Instagram",
+          "username": "anahi_s.u",
+          "url": "https://www.instagram.com/anahi_s.u/"
+        }
+      ]
     }
   ]
 }

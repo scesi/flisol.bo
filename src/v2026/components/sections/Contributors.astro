@@ -1,7 +1,10 @@
 ---
 import contributorsData from '@/v2026/data/contributors-2026.json'
-import melanyAvatar from '@/v2026/assets/contributors/melani-icon.webp'
+import diegoAvatar from '@/v2026/assets/contributors/diego-icon.webp'
+import melanyAvatar from '@/v2026/assets/contributors/melany-icon.webp'
+import stevenAvatar from '@/v2026/assets/contributors/nose-icon.webp'
 import sidneyAvatar from '@/v2026/assets/contributors/sidney-icon.webp'
+import anahiAvatar from '@/v2026/assets/contributors/anahi-icon.webp'
 import ContributorsCard from '@/v2026/components/sections/contributors/ContributorsCard.astro'
 
 type Network = {
@@ -21,6 +24,9 @@ const contributors = (contributorsData.contributors ?? []) as Contributor[]
 const avatarByName: Record<string, string> = {
   'melany ventura': melanyAvatar.src,
   'sidney sahonero': sidneyAvatar.src,
+  'steven ramos': stevenAvatar.src,
+  'diego perez': diegoAvatar.src,
+  'anahi sanabria': anahiAvatar.src,
 }
 
 const normalizeKey = (value: string): string =>
