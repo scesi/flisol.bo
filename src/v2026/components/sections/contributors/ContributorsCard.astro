@@ -8,6 +8,7 @@ type Network = {
 type Contributor = {
   name: string
   role: string
+  level: 'gold' | 'silver' | 'bronze'
   networks: Network[]
 }
 
@@ -17,6 +18,13 @@ interface Props {
 }
 
 const { contributor, avatar } = Astro.props as Props
+
+const getLevelTone = (level: string): string => {
+  const normalized = level.toLowerCase()
+  if (normalized === 'gold') return 'level-gold'
+  if (normalized === 'bronze') return 'level-bronze'
+  return 'level-silver'
+}
 
 const NETWORK_KEYS = ['github', 'linkedin', 'instagram', 'behance', 'dribbble', 'tiktok', 'youtube']
 
@@ -42,12 +50,8 @@ const getInitials = (name: string): string => {
 }
 ---
 
-<article class="contributor-card">
+<article class:list={['contributor-card', getLevelTone(contributor.level)]}>
   <div class="avatar-frame">
-    <div class="sparkle-layer" aria-hidden="true">
-      {Array.from({ length: 12 }).map((_, i) => <span class={`sparkle sparkle-${i}`} />)}
-    </div>
-
     {
       avatar ? (
         <img src={avatar} alt={`Foto de ${contributor.name}`} class="avatar" loading="lazy" />
@@ -59,86 +63,138 @@ const getInitials = (name: string): string => {
     }
   </div>
 
-  <h3 class="contributor-name">{contributor.name}</h3>
+  <div class="card-info">
+    <h3 class="contributor-name">{contributor.name}</h3>
 
-  <div class="network-list" aria-label={`Redes de ${contributor.name}`}>
-    {
-      contributor.networks.map((network) => {
-        const key = network.network_name.toLowerCase()
-        return (
-          <a
-            href={network.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class:list={['network-chip', getNetworkTone(network.network_name)]}
-            aria-label={`${network.network_name} de ${contributor.name}`}
-            title={`${network.network_name}: @${network.username}`}
-          >
-            <span class="network-icon" aria-hidden="true">
-              {key === 'github' && (
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.59 2 12.25c0 4.53 2.87 8.37 6.84 9.72.5.1.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.46-1.19-1.12-1.51-1.12-1.51-.92-.64.07-.63.07-.63 1.01.08 1.55 1.07 1.55 1.07.91 1.58 2.38 1.12 2.96.85.09-.68.35-1.12.64-1.37-2.22-.26-4.56-1.14-4.56-5.09 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.74 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.83c.85 0 1.7.12 2.49.36 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.48.1 2.74.64.72 1.03 1.63 1.03 2.75 0 3.96-2.34 4.83-4.58 5.08.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.28 10.28 0 0 0 22 12.25C22 6.59 17.52 2 12 2Z" />
-                </svg>
-              )}
-              {key === 'linkedin' && (
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M6.94 8.5H3.56V20h3.38V8.5ZM5.25 3A2.02 2.02 0 0 0 3.25 5c0 1.1.9 2 2 2h.02a2 2 0 0 0 0-4Zm6.74 5.5H8.66V20h3.33v-6.02c0-1.59.3-3.12 2.24-3.12 1.91 0 1.94 1.8 1.94 3.22V20h3.33v-6.6c0-3.24-.69-5.72-4.42-5.72-1.79 0-2.98.99-3.47 1.93h-.05V8.5Z" />
-                </svg>
-              )}
-              {key === 'instagram' && (
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm-.14 1.9A3.7 3.7 0 0 0 3.9 7.6v8.8a3.7 3.7 0 0 0 3.71 3.7h8.78a3.7 3.7 0 0 0 3.71-3.7V7.6a3.7 3.7 0 0 0-3.71-3.7H7.61Zm9.14 1.43a1.22 1.22 0 1 1 0 2.44 1.22 1.22 0 0 1 0-2.44ZM12 7.14A4.86 4.86 0 1 1 7.14 12 4.86 4.86 0 0 1 12 7.14Zm0 1.9A2.96 2.96 0 1 0 14.96 12 2.96 2.96 0 0 0 12 9.04Z" />
-                </svg>
-              )}
-              {key === 'behance' && (
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M2 7.5h7.2c2.35 0 3.8 1.22 3.8 3.12 0 1.44-.77 2.4-1.86 2.8 1.46.35 2.4 1.55 2.4 3.2 0 2.1-1.64 3.38-4.32 3.38H2V7.5Zm3.05 4.9h3.46c.88 0 1.35-.45 1.35-1.17 0-.8-.58-1.15-1.45-1.15H5.05v2.32Zm0 5.12h3.6c1.1 0 1.7-.48 1.7-1.36 0-.88-.6-1.35-1.7-1.35h-3.6v2.71Zm10.2-5.95h6.75v1.8h-6.75v-1.8Zm6.9 4.08h-4.85c.18 1.27.95 1.9 2.1 1.9.84 0 1.46-.31 1.84-.93h2.75c-.56 1.99-2.23 3.16-4.64 3.16-3.2 0-5.25-2.1-5.25-5.24 0-3.14 2.1-5.25 5.2-5.25 3.26 0 5.06 2.3 4.95 6.36Zm-4.78-3.18c-1.05 0-1.72.6-1.93 1.73h3.9c-.1-1.1-.79-1.73-1.97-1.73Z" />
-                </svg>
-              )}
-              {key === 'dribbble' && (
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm6.9 4.64a8.03 8.03 0 0 1 1.68 4.85 20.14 20.14 0 0 0-5.86-.13c-.23-.54-.47-1.08-.73-1.6a16.44 16.44 0 0 0 4.9-3.12Zm-1.35-1.24a14.36 14.36 0 0 1-4.38 2.74A41.4 41.4 0 0 0 10.9 4.3 7.96 7.96 0 0 1 17.55 5.4ZM9 4.55a31.69 31.69 0 0 1 2.42 4.02 33.05 33.05 0 0 1-7.46.2A8.02 8.02 0 0 1 9 4.55ZM3.45 10.6h.3a35.41 35.41 0 0 0 8.57-.52c.23.47.44.95.64 1.43l-.31.09c-4.43 1.44-6.8 5.41-7.3 6.3a8.04 8.04 0 0 1-1.9-7.3Zm3.2 8.6c.48-.77 2.42-3.9 6.73-5.36.17-.06.35-.11.53-.16a26.6 26.6 0 0 1 1.38 5.65A7.97 7.97 0 0 1 6.65 19.2Zm10.4-.84a28.04 28.04 0 0 0-1.25-5.25 17.9 17.9 0 0 0 4.74.25 8.03 8.03 0 0 1-3.5 4.99Z" />
-                </svg>
-              )}
-              {key === 'tiktok' && (
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M16.9 3h-3.07v10.16a2.57 2.57 0 1 1-2.57-2.57c.3 0 .58.05.85.14V7.62a5.66 5.66 0 1 0 4.79 5.54V7.98a6.43 6.43 0 0 0 3.75 1.2V6.1a3.64 3.64 0 0 1-3.75-3.1Z" />
-                </svg>
-              )}
-              {key === 'youtube' && (
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M21.58 7.19a2.93 2.93 0 0 0-2.06-2.07C17.7 4.62 12 4.62 12 4.62s-5.7 0-7.52.5A2.93 2.93 0 0 0 2.42 7.2 30.5 30.5 0 0 0 2 12a30.5 30.5 0 0 0 .42 4.8 2.93 2.93 0 0 0 2.06 2.07c1.82.5 7.52.5 7.52.5s5.7 0 7.52-.5a2.93 2.93 0 0 0 2.06-2.07A30.5 30.5 0 0 0 22 12a30.5 30.5 0 0 0-.42-4.81ZM10.16 14.9V9.1L15.2 12l-5.03 2.9Z" />
-                </svg>
-              )}
-              {!NETWORK_KEYS.includes(key) && (
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm6.95 9h-3.04a15.44 15.44 0 0 0-1.22-5.12A8.04 8.04 0 0 1 18.95 11ZM12 4.05c.9 1.14 1.62 3.04 1.85 5.45h-3.7C10.38 7.1 11.1 5.2 12 4.05ZM4.99 13h3.03a15.84 15.84 0 0 0 1.22 5.12A8.03 8.03 0 0 1 4.99 13Zm3.03-2H4.99a8.03 8.03 0 0 1 4.25-5.12A15.84 15.84 0 0 0 8.02 11Zm.74 2h3.24v5.82c-1.58-.27-2.92-2.42-3.24-5.82Zm3.24-2H8.76c.32-3.4 1.66-5.55 3.24-5.82V11Zm1.76 7.82V13h3.24c-.32 3.4-1.66 5.55-3.24 5.82Zm0-7.82V5.18c1.58.27 2.92 2.42 3.24 5.82h-3.24ZM14.76 18.12A15.84 15.84 0 0 0 15.98 13h3.03a8.03 8.03 0 0 1-4.25 5.12Z" />
-                </svg>
-              )}
-            </span>
-          </a>
-        )
-      })
-    }
+    <div class="network-list" aria-label={`Redes de ${contributor.name}`}>
+      {
+        contributor.networks.map((network) => {
+          const key = network.network_name.toLowerCase()
+          return (
+            <a
+              href={network.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class:list={['network-chip', getNetworkTone(network.network_name)]}
+              aria-label={`${network.network_name} de ${contributor.name}`}
+              title={`${network.network_name}: @${network.username}`}
+            >
+              <span class="network-icon" aria-hidden="true">
+                {key === 'github' && (
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.59 2 12.25c0 4.53 2.87 8.37 6.84 9.72.5.1.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.46-1.19-1.12-1.51-1.12-1.51-.92-.64.07-.63.07-.63 1.01.08 1.55 1.07 1.55 1.07.91 1.58 2.38 1.12 2.96.85.09-.68.35-1.12.64-1.37-2.22-.26-4.56-1.14-4.56-5.09 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.74 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.83c.85 0 1.7.12 2.49.36 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.48.1 2.74.64.72 1.03 1.63 1.03 2.75 0 3.96-2.34 4.83-4.58 5.08.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.28 10.28 0 0 0 22 12.25C22 6.59 17.52 2 12 2Z" />
+                  </svg>
+                )}
+                {key === 'linkedin' && (
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M6.94 8.5H3.56V20h3.38V8.5ZM5.25 3A2.02 2.02 0 0 0 3.25 5c0 1.1.9 2 2 2h.02a2 2 0 0 0 0-4Zm6.74 5.5H8.66V20h3.33v-6.02c0-1.59.3-3.12 2.24-3.12 1.91 0 1.94 1.8 1.94 3.22V20h3.33v-6.6c0-3.24-.69-5.72-4.42-5.72-1.79 0-2.98.99-3.47 1.93h-.05V8.5Z" />
+                  </svg>
+                )}
+                {key === 'instagram' && (
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm-.14 1.9A3.7 3.7 0 0 0 3.9 7.6v8.8a3.7 3.7 0 0 0 3.71 3.7h8.78a3.7 3.7 0 0 0 3.71-3.7V7.6a3.7 3.7 0 0 0-3.71-3.7H7.61Zm9.14 1.43a1.22 1.22 0 1 1 0 2.44 1.22 1.22 0 0 1 0-2.44ZM12 7.14A4.86 4.86 0 1 1 7.14 12 4.86 4.86 0 0 1 12 7.14Zm0 1.9A2.96 2.96 0 1 0 14.96 12 2.96 2.96 0 0 0 12 9.04Z" />
+                  </svg>
+                )}
+                {key === 'behance' && (
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M2 7.5h7.2c2.35 0 3.8 1.22 3.8 3.12 0 1.44-.77 2.4-1.86 2.8 1.46.35 2.4 1.55 2.4 3.2 0 2.1-1.64 3.38-4.32 3.38H2V7.5Zm3.05 4.9h3.46c.88 0 1.35-.45 1.35-1.17 0-.8-.58-1.15-1.45-1.15H5.05v2.32Zm0 5.12h3.6c1.1 0 1.7-.48 1.7-1.36 0-.88-.6-1.35-1.7-1.35h-3.6v2.71Zm10.2-5.95h6.75v1.8h-6.75v-1.8Zm6.9 4.08h-4.85c.18 1.27.95 1.9 2.1 1.9.84 0 1.46-.31 1.84-.93h2.75c-.56 1.99-2.23 3.16-4.64 3.16-3.2 0-5.25-2.1-5.25-5.24 0-3.14 2.1-5.25 5.2-5.25 3.26 0 5.06 2.3 4.95 6.36Zm-4.78-3.18c-1.05 0-1.72.6-1.93 1.73h3.9c-.1-1.1-.79-1.73-1.97-1.73Z" />
+                  </svg>
+                )}
+                {key === 'dribbble' && (
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm6.9 4.64a8.03 8.03 0 0 1 1.68 4.85 20.14 20.14 0 0 0-5.86-.13c-.23-.54-.47-1.08-.73-1.6a16.44 16.44 0 0 0 4.9-3.12Zm-1.35-1.24a14.36 14.36 0 0 1-4.38 2.74A41.4 41.4 0 0 0 10.9 4.3 7.96 7.96 0 0 1 17.55 5.4ZM9 4.55a31.69 31.69 0 0 1 2.42 4.02 33.05 33.05 0 0 1-7.46.2A8.02 8.02 0 0 1 9 4.55ZM3.45 10.6h.3a35.41 35.41 0 0 0 8.57-.52c.23.47.44.95.64 1.43l-.31.09c-4.43 1.44-6.8 5.41-7.3 6.3a8.04 8.04 0 0 1-1.9-7.3Zm3.2 8.6c.48-.77 2.42-3.9 6.73-5.36.17-.06.35-.11.53-.16a26.6 26.6 0 0 1 1.38 5.65A7.97 7.97 0 0 1 6.65 19.2Zm10.4-.84a28.04 28.04 0 0 0-1.25-5.25 17.9 17.9 0 0 0 4.74.25 8.03 8.03 0 0 1-3.5 4.99Z" />
+                  </svg>
+                )}
+                {key === 'tiktok' && (
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M16.9 3h-3.07v10.16a2.57 2.57 0 1 1-2.57-2.57c.3 0 .58.05.85.14V7.62a5.66 5.66 0 1 0 4.79 5.54V7.98a6.43 6.43 0 0 0 3.75 1.2V6.1a3.64 3.64 0 0 1-3.75-3.1Z" />
+                  </svg>
+                )}
+                {key === 'youtube' && (
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21.58 7.19a2.93 2.93 0 0 0-2.06-2.07C17.7 4.62 12 4.62 12 4.62s-5.7 0-7.52.5A2.93 2.93 0 0 0 2.42 7.2 30.5 30.5 0 0 0 2 12a30.5 30.5 0 0 0 .42 4.8 2.93 2.93 0 0 0 2.06 2.07c1.82.5 7.52.5 7.52.5s5.7 0 7.52-.5a2.93 2.93 0 0 0 2.06-2.07A30.5 30.5 0 0 0 22 12a30.5 30.5 0 0 0-.42-4.81ZM10.16 14.9V9.1L15.2 12l-5.03 2.9Z" />
+                  </svg>
+                )}
+                {!NETWORK_KEYS.includes(key) && (
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm6.95 9h-3.04a15.44 15.44 0 0 0-1.22-5.12A8.04 8.04 0 0 1 18.95 11ZM12 4.05c.9 1.14 1.62 3.04 1.85 5.45h-3.7C10.38 7.1 11.1 5.2 12 4.05ZM4.99 13h3.03a15.84 15.84 0 0 0 1.22 5.12A8.03 8.03 0 0 1 4.99 13Zm3.03-2H4.99a8.03 8.03 0 0 1 4.25-5.12A15.84 15.84 0 0 0 8.02 11Zm.74 2h3.24v5.82c-1.58-.27-2.92-2.42-3.24-5.82Zm3.24-2H8.76c.32-3.4 1.66-5.55 3.24-5.82V11Zm1.76 7.82V13h3.24c-.32 3.4-1.66 5.55-3.24 5.82Zm0-7.82V5.18c1.58.27 2.92 2.42 3.24 5.82h-3.24ZM14.76 18.12A15.84 15.84 0 0 0 15.98 13h3.03a8.03 8.03 0 0 1-4.25 5.12Z" />
+                  </svg>
+                )}
+              </span>
+            </a>
+          )
+        })
+      }
+    </div>
   </div>
 </article>
 
 <style>
   .contributor-card {
+    --level-color: #9ea6bd;
+    --level-color-soft: color-mix(in srgb, var(--level-color) 55%, #2e1d6c 45%);
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 0.45rem;
-    width: max(50%, 200px);
+    width: min(100%, 260px);
     margin: 0 auto;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
+    padding: 0.75rem;
+    border: 3px solid var(--level-color);
+    border-radius: 0;
+    background:
+      linear-gradient(180deg, rgba(18, 10, 48, 0.58), rgba(12, 8, 31, 0.42)),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03), transparent 45%);
+    box-shadow:
+      0 0 0 2px #100825,
+      0 0 0 4px var(--level-color-soft),
+      4px 4px 0 rgba(7, 3, 20, 0.78),
+      8px 8px 0 rgba(7, 3, 20, 0.34);
+    transition:
+      box-shadow 0.22s ease,
+      border-color 0.22s ease,
+      background-color 0.22s ease;
+  }
+
+  .contributor-card::before,
+  .contributor-card::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--level-color);
+    box-shadow: 0 0 0 2px #100825;
+    pointer-events: none;
+  }
+
+  .contributor-card::before {
+    top: -5px;
+    left: -5px;
+  }
+
+  .contributor-card::after {
+    right: -5px;
+    bottom: -5px;
+  }
+
+  .contributor-card:hover,
+  .contributor-card:focus-within {
+    border-color: color-mix(in srgb, var(--level-color) 88%, #fff 12%);
+    background:
+      linear-gradient(180deg, rgba(28, 14, 74, 0.72), rgba(18, 11, 46, 0.58)),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent 45%);
+    box-shadow:
+      0 0 0 2px #100825,
+      0 0 0 4px color-mix(in srgb, var(--level-color) 82%, #25135b 18%),
+      0 0 0 6px color-mix(in srgb, var(--level-color) 55%, transparent),
+      0 0 20px color-mix(in srgb, var(--level-color) 60%, transparent),
+      6px 6px 0 rgba(7, 3, 20, 0.72),
+      11px 11px 0 rgba(7, 3, 20, 0.32);
   }
 
   .avatar-frame {
     position: relative;
-    overflow: visible;
+    overflow: hidden;
     border-radius: 12px;
     aspect-ratio: 4 / 5;
   }
@@ -180,7 +236,7 @@ const getInitials = (name: string): string => {
   .contributor-name {
     margin: 0;
     color: #ffffff;
-    font-size: 0.76rem;
+    font-size: 0.62rem;
     line-height: 1.35;
     text-align: center;
     text-shadow:
@@ -190,159 +246,22 @@ const getInitials = (name: string): string => {
       0 -1px #18083b;
   }
 
-  .sparkle-layer {
-    position: absolute;
-    inset: -14px;
-    pointer-events: none;
-    z-index: 2;
-    border-radius: inherit;
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.28rem;
   }
 
-  .sparkle {
-    position: absolute;
-    display: block;
-    width: 6px;
-    height: 6px;
-    background: #edb81b;
-    opacity: 0;
-    transform: scale(0);
-    transition: none;
+  .level-gold {
+    --level-color: #ffe438;
   }
 
-  .sparkle-0 {
-    top: 0%;
-    left: 20%;
-  }
-  .sparkle-1 {
-    top: 0%;
-    left: 50%;
-  }
-  .sparkle-2 {
-    top: 0%;
-    left: 80%;
-  }
-  .sparkle-3 {
-    top: 20%;
-    right: 0%;
-  }
-  .sparkle-4 {
-    top: 50%;
-    right: 0%;
-  }
-  .sparkle-5 {
-    top: 80%;
-    right: 0%;
-  }
-  .sparkle-6 {
-    bottom: 0%;
-    left: 80%;
-  }
-  .sparkle-7 {
-    bottom: 0%;
-    left: 50%;
-  }
-  .sparkle-8 {
-    bottom: 0%;
-    left: 20%;
-  }
-  .sparkle-9 {
-    top: 80%;
-    left: 0%;
-  }
-  .sparkle-10 {
-    top: 50%;
-    left: 0%;
-  }
-  .sparkle-11 {
-    top: 20%;
-    left: 0%;
+  .level-silver {
+    --level-color: #dbe0eb;
   }
 
-  .contributor-card:hover .sparkle-0,
-  .contributor-card:focus-within .sparkle-0 {
-    animation: pop 0.7s 0s ease-out forwards;
-  }
-  .contributor-card:hover .sparkle-1,
-  .contributor-card:focus-within .sparkle-1 {
-    animation: pop 0.7s 0.06s ease-out forwards;
-  }
-  .contributor-card:hover .sparkle-2,
-  .contributor-card:focus-within .sparkle-2 {
-    animation: pop 0.7s 0.12s ease-out forwards;
-  }
-  .contributor-card:hover .sparkle-3,
-  .contributor-card:focus-within .sparkle-3 {
-    animation: pop 0.7s 0.18s ease-out forwards;
-  }
-  .contributor-card:hover .sparkle-4,
-  .contributor-card:focus-within .sparkle-4 {
-    animation: pop 0.7s 0.24s ease-out forwards;
-  }
-  .contributor-card:hover .sparkle-5,
-  .contributor-card:focus-within .sparkle-5 {
-    animation: pop 0.7s 0.3s ease-out forwards;
-  }
-  .contributor-card:hover .sparkle-6,
-  .contributor-card:focus-within .sparkle-6 {
-    animation: pop 0.7s 0.36s ease-out forwards;
-  }
-  .contributor-card:hover .sparkle-7,
-  .contributor-card:focus-within .sparkle-7 {
-    animation: pop 0.7s 0.42s ease-out forwards;
-  }
-  .contributor-card:hover .sparkle-8,
-  .contributor-card:focus-within .sparkle-8 {
-    animation: pop 0.7s 0.48s ease-out forwards;
-  }
-  .contributor-card:hover .sparkle-9,
-  .contributor-card:focus-within .sparkle-9 {
-    animation: pop 0.7s 0.54s ease-out forwards;
-  }
-  .contributor-card:hover .sparkle-10,
-  .contributor-card:focus-within .sparkle-10 {
-    animation: pop 0.7s 0.6s ease-out forwards;
-  }
-  .contributor-card:hover .sparkle-11,
-  .contributor-card:focus-within .sparkle-11 {
-    animation: pop 0.7s 0.66s ease-out forwards;
-  }
-
-  @keyframes pop {
-    0% {
-      opacity: 0;
-      transform: scale(0) rotate(0deg);
-    }
-    40% {
-      opacity: 1;
-      transform: scale(1.4) rotate(45deg);
-    }
-    70% {
-      opacity: 0.8;
-      transform: scale(1) rotate(90deg);
-    }
-    100% {
-      opacity: 0;
-      transform: scale(0) rotate(135deg);
-    }
-  }
-
-  /* Variantes de color para los sparkles alternos */
-  .sparkle-1,
-  .sparkle-4,
-  .sparkle-7,
-  .sparkle-10 {
-    background: #4296ca;
-    width: 4px;
-    height: 4px;
-  }
-
-  .sparkle-2,
-  .sparkle-5,
-  .sparkle-8,
-  .sparkle-11 {
-    background: #ffffff;
-    width: 5px;
-    height: 5px;
+  .level-bronze {
+    --level-color: #bd6e31;
   }
 
   .network-list {
@@ -392,11 +311,86 @@ const getInitials = (name: string): string => {
     display: block;
   }
 
+  @media (max-width: 900px) {
+    .contributor-card {
+      width: min(100%, 172px);
+      padding: 0.42rem;
+      gap: 0.28rem;
+    }
+
+    .network-list {
+      gap: 0.42rem;
+    }
+
+    .network-icon,
+    .network-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .contributor-name {
+      font-size: 0.66rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .contributor-card {
+      width: min(100%, 320px);
+      padding: 0.48rem;
+      gap: 0.56rem;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .avatar-frame {
+      width: 86px;
+      min-width: 86px;
+      aspect-ratio: 1 / 1;
+      border-radius: 9px;
+    }
+
+    .avatar,
+    .avatar-fallback {
+      border-radius: 9px;
+    }
+
+    .card-info {
+      min-width: 0;
+      flex: 1;
+      gap: 0.80rem;
+      align-items: flex-center;
+      margin: auto;
+      margin-left: 8px;
+
+    }
+
+    .contributor-name {
+      text-align: left;
+    }
+
+    .network-icon,
+    .network-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .network-list {
+      margin: 0;
+      gap: 0.46rem;
+      justify-content: flex start;
+    }
+
+    .contributor-name {
+      font-size: 0.72rem;
+      line-height: 1.25;
+    }
+  }
+
   .tone-github {
-    --tone-color: #8b949e;
+    --tone-color: #a1a1a1;
   }
   .tone-linkedin {
-    --tone-color: #4db6ff;
+    --tone-color: #148fe7;
   }
   .tone-instagram {
     --tone-color: #f7b34f;
@@ -411,7 +405,7 @@ const getInitials = (name: string): string => {
     --tone-color: #61fff2;
   }
   .tone-youtube {
-    --tone-color: #ff7676;
+    --tone-color: #ff5050;
   }
   .tone-default {
     --tone-color: #cdbdf7;

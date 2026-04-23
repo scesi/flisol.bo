@@ -3,6 +3,7 @@
     {
       "name": "Diego Perez",
       "role": "Full Stack Developer",
+      "level": "gold",
       "networks": [
         {
           "network_name": "GitHub",
@@ -24,6 +25,7 @@
     {
       "name": "Melany Ventura",
       "role": "UI/UX Designer",
+      "level": "silver",
       "networks": [
         {
           "network_name": "Behance",
@@ -55,6 +57,7 @@
     {
       "name": "Steven Ramos",
       "role": " ",
+      "level": "bronze",
       "networks": [
         {
           "network_name": "Github",
@@ -76,6 +79,7 @@
     {
       "name": "Sidney Sahonero",
       "role": "Full Stack Developer",
+      "level": "silver",
       "networks": [
         {
           "network_name": "GitHub",
@@ -94,9 +98,17 @@
         }
       ]
     },
+
+    {
+      "name": "Ing. Stefano Rico",
+      "role": "Frontend Developer (in this project) | Ingeniero Informático e Ingeniero Electromecánico",
+      "level": "silver",
+      "networks": []
+    },
     {
       "name": "Anahi Sanabria",
       "role": "Fullstack",
+      "level": "silver",
       "networks": [
         {
           "network_name": "GitHub",

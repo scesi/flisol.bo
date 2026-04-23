@@ -1,10 +1,5 @@
 ---
 import contributorsData from '@/v2026/data/contributors-2026.json'
-import diegoAvatar from '@/v2026/assets/contributors/diego-icon.webp'
-import melanyAvatar from '@/v2026/assets/contributors/melany-icon.webp'
-import stevenAvatar from '@/v2026/assets/contributors/nose-icon.webp'
-import sidneyAvatar from '@/v2026/assets/contributors/sidney-icon.webp'
-import anahiAvatar from '@/v2026/assets/contributors/anahi-icon.webp'
 import ContributorsCard from '@/v2026/components/sections/contributors/ContributorsCard.astro'
 
 type Network = {
@@ -16,18 +11,38 @@ type Network = {
 type Contributor = {
   name: string
   role: string
+  level: 'gold' | 'silver' | 'bronze'
   networks: Network[]
 }
 
 const contributors = (contributorsData.contributors ?? []) as Contributor[]
 
-const avatarByName: Record<string, string> = {
-  'melany ventura': melanyAvatar.src,
-  'sidney sahonero': sidneyAvatar.src,
-  'steven ramos': stevenAvatar.src,
-  'diego perez': diegoAvatar.src,
-  'anahi sanabria': anahiAvatar.src,
-}
+type AvatarAsset =
+  | string
+  | {
+      src: string
+    }
+
+const avatarModules = (
+  import.meta as ImportMeta & {
+    glob: (
+      pattern: string,
+      options?: { eager?: boolean; import?: string }
+    ) => Record<string, AvatarAsset>
+  }
+).glob('../../assets/contributors/*.webp', {
+  eager: true,
+  import: 'default',
+}) as Record<string, AvatarAsset>
+
+const avatarByName: Record<string, string> = Object.fromEntries(
+  Object.entries(avatarModules).map(([filePath, assetUrl]) => {
+    const fileName = filePath.split('/').pop() ?? ''
+    const baseName = fileName.replace(/\.webp$/i, '').replace(/[-_](icon|avatar)$/i, '')
+    const resolvedUrl = typeof assetUrl === 'string' ? assetUrl : assetUrl.src
+    return [baseName.toLowerCase(), resolvedUrl]
+  })
+)
 
 const normalizeKey = (value: string): string =>
   value
@@ -36,7 +51,14 @@ const normalizeKey = (value: string): string =>
     .replace(/[\u0300-\u036f]/g, '')
     .trim()
 
-const getAvatar = (name: string): string | null => avatarByName[normalizeKey(name)] ?? null
+const getAvatar = (name: string): string | null => {
+  const normalized = normalizeKey(name)
+  const chunks = normalized.split(' ').filter(Boolean)
+  const firstName = chunks[0] ?? ''
+  const secondName = chunks[1] ?? ''
+
+  return avatarByName[normalized] ?? avatarByName[firstName] ?? avatarByName[secondName] ?? null
+}
 ---
 
 <section id="contributors" class="contributors-section">
@@ -56,12 +78,31 @@ const getAvatar = (name: string): string | null => avatarByName[normalizeKey(nam
         ))
       }
     </div>
+
+    <div class="contributors-legend" aria-label="Significado de niveles de contribution">
+      <p class="legend-title">Niveles de contribution</p>
+      <ul class="legend-list">
+        <li class="legend-item legend-gold">
+          <span class="legend-swatch" aria-hidden="true"></span>
+          <span><strong>Oro:</strong> mayor aporte al proyecto y liderazgo de ejecucion.</span>
+        </li>
+        <li class="legend-item legend-silver">
+          <span class="legend-swatch" aria-hidden="true"></span>
+          <span><strong>Plata:</strong> aporte constante y alto impacto en entregables clave.</span>
+        </li>
+        <li class="legend-item legend-bronze">
+          <span class="legend-swatch" aria-hidden="true"></span>
+          <span
+            ><strong>Bronce:</strong> aporte activo y soporte tecnico durante el desarrollo.</span
+          >
+        </li>
+      </ul>
+    </div>
   </div>
 </section>
 
 <style>
   .contributors-section {
-    position: relative;
     margin-top: -1px;
     padding: 4.8rem 0.8rem 5.4rem;
     background:
@@ -111,18 +152,109 @@ const getAvatar = (name: string): string | null => avatarByName[normalizeKey(nam
 
   .contributors-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(5, minmax(185px, 230px));
+    justify-content: center;
+    column-gap: 2rem;
+    row-gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 1220px) {
+    .contributors-grid {
+      grid-template-columns: repeat(5, minmax(165px, 205px));
+      column-gap: 0.9rem;
+      row-gap: 1.55rem;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .contributors-grid {
+      grid-template-columns: repeat(4, minmax(160px, 205px));
+      row-gap: 1.25rem;
+      column-gap: 0.8rem;
+    }
+  }
+
+  .contributors-legend {
+    border: 2px solid #2c1a68;
+    background: linear-gradient(180deg, rgba(24, 11, 64, 0.8), rgba(17, 9, 47, 0.92));
+    box-shadow:
+      0 0 0 2px #12072f,
+      4px 4px 0 rgba(7, 3, 20, 0.7);
+    padding: 0.75rem 0.9rem;
+  }
+
+  .legend-title {
+    margin: 0 0 0.5rem;
+    color: #f4edff;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .legend-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #dcd4f8;
+    font-size: 0.62rem;
+    line-height: 1.45;
+  }
+
+  .legend-swatch {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 14px;
+    border: 2px solid currentColor;
+    box-shadow: 2px 2px 0 rgba(4, 2, 12, 0.75);
+  }
+
+  .legend-gold {
+    color: #f4ce57;
+  }
+
+  .legend-silver {
+    color: #a9b7d3;
+  }
+
+  .legend-bronze {
+    color: #c18a60;
   }
 
   @media (max-width: 900px) {
     .contributors-section {
-      padding: 4rem 0.7rem 4.8rem;
+      padding: 3.7rem 1rem 4.4rem;
     }
 
     .contributors-grid {
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-      gap: 0.8rem;
+      grid-template-columns: repeat(3, minmax(126px, 164px));
+      column-gap: 0.62rem;
+      row-gap: 0.92rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .contributors-section {
+      padding: 3.4rem 0.95rem 4rem;
+    }
+
+    .contributors-grid {
+      grid-template-columns: minmax(260px, 320px);
+      justify-content: center;
+      column-gap: 0;
+      row-gap: 1.15rem;
+    }
+
+    .contributors-legend {
+      margin-top: 0.5rem;
     }
   }
 </style>
