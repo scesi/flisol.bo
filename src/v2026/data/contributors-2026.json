@@ -124,8 +124,30 @@
           "network_name": "Instagram",
           "username": "anahi_s.u",
           "url": "https://www.instagram.com/anahi_s.u/"
+      "name": "Miguel Zubieta",
+      "role": "Software Engineer",
+      "networks": [
+        {
+          "network_name": "Github",
+          "username": "m87y2k",
+          "url": "https://github.com/m87y2k"
+        },
+        {
+          "network_name": "LinkedIn",
+          "username": "m87y2k",
+          "url": "https://www.linkedin.com/in/m87y2k"
+        },
+        {
+          "network_name": "Instagram",
+          "username": "m87.y2k",
+          "url": "https://www.instagram.com/m87.y2k"
         }
       ]
+    },
+    {
+      "name": "Ing. Stefano Rico",
+      "role": "Frontend Developer (in this project) | Ingeniero Informático e Ingeniero Electromecánico",
+      "networks": []
     }
   ]
 }
