@@ -1,87 +1,85 @@
 ---
 interface Props {
-  lat?: number;
-  lng?: number;
-  placeName?: string;
+  lat?: number
+  lng?: number
+  placeName?: string
 }
 
-const { 
-  lat = -17.3932967, 
-  lng = -66.1469490, 
-  placeName = "Centro MEMI" 
-} = Astro.props;
+const { lat = -17.3932967, lng = -66.146949, placeName = 'Centro MEMI' } = Astro.props
 ---
 
 <section id="eventLocation" class="map-section">
   <div class="map-shell">
     <header class="map-header">
       <p class="map-kicker">Ubicación del evento</p>
-      <h3>Centro MEMI, Facultad de Ciencias y Tecnología de la Universidad Mayor de San Simón:</h3>
+      <h3>Centro MEMI</h3>
+      <p class="map-description">
+        Facultad de Ciencias y Tecnología de la Universidad Mayor de San Simón
+      </p>
     </header>
 
     <div class="map-frame">
-      <div 
-        id="map" 
-        role="region" 
-        aria-label={`Mapa de ubicación en ${placeName}`}
-      ></div>
+      <div id="map" role="region" aria-label={`Mapa de ubicación en ${placeName}`}></div>
     </div>
   </div>
 </section>
 
 <script>
-  import L from 'leaflet';
-  import 'leaflet/dist/leaflet.css';
-  let mapInstance = null;
+  import L from 'leaflet'
+  import 'leaflet/dist/leaflet.css'
+  let mapInstance = null
 
   function initMap() {
-    const mapContainer = document.getElementById('map');
-    if (!mapContainer || mapInstance || mapContainer._leaflet_id) return;
+    const mapContainer = document.getElementById('map')
+    if (!mapContainer || mapInstance || mapContainer._leaflet_id) return
 
-    const lat = -17.3932967;
-    const lng = -66.1469490;
+    const lat = -17.3932967
+    const lng = -66.146949
 
     mapInstance = L.map('map', {
       scrollWheelZoom: false,
-    }).setView([lat, lng], 16);
+    }).setView([lat, lng], 16)
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap'
-    }).addTo(mapInstance);
+      attribution: '&copy; OpenStreetMap',
+    }).addTo(mapInstance)
 
     const defaultIcon = L.icon({
       iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
       shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
       iconSize: [25, 41],
-      iconAnchor: [12, 41]
-    });
+      iconAnchor: [12, 41],
+    })
 
     L.marker([lat, lng], { icon: defaultIcon })
       .addTo(mapInstance)
       .bindPopup(`<b style="color: #1a0c43;">Centro MEMI</b><br>FLISoL 2026.`)
-      .openPopup();
+      .openPopup()
   }
 
   function setupObserver() {
-    const target = document.getElementById('map');
-    if (!target) return;
+    const target = document.getElementById('map')
+    if (!target) return
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          initMap();
-          observer.disconnect();
-        }
-      });
-    }, { rootMargin: '100px' });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            initMap()
+            observer.disconnect()
+          }
+        })
+      },
+      { rootMargin: '100px' }
+    )
 
-    observer.observe(target);
+    observer.observe(target)
   }
 
   document.addEventListener('astro:page-load', () => {
-    mapInstance = null; 
-    setupObserver();
-  });
+    mapInstance = null
+    setupObserver()
+  })
 </script>
 
 <style lang="scss">
@@ -127,10 +125,11 @@ const {
   }
 
   .map-description {
-    max-width: 60ch;
-    font-family: 'Montserrat', sans-serif;
-    color: #e5defe;
-    font-size: 0.9rem;
+    max-width: 68ch;
+    color: #d9cff8;
+    line-height: 1.65;
+    font-size: 0.7rem;
+    margin: 0;
   }
 
   .map-frame {
@@ -154,10 +153,6 @@ const {
   @media (max-width: 768px) {
     #map {
       height: 350px;
-    }
-    
-    .map-header {
-      text-align: center;
     }
   }
 </style>

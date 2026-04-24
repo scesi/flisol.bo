@@ -3,6 +3,7 @@
     {
       "name": "Diego Perez",
       "role": "Full Stack Developer",
+      "level": "gold",
       "networks": [
         {
           "network_name": "GitHub",
@@ -24,6 +25,7 @@
     {
       "name": "Melany Ventura",
       "role": "UI/UX Designer",
+      "level": "silver",
       "networks": [
         {
           "network_name": "Behance",
@@ -53,8 +55,9 @@
       ]
     },
     {
-      "name": "Steven Joel Ramos Salazar",
+      "name": "Steven Ramos",
       "role": " ",
+      "level": "bronze",
       "networks": [
         {
           "network_name": "Github",
@@ -74,6 +77,53 @@
       ]
     },
     {
+      "name": "Sidney Sahonero",
+      "role": "Full Stack Developer",
+      "level": "silver",
+      "networks": [
+        {
+          "network_name": "GitHub",
+          "username": "SidnyTech",
+          "url": "https://github.com/SidnyTech"
+        },
+        {
+          "network_name": "LinkedIn",
+          "username": "sidney-sahonero",
+          "url": "https://www.linkedin.com/in/sidney-sahonero/"
+        },
+        {
+          "network_name": "Instagram",
+          "username": "sidney.sg_",
+          "url": "https://www.instagram.com/sidney.sg_/"
+        }
+      ]
+    },
+
+    {
+      "name": "Ing. Stefano Rico",
+      "role": "Frontend Developer (in this project) | Ingeniero Informático e Ingeniero Electromecánico",
+      "level": "silver",
+      "networks": []
+    },
+    {
+      "name": "Anahi Sanabria",
+      "role": "Fullstack",
+      "level": "silver",
+      "networks": [
+        {
+          "network_name": "GitHub",
+          "username": "anahiSU",
+          "url": "https://github.com/AnahiSU"
+        },
+        {
+          "network_name": "LinkedIn",
+          "username": "anahiSU",
+          "url": "https://www.linkedin.com/in/anahisu/"
+        },
+        {
+          "network_name": "Instagram",
+          "username": "anahi_s.u",
+          "url": "https://www.instagram.com/anahi_s.u/"
       "name": "Miguel Zubieta",
       "role": "Software Engineer",
       "networks": [
@@ -93,6 +143,11 @@
           "url": "https://www.instagram.com/m87.y2k"
         }
       ]
+    },
+    {
+      "name": "Ing. Stefano Rico",
+      "role": "Frontend Developer (in this project) | Ingeniero Informático e Ingeniero Electromecánico",
+      "networks": []
     }
   ]
 }
