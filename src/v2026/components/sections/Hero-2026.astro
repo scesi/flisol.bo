@@ -34,14 +34,24 @@ const eventoIniciado = diasRestantes === 0
         <div class="event-date">24 y 25 de Abril, 2026</div>
         <h3>Faltan</h3>
         <div id="countdown" class="timer">--:--:--:--</div>
-        <a
-          href={data.registerLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hero-register-button"
-        >
-          Inscribete
-        </a>
+        <div class="action-buttons">
+          <a
+            href={data.registerLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hero-register-button"
+          >
+            Inscríbete
+          </a>
+          <a
+            href="https://itch.io/embed-upload/17283752?color=862fff"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hero-register-button"
+          >
+            Jugar GNU Runner
+          </a>
+        </div>
       </div>
       <Image src={PixelGNU} alt="Pixel GNU" class="pixel-gnu" />
       <Image src={PixelTux} alt="Pixel Tux" class="pixel-tux" />
@@ -257,9 +267,16 @@ const eventoIniciado = diasRestantes === 0
     border-radius: 5px;
   }
 
+  .action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+  }
+
   .hero-register-button {
     display: inline-block;
-    margin-top: 15px;
     background-color: #e9ba2d;
     color: black;
     padding: 0.5rem 1rem;
@@ -330,8 +347,17 @@ const eventoIniciado = diasRestantes === 0
       font-size: 1rem;
     }
 
+    .action-buttons {
+      flex-direction: column;
+      gap: 0.8rem;
+      width: 100%;
+    }
+
     .hero-register-button {
       font-size: 0.75rem;
+      width: 100%;
+      text-align: center;
+      box-sizing: border-box;
     }
   }
 </style>
