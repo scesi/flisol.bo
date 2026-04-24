@@ -20,6 +20,7 @@ interface Props {
 const { contributor, avatar } = Astro.props as Props
 
 const getLevelTone = (level: string): string => {
+  if (!level) return 'level-bronze';
   const normalized = level.toLowerCase()
   if (normalized === 'gold') return 'level-gold'
   if (normalized === 'bronze') return 'level-bronze'

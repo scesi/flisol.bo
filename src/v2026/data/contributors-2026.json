@@ -124,8 +124,13 @@
           "network_name": "Instagram",
           "username": "anahi_s.u",
           "url": "https://www.instagram.com/anahi_s.u/"
+        }
+      ]
+    },
+    {
       "name": "Miguel Zubieta",
       "role": "Software Engineer",
+      "level": "silver",
       "networks": [
         {
           "network_name": "Github",
@@ -143,11 +148,6 @@
           "url": "https://www.instagram.com/m87.y2k"
         }
       ]
-    },
-    {
-      "name": "Ing. Stefano Rico",
-      "role": "Frontend Developer (in this project) | Ingeniero Informático e Ingeniero Electromecánico",
-      "networks": []
     }
   ]
 }

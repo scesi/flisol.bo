@@ -17,6 +17,18 @@ type Contributor = {
 
 const contributors = (contributorsData.contributors ?? []) as Contributor[]
 
+const LEVEL_ORDER: Record<string, number> = {
+  gold: 1,
+  silver: 2,
+  bronze: 3
+};
+
+const sortedContributors = [...contributors].sort((a, b) => {
+  const levelA = LEVEL_ORDER[a.level.toLowerCase()] ?? 99;
+  const levelB = LEVEL_ORDER[b.level.toLowerCase()] ?? 99;
+  return levelA - levelB;
+});
+
 type AvatarAsset =
   | string
   | {
@@ -73,7 +85,7 @@ const getAvatar = (name: string): string | null => {
 
     <div class="contributors-grid">
       {
-        contributors.map((contributor) => (
+        sortedContributors.map((contributor) => (
           <ContributorsCard contributor={contributor} avatar={getAvatar(contributor.name)} />
         ))
       }
